@@ -1,0 +1,40 @@
+{
+  "name": "tenrai-reference-webwallet",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reference web wallet for Tenrai: keys and signing in the browser with the Tenrai SDK, a Node.js backend that reads the node for it",
+  "license": "Apache-2.0",
+  "homepage": "https://tenrai-technologies.org/",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "predev": "npm run verify:sdk",
+    "dev": "node --env-file-if-exists=.env --watch server/main.ts --dev",
+    "prebuild": "npm run verify:sdk && npm run check",
+    "build": "vite build",
+    "prestart": "npm run verify:sdk",
+    "start": "node --env-file-if-exists=.env server/main.ts",
+    "precheck": "npm run verify:sdk",
+    "check": "tsc -p tsconfig.json && tsc -p server/tsconfig.json",
+    "test": "node --test server/*.test.ts test/*.test.mjs",
+    "verify:sdk": "node vendor/tenrai-sdk/scripts/verify-vendored-install.mjs"
+  },
+  "dependencies": {
+    "@tenrai/sdk": "file:vendor/tenrai-sdk",
+    "express": "^5.2.1",
+    "jsqr": "1.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.19.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.3"
+  }
+}

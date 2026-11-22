@@ -1,0 +1,12 @@
+import type { TenraiClient } from "../client.ts";
+import type { Desk } from "./context.ts";
+import type { BondRequest, ExitValidatorRequest, PositionRequest, RegisterValidatorRequest, RotateValidatorRequest, ScheduleValidatorCommissionRequest, SentTransfer, SetStakeRewardAddressRequest, UpdateValidatorEndpointRequest, ValidatorHeartbeatRequest } from "./types.ts";
+export declare function bond(desk: Desk, client: TenraiClient, request: BondRequest): Promise<SentTransfer>;
+export declare function registerValidator(desk: Desk, client: TenraiClient, request: RegisterValidatorRequest): Promise<SentTransfer>;
+export declare function exitValidator(desk: Desk, client: TenraiClient, request: ExitValidatorRequest): Promise<SentTransfer>;
+export declare function rotateValidator(desk: Desk, client: TenraiClient, request: RotateValidatorRequest): Promise<SentTransfer>;
+export declare function updateValidatorEndpoint(desk: Desk, client: TenraiClient, request: UpdateValidatorEndpointRequest): Promise<SentTransfer>;
+export declare function scheduleValidatorCommission(desk: Desk, client: TenraiClient, request: ScheduleValidatorCommissionRequest): Promise<SentTransfer>;
+export declare function setStakeRewardAddress(desk: Desk, client: TenraiClient, request: SetStakeRewardAddressRequest): Promise<SentTransfer>;
+export declare function heartbeatValidator(desk: Desk, client: TenraiClient, request: ValidatorHeartbeatRequest): Promise<SentTransfer>;
+export declare function position(desk: Desk, client: TenraiClient, request: PositionRequest, kind: "unbond" | "withdraw"): Promise<SentTransfer>;

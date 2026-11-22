@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "network": "testnet100",
+  "descriptors": [
+    "010101c332e892bc2328a58acb7b653fab18f24678acb2ab8ec807a0a1095a637c7b5b88e6ce1a8f5765750000000000000065",
+    "010201c332e892bc2328a58acb7b653fab18f24678acb2ab8ec807a0a1095a637c7b5b88e6ce1a8f576575fc8b64001c5fdd0f2f40fb67dae4a865a2c5bd17836676d6d5b58b7917e33717"
+  ],
+  "canonical": {
+    "format": 1,
+    "network": "testnet100",
+    "descriptors": [
+      "010101c332e892bc2328a58acb7b653fab18f24678acb2ab8ec807a0a1095a637c7b5b88e6ce1a8f5765750000000000000065",
+      "010201c332e892bc2328a58acb7b653fab18f24678acb2ab8ec807a0a1095a637c7b5b88e6ce1a8f576575fc8b64001c5fdd0f2f40fb67dae4a865a2c5bd17836676d6d5b58b7917e33717"
+    ]
+  },
+  "legacy": {
+    "version": 1,
+    "network": "testnet100",
+    "descriptors": [
+      "010101c332e892bc2328a58acb7b653fab18f24678acb2ab8ec807a0a1095a637c7b5b88e6ce1a8f5765750000000000000065",
+      "010201c332e892bc2328a58acb7b653fab18f24678acb2ab8ec807a0a1095a637c7b5b88e6ce1a8f576575fc8b64001c5fdd0f2f40fb67dae4a865a2c5bd17836676d6d5b58b7917e33717"
+    ]
+  },
+  "vanilla_export": {
+    "format": 1,
+    "network": "testnet100",
+    "descriptors": [
+      "010101c332e892bc2328a58acb7b653fab18f24678acb2ab8ec807a0a1095a637c7b5b88e6ce1a8f5765750000000000000065",
+      "010201c332e892bc2328a58acb7b653fab18f24678acb2ab8ec807a0a1095a637c7b5b88e6ce1a8f576575fc8b64001c5fdd0f2f40fb67dae4a865a2c5bd17836676d6d5b58b7917e33717"
+    ]
+  },
+  "reference_export": {
+    "format": 1,
+    "network": "testnet100",
+    "descriptors": [
+      "010101c332e892bc2328a58acb7b653fab18f24678acb2ab8ec807a0a1095a637c7b5b88e6ce1a8f5765750000000000000065",
+      "010201c332e892bc2328a58acb7b653fab18f24678acb2ab8ec807a0a1095a637c7b5b88e6ce1a8f576575fc8b64001c5fdd0f2f40fb67dae4a865a2c5bd17836676d6d5b58b7917e33717"
+    ]
+  },
+  "test_only": true,
+  "manifest": {
+    "api_version": 1,
+    "chain_id": "010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101",
+    "finalized": {
+      "cut_id": "040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404040404",
+      "height": 100,
+      "state_root": "27972abbd6038061a0941e4858aaab1614833ccdc94b23d88841070a93d3b307526c0d782ea12f7e8f682b424ce750ea",
+      "validator_set_id": "060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606060606"
+    },
+    "ledger_rules_hash": "7b41e97b403a23784f306eee8c0d608f59c1f1302eb37aaccf41851cdc2193e3774f4a7dfe691cf8f87e37ea6b55c62a",
+    "max_transaction_mass": 95999,
+    "max_transparent_payload_bytes": 1024,
+    "max_validity_cuts": 1800,
+    "minimum_fee_per_mass": "1",
+    "network": "testnet100",
+    "params_hash": "020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202020202",
+    "protocol_version": 2,
+    "transaction_limits": {
+      "max_inputs": 8,
+      "max_operation_bytes": 10000,
+      "max_outputs": 8,
+      "max_signature_checks": 10,
+      "max_wire_bytes": 47104,
+      "max_witnesses": 10
+    },
+    "transaction_mass_rules": {
+      "input_mass": 2,
+      "operation_byte_mass": 5,
+      "output_mass": 3,
+      "payload_byte_mass": 6,
+      "wire_byte_mass": 1,
+      "witness_mass": 4
+    }
+  }
+}

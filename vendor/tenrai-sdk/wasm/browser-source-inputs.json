@@ -1,0 +1,2253 @@
+{
+  "candidate_has_uncommitted_changes": true,
+  "declaration_sha256": {
+    "tenrai_wasm.d.ts": "3bcdaa45e1eff95e14d0e270bbb8df9b6c07d502fe621b98a777fc9c1a431b7a",
+    "tenrai_wasm_bg.wasm.d.ts": "ede78c3ad2961a0506599056cf3f2e4a9630dc7473660a6ef1705d2f378856ec"
+  },
+  "files": {
+    ".cargo/config.toml": "5063e92423bca42290f536c124d0231fa70c351f4989157213fd318646b83371",
+    "Cargo.lock": "fd239eeef0fe9c978a30345bdda39c548459009f714aa3014533baa2ce59e4f8",
+    "Cargo.toml": "768e6cb2f2619922de1a4c9953393d0e8c41dec2a91d1c314469fdf33f15cab4",
+    "config/development.traidag.json": "2e2cb07d47baef802e82f6ff2f662579e81b9d1e55b38271cc3d2bfed828ad6e",
+    "config/mainnet.chain-id": "d5fb9304b77e91334a112b4e69f3fc6c242ca9005b31fac9f600fa90c4257d5e",
+    "config/mainnet.finalized-checkpoint": "51cfd463b6af8a57b3380487f986abf10f137073e9be453e44a7e9a5b4c0e72b",
+    "config/mainnet.genesis-id": "c32caf89f993906a6d4e7ba03e359a37ec52abe1a14ca6d85b6c3e1bc493d43a",
+    "config/mainnet.traidag.json": "a39d00757df907318586d8400a1e3bc8379d7a6ebf46279eba0db12ec64c782c",
+    "config/node.example.json": "c33a097836964328891b3b7c5c02019bdbcbc987e6e186841905d7d448993a9f",
+    "config/release-keyset.json": "27f24bd5fb8a3575a59d2e5e78c6e66102c3bc5bca56144503339e40be51274b",
+    "crates/auth/Cargo.toml": "14049d8eff3c7aaad926f7a8aacb58d1b9a11e3954f861cee559ba493757984d",
+    "crates/auth/src/address_proof.rs": "98932e3445e0da52a8ade31a3483065e243a14f97c2f2b801ea902249f9727a8",
+    "crates/auth/src/address_proof_tests.rs": "b83ddb29d8839205786488c9bbb34c74ca58e8d5badf59db99ac20c58717472b",
+    "crates/auth/src/api_envelope.rs": "3c3878bdda742998337b574d9c4a39f82cf4b16e1a5e2785351d2d87865ab150",
+    "crates/auth/src/api_envelope/tests.rs": "cd51b1724dcf76a94487b121a72812178e8788179b42daa71234606fa8f3751d",
+    "crates/auth/src/derivation.rs": "d7d99c58a99c3f31b1a0a521305959ce629a3455ec0d54becfc44c2e57db1a21",
+    "crates/auth/src/derivation/tests.rs": "a00b85a0666b04d752b78458489a51467cd84da99117991764d63562c87fb9e7",
+    "crates/auth/src/heartbeat_fee_key.rs": "7f089d25e9c883e1b680370b03297fba458e76df7e1298858df27f43e7d8fa53",
+    "crates/auth/src/heartbeat_fee_key/tests.rs": "22577eef82ea1d933b97a4efe5c74b0486772351288fa24a60eb85269b007790",
+    "crates/auth/src/lib.rs": "837c21b76b1d794293f8c9f6b96fc543d9518a9362653e9763c4d1b0b6e051a4",
+    "crates/auth/src/messenger.rs": "21d4f8871b74210152b147c5adf5bd7f82b2e0c6bba1cc3bce26690665aac3d9",
+    "crates/auth/src/messenger/chats.rs": "a709d1daff2cbf80c6bdccd1a29976bb14cb9e97501992882a39e530f5b57920",
+    "crates/auth/src/messenger/frame.rs": "18df95bec436e24b4cfe3c4addafd6a08c22b81b5d31168cf32201f155ad6b8d",
+    "crates/auth/src/messenger/identity.rs": "13ae5204a14651611bee553dd3f3b8e8989a8775a8af6c9523f01ca641897f82",
+    "crates/auth/src/messenger/session.rs": "69eee32f0a3c2cbcafb8ff360d6e4dffabd46a23abec0240f9f3188e714b921b",
+    "crates/auth/src/messenger/tests.rs": "f26d9e831fb95ab9093a6c4a86cf96535d17cda907233b5ae969ae622f178cfe",
+    "crates/auth/src/mldsa65.rs": "ffc7866447a8b808fa7e0d51f9041f40f173e077c878d4f578797c6c1c744abb",
+    "crates/auth/src/mldsa65/tests.rs": "cc4680464d2189ec650a55adbc2b2bec9d4fa121363f8b8806a41115cb4ff4a8",
+    "crates/auth/src/mlkem768.rs": "61c96b4db864ef0da401fcadc59dd16cac85a90c33ec3f2b9afa8119c609168c",
+    "crates/auth/src/mlkem768/tests.rs": "3d8497de8f0845de81f1ac243c528db0c65f2cc0edc386ee97bc220329055852",
+    "crates/auth/src/sealed_mldsa_key.rs": "418e45adf47f4b10d2ca0dbc09f7c4d12651da1cc1219d07dbff354c7bb7dbe5",
+    "crates/auth/src/sealed_secret.rs": "48e8bd9d267cc21c844411670deb0561cd0492c030b184c0852b92e8d0015f70",
+    "crates/auth/src/sealed_secret/tests.rs": "a75cc6a10270374d02b61687e2b2aafc1885b83e5897119a6f3052e47d954e47",
+    "crates/auth/src/sealed_state.rs": "410eb465db14d52efad0d06d8ca215fbab5a090b5005b67bf8bce4f5f521d09c",
+    "crates/auth/src/sealed_state/tests.rs": "eedf62f420d1698169352020777e9f7580b205f251ecf4c4e786a3bdff4a1f86",
+    "crates/auth/src/tsp2_keys.rs": "fb397552232f89e3462e365b12bbafc124d4db68b158b1a75ead7ec3ea3a6d1f",
+    "crates/auth/src/tsp2_keys_tests.rs": "8bae12dfdf397514376483739ce38dbde1ef3336d7170acded220e6b4651e461",
+    "crates/auth/src/validator_key.rs": "2b36df81b099cee0f1fe3dc54c8e5a0469f8a9ae9cd7fe208ced2d2c35702ed5",
+    "crates/auth/src/validator_key/tests.rs": "551322321a73b56e7fccca722604203f60fec3554bd3443db3321f26aa3622b3",
+    "crates/auth/src/verified_signatures.rs": "a09628a580f714bd88570161ca0f70a2fdf7e4ef54866a0499960020ffbc3652",
+    "crates/auth/src/verified_signatures/tests.rs": "5df4fdd831ecd79c27912eafc75d8b2333b655a96a50b8c88e466cd4cdc789e0",
+    "crates/auth/src/wallet_store.rs": "85dede04627ec7fd3b438c7ac4905d5966d41161363700b40862f8d606aabb4f",
+    "crates/auth/src/wallet_store/coin_cache.rs": "4d5b40c459a7948aad0c5c364d5ac478caf63972fb9a4a60c828a91daa41b174",
+    "crates/auth/src/wallet_store/finality_guard.rs": "b0dc49edc2dc626bdfff81df828a4bc083912fc859d0078166b000a625365873",
+    "crates/auth/src/wallet_store/operations.rs": "759afc8d5a99097cf6adac65e534dfd642b03a770368af982099a13aa6f63849",
+    "crates/auth/src/wallet_store/tests.rs": "51d03bb563fe4f4f835b49f24c8c89721931587f008411600ff4c956f2053501",
+    "crates/client-api/Cargo.toml": "85fe20515f749cb49cbafab205721b492c66a01a6784841a441752be93c3af2b",
+    "crates/client-api/src/address.rs": "3d9ddcdba1e6c106bbfe8e88cdd3114beaedc2efe2a9c5c6ff61d22b0664f9f5",
+    "crates/client-api/src/address_proof.rs": "fcd43b63ddc6ab47b5b7249e357ddd8374058153c481b0920f5803ca513c40bb",
+    "crates/client-api/src/address_range.rs": "abe9a9a8ae33b88f9d495312fb853f27867206c12d3a27517fb8e0e267275051",
+    "crates/client-api/src/amount.rs": "e68556a3639516b9a28e47d7448f8a604715bceba863f1b31806fbb4791a5a8b",
+    "crates/client-api/src/compact_history.rs": "b8f81e9be5f55607debf54444c8075f2c4a7ccc99b93fb6fb71823cb402cf78d",
+    "crates/client-api/src/economics.rs": "df10a6a04c7da2d706c0391a9fb141177285af474e854a221552d6bc9bd8d73e",
+    "crates/client-api/src/error.rs": "d287541ba343709753f776def3c617bd78c6fdbdf6e9652efcb4ffe1de872cd2",
+    "crates/client-api/src/events.rs": "f93d3b80199ac98a7f90abc9ab9be93809e7e9ae6c9b544df46404e322847594",
+    "crates/client-api/src/identifiers.rs": "dd7bbb24cc3aaea02dd64736fae8e06c19386a43a51ba3b001738123435c6ec4",
+    "crates/client-api/src/key_registry.rs": "e0948e7dc1b34a08b0754d5f544f250e61a374583094a7e80be4f2185adf9b9d",
+    "crates/client-api/src/key_registry/tests.rs": "7f3b6aabc0e3e47823d0f1eb3a0332013285c02e110ba58175a82207fceea00a",
+    "crates/client-api/src/ledger.rs": "f4b5ecdbe70263f6d918a240b389315155c99952c7499f21782eb64fcfe25ead",
+    "crates/client-api/src/ledger/tests.rs": "8dccf416ea692651ee7bb4caab6fbc5961f5537b6703cb7e395176d0127498b5",
+    "crates/client-api/src/lib.rs": "407af005f55a6f5df4111f00307b4732d3fe3cb18f6e4d9f2f70e2fd7195e45d",
+    "crates/client-api/src/mempool.rs": "9aa9a1cf9ffcc63fdadc1c99f09e5baa81784fc08f8436cd1210284e4880f199",
+    "crates/client-api/src/miner_tag.rs": "e0dee408f6eba51fb4b83027e79bcc50c85e787e95231e2ecbabad7236402ae8",
+    "crates/client-api/src/network.rs": "5518b24a5f9137800e8d01018a96639fe88a816c285533748a88b90f1307f38f",
+    "crates/client-api/src/node.rs": "0cc88c7f568bca229f661c3f52af5e9a8c8a9701cadcac80aaa7da32e4e01feb",
+    "crates/client-api/src/pending.rs": "8ffd682aaedceb3fc80dbfd8afaa9e547f9d9bc6513074356cb222ee67c55f45",
+    "crates/client-api/src/private.rs": "7be7f780afd4e9170fb9e7a6e94018d12ee455086cf90704f8695f3f47391121",
+    "crates/client-api/src/private_registration.rs": "f319c707d419991f5e49fcc97f97f4c3206968c5a9b687fa088597ea6d3be1ba",
+    "crates/client-api/src/socket.rs": "4d104e23f1704f5d5fc3635c350a53603e10155e832667baea500a67f97638bf",
+    "crates/client-api/src/staking.rs": "99d39816d0beef5f9838a2a699539f5b900747720232887ada946624d698e449",
+    "crates/client-api/src/status.rs": "316f9721b6bc6115114b8a35cb38af5d6ee6af3a013270cf749c55414acdd692",
+    "crates/client-api/src/tests/address_proof.rs": "09693334e3ee9d3d198a063bfa8acf5a82b63af81135863e8b1e09d4f5dedb23",
+    "crates/client-api/src/tests/error.rs": "c8fc6e49c4c40c1a7751b72fafae33d7c35296fa2185f4c21e334a22dacba264",
+    "crates/client-api/src/tests/events.rs": "844ce733fe530bce90c0e3cbc72f38133190c1112a51198c4bac8d80fec2f144",
+    "crates/client-api/src/tests/identifiers.rs": "6a997035e6c4527753906ef13cb9faa7ea5f35ba7ea070eee5a91a165673e3cd",
+    "crates/client-api/src/tests/key_registry.rs": "8c5377458501c5bcfaabf04e9cc35137143c1aa4f17f8df4b3b004561ce09d4b",
+    "crates/client-api/src/tests/ledger.rs": "071f6420c2e6a3e77f9b1e03fb388e1807e34dd7d25b4350fb78d0f69bda6d56",
+    "crates/client-api/src/tests/miner_tag.rs": "95ee0d1591323579018f8632bb6f0d31edac37171156b9e3373a65d8f1ef9e31",
+    "crates/client-api/src/tests/node.rs": "061447acb57b2a240191168c5cbdcc17e718ec5539a6d4ca2e31d148a05321a3",
+    "crates/client-api/src/tests/private_funding.rs": "40342b3497bc6f7e6ec98dde980b558e8d7121af39a85fac9fb499e138563e66",
+    "crates/client-api/src/tests/socket.rs": "32121920400fdd92d86e287c337b1b69d394377f8a52197bdb8a1df2c9ab0ebc",
+    "crates/client-api/src/tests/staking.rs": "a890d738cc6cb0d4067f49bb6df06b7dd732b68f41a243d972af35f4514606d9",
+    "crates/client-api/src/tests/transaction.rs": "5ee6d89cd3c09ef4e2387a45c6914ec30a231283124174f569d174bdb95a05ed",
+    "crates/client-api/src/tests/utxo.rs": "6e141c4fe590c188755b86d8af3c542e310a99744ab0493f02b816a28c701022",
+    "crates/client-api/src/tests/utxo_presence.rs": "69fe533b21f9ee9484728c7b0a1f7146c7cc25bab849a94b90aa2eedabccae3a",
+    "crates/client-api/src/tests/utxo_proof.rs": "55edfd7395df105e8a6c41fd80e3744213e708b320d1a7205b3d7c9b5e4b4a16",
+    "crates/client-api/src/tests/validator_positions.rs": "f1dc76ce09f10fba2803e2bad76e41678af91e95daedb5d9a0e0cb0708c895d5",
+    "crates/client-api/src/tests/work.rs": "0a38f7b51e3f19e92b48a38619666d601c3a855cb70f149bdd67755f8ff2f58d",
+    "crates/client-api/src/transaction.rs": "d4c9459e6b022d080621cb5a9c3293d2b352cce4d3bba17d260a38ad21b44c9d",
+    "crates/client-api/src/utxo.rs": "b17675d8650da6b4b45230f3ab0820014be3315d59df604ff91ffe4775e3588c",
+    "crates/client-api/src/utxo_presence.rs": "745a0c5ee318b56e4f01737a617b5d326682f586e8da45b478d2d0cd4dedcf8e",
+    "crates/client-api/src/utxo_proof.rs": "366e5ec1728f59607569beb1ab6e13897e3983558a1c813a879a273e9cb650c0",
+    "crates/client-api/src/validator_positions.rs": "d6b4d4a4b8fc564b942e0dd5d39cf34007b3f090618cffa38d9d140d3e4d9cfa",
+    "crates/client-api/src/version.rs": "475117d9ef040959a69406f6561061ad322f1872cdc7207bb40df20a7a62ba62",
+    "crates/client-api/src/work.rs": "3fc073eb8f8ad4a318fb61e305161a9a93e81e1293a5016e5c225727061c42c0",
+    "crates/multisig/Cargo.toml": "7f2d9bf55a8c8abc270455a3ccf9d28ce4ec57163d467bd8d0a8ca12d7ddcec3",
+    "crates/multisig/src/lib.rs": "01754cd74fa676e350e096470b9421e4001f0263f98c668747d1d8b72c4bb5bc",
+    "crates/multisig/src/tests.rs": "99ecbd76d2a43e0891121b4cfa2f452bba701ff6dba7cf387a38cd2732222cde",
+    "crates/platform/Cargo.toml": "86f08a4ccd35b7007a089ff4d1791d29577a2be29a725ad13a0927920914d9db",
+    "crates/platform/src/atomic_replace.rs": "6ad0477f65209bcbdc1c77069641cec1c90a4353c81da09c2bca2fbf8927bdbd",
+    "crates/platform/src/durable_directory.rs": "052d2e99fc9b4e15703c7a0917bc94b394abb017c8aed62c0dfce73d7dfa0b0d",
+    "crates/platform/src/echo.rs": "075fcf5ec231c0e6948ab62a5caf61532677d4f938e9c6b8e32f21e52a85d41d",
+    "crates/platform/src/exclusive_file_lock.rs": "0ee9ff7d37a562d74804fb752f9cb6763ff062f5577049aa3a7f3204c76dc3db",
+    "crates/platform/src/fine_timers.rs": "50bc5dfcdc0e6df6bbf58b2ab7024c7aacd431867a8444b99931f73c4bd1e68b",
+    "crates/platform/src/lib.rs": "3d20b5c46e9e952baa885d85163bc8745b48dd8e9e71b75fba40289a3fa3e567",
+    "crates/platform/src/linux_memory.rs": "e47c217d2f6a14f2fcc81cd5bc9f315f656b1ec47ad9fa8ab50fa55a3e90352e",
+    "crates/platform/src/long_path.rs": "ea54172721b4930f74557e6f424cea3f5759b005f0a536e380d2545dc6fddba4",
+    "crates/platform/src/macos_memory.rs": "17157c5ca251b154593efd6de056735737d563b100b307cf6984e7b9f6cad728",
+    "crates/platform/src/open_files.rs": "e7d4a7caabf3d7108ba3b3668e2b7817fb618fd661454125560a31b55af5f4c2",
+    "crates/platform/src/private_directory.rs": "75c3dd047e87d7754e8ca3ea724c641bbf33c512432fd31597d0a66095739c40",
+    "crates/platform/src/single_link.rs": "bfdcf6ab3a4605b67b53b2a0e16e698224f985a70da8047bb45cbd42aee43393",
+    "crates/platform/src/sqlite_sector.rs": "54028bf798e6e45df61256b77fb7299b4abcb0f74df9403310bc8681dd64eb44",
+    "crates/platform/src/tests.rs": "b98fac8c50549ca70ad573e75eedc392127c5fae5bc4ff3acccdff1a82bf4756",
+    "crates/platform/src/tests/atomic_replace.rs": "3be3069d1eeeb54a2e57e6652c668609e7e0f86effdb9e4f989b5a6b7143ad43",
+    "crates/platform/src/tests/durable_directory.rs": "0515064e3276fdbfab048015468074a9c55e92cb911e32dd6d23319760d87988",
+    "crates/platform/src/tests/exclusive_file_lock.rs": "23be06d407041fafe5a19fe640265a1f383191cc32233009bbd52283f43a33a4",
+    "crates/platform/src/tests/linux_memory.rs": "0f08414b5ec3e1f02a6b2e72805e37515ef1711911b93d59d75f8237c6673f83",
+    "crates/platform/src/tests/long_path.rs": "20e0585571046aa4c4ebe3ca90686e326b1bc130f7bbfd84442d7565b49025e3",
+    "crates/platform/src/tests/private_atomic_replace.rs": "c300ed56d58218a84710774279717ad51e8f6c8b2d3879ea10f6f2bfc08c0b23",
+    "crates/platform/src/tests/private_directory.rs": "bd6cdfcfb4868c1c9b51b58803f51d8a59db3de964556708f748bd7baffff552",
+    "crates/platform/src/tests/thread_priority.rs": "f0451e14ce93a24bb63bb8ae752bf9bb4627473d64147349f4a60981f38701b0",
+    "crates/platform/src/tests/thread_time.rs": "1cad3a3925d3c1affcf27ef220d15a30e786312e59104289ea69cc36eae84723",
+    "crates/platform/src/tests/unbuffered_io.rs": "e89e9c0fe8b355204c0901585e225d732bc8ceac89caa96d6d69d09a873a4403",
+    "crates/platform/src/tests/windows_private_file.rs": "b94ffb89cc052c57cf61d627a7ad38c812496e711e100c77ab17ebe79a828e81",
+    "crates/platform/src/thread_priority.rs": "e2010e42a276da47bb7a144c7f2a0f9ea721e210b4585c80994bc5850aeb0fd5",
+    "crates/platform/src/thread_time.rs": "71a774bc5fbe9797c0cd5430d507f496519760a131bdce90b85d75347660beff",
+    "crates/platform/src/unbuffered_io.rs": "3380e92803a65b1d3c2b1326b1f1a76eed9503b0d5b5126c504edf623c9f24a4",
+    "crates/platform/src/unix_disk_space.rs": "22969b1416819e4c5239edf8ddc73339b4560ef89cb1943d86bed9d041da14f1",
+    "crates/platform/src/window.rs": "9e68048a8d5451c5d8a65bbdfee178e50c8b9425d5cdd21d39a7d3c259c7dd7b",
+    "crates/platform/src/windows_disk_space.rs": "d5fdc49b276327d3edfffc497143021d495265f6bd64ce3628a55cd94b9d2b80",
+    "crates/platform/src/windows_memory.rs": "0bc10e42f7e044f9d4d63ad3d8ee61dc39ee6710354be58c76875332ff1a026e",
+    "crates/platform/src/windows_private_file.rs": "397971bc16b5aecd7dcdd07004728873132a9a2b737c99e348df0e3bd8331485",
+    "crates/primitives/Cargo.toml": "d9ab607811548dbab4a518ecfd5cc32c7cc660d852fb53fb20c45566a24f6d9f",
+    "crates/primitives/src/address.rs": "f49791b9fab1494a4d774af7152922a8a210fffc7b8132cf28a623b7adcb0a40",
+    "crates/primitives/src/address/tests.rs": "f79a75c11d77756cb080ebe278499c234100a4abc59f95600d5cf50bef5fac76",
+    "crates/primitives/src/address_words.rs": "0e33daaba4675848a8f41c43f0e150bd2b04b9f8c9a591759620fa7c33af0088",
+    "crates/primitives/src/address_words_tests.rs": "2c26fff058e071b101108cc7413a2fdde2fdfaf41f0963ce679a9657e2f9a7f6",
+    "crates/primitives/src/address_words_v1.txt": "55149311582c84d0baafbbbb98ad8329e5c365fba3be78ccb2aaf180a4ddc344",
+    "crates/primitives/src/amount.rs": "4c73350455b016c61bcaeddf291fa416423b925e2d2381774e77b5f3eeb60245",
+    "crates/primitives/src/amount/tests.rs": "a10ddeed6b8ebb1a34fce12cd4f18578f7070b0229a9702bfb8ad696a5975ec0",
+    "crates/primitives/src/codec.rs": "205ebaa0508f24c13329f33da56a6e8add320065a51cdaaa8aefdbd9154190eb",
+    "crates/primitives/src/hash384.rs": "43b1fc9fb9461ecc4c6bcf8d48668325049c0f19e795081f8cf2ba2d856ea7b3",
+    "crates/primitives/src/hash384/tests.rs": "c4c615e18274fde36db008c84319aede138b74bd30be6ed90a96893d2cdbde7e",
+    "crates/primitives/src/lib.rs": "00d6484f8eff07877a7a62c03ad991f87d045341349edd599de2d550f1707188",
+    "crates/primitives/src/lock.rs": "8c214659e6eb2e18557b76d3ce915a0630edae2d2889474e4a39689a34147c78",
+    "crates/primitives/src/lock/tests.rs": "7613f0bfb8232ce096dd7abc7337b38dde8589f5ca71259e6d11e480d8af47ba",
+    "crates/primitives/src/messenger.rs": "885fd69fa51bdd1599b66dfc83fd9125ce13c9ea9879a4c3c1ec04619b90c243",
+    "crates/primitives/src/miner_tag.rs": "cbc5ad95d9577bfe67f518ad5bdac3e0730b46bf966add7da913959f48ead186",
+    "crates/primitives/src/multisig.rs": "a388d82cfa289d0fab27e7bf00a77610aa77583e5aafeaa4b74abe8bf17d3072",
+    "crates/primitives/src/multisig/tests.rs": "ad1895b49bdb9691df3cf4fecbb69ccd881ef3ffa717ac1f8b77bc7c5e1f524e",
+    "crates/primitives/src/native_lock.rs": "a0caac26f86dff1b9ca5e154ff40e7261af37ff552dd62c029d55c4c6db61921",
+    "crates/primitives/src/native_lock/tests.rs": "5a5905a37581d93babb8e041bab4893ebd4a210337294494d50aefdd667b73df",
+    "crates/primitives/src/net.rs": "20d5bf010e60221ab7861633c9750eff6ac3c7136a5f65a08ac61ef3ea6cc1c5",
+    "crates/primitives/src/net_tests.rs": "92488cacbb15ecaacf115b64f3a0d0a4fcc2cb227605e50a9b6224694c04b328",
+    "crates/primitives/src/params/consensus.rs": "c41bd396d97fedd05d34c44dcef2f695ad3c94b6ddef77b4de3939fb55b91bb3",
+    "crates/primitives/src/params/economics.rs": "0467e82f2538dd239bf732a73774506169f3c27c19c1443f7acff612c620fbe4",
+    "crates/primitives/src/params/mining.rs": "60e8a9b88e8277e242d64d6a71f3764534fe36d473c2fbf097b0853d8453fd57",
+    "crates/primitives/src/params/mod.rs": "92ca49c6669b314e8829cc5f190773a66ff9cc21dce5579c679269e4d14e9256",
+    "crates/primitives/src/params/network.rs": "3718ba817f78c4b9dfbe83f36e55845d2ada502678ccccee4ceb08665153ecdc",
+    "crates/primitives/src/params/node.rs": "a66412a5d85f27027c416f04736a994b03c998841ee08de1c4c53db895383461",
+    "crates/primitives/src/params/rule_set.rs": "711d495dfddb4cf59685343e29b00091692af794022d3923aa74bc9b47f99d1b",
+    "crates/primitives/src/params/rule_set/tests.rs": "9b6dc0df81a127e56c41f58a7b6f4bc2cf5ff8e5d7f903eee59ea4a04a264f6a",
+    "crates/primitives/src/params/staking.rs": "8f1456025a6fabd63ca268b43a95b3abf73005808914c5589ac9bbd6f1cebdd5",
+    "crates/primitives/src/params/tests.rs": "d844f672f48f28ee24394fd7160a6bc02cad8f0f851c30a93549185abe2c2da1",
+    "crates/primitives/src/params/wallet.rs": "56366c80d4737330363979b01df47181bee19b22035c41bba12171341a91fd4a",
+    "crates/primitives/src/recipient_payloads.rs": "64390fc835601f2a1fb5fe73d32aa53eb7d5293f1d3700f363a657b1d17b2c2f",
+    "crates/primitives/src/recipient_payloads/tests.rs": "b8701fe18f415cddec860f76c86c25abbff1e24f5f70faad5091720398d2a430",
+    "crates/primitives/src/text.rs": "28da54a92f858453a1fe820030d1a0c633fad79bb3bfd3bc7fec6d64462b2138",
+    "crates/tenq/Cargo.toml": "d8dbf1534551d8df03b05f5e320143de2c05fcf90c35296c66c4059043e9283f",
+    "crates/tenq/LICENSE": "50e6751797c50dedd75ef1b8a0d9e42f5f8472e9fbce91f34718e9f97b0c780a",
+    "crates/tenq/NOTICE": "9a7c7d7bc79f549c3565983fac79755b801995f26cd837d5d7ef4bbfec600a2e",
+    "crates/tenq/kernels/tenq_cuda.cu": "5225075cd0446f8b7146a85a7911b59e7cb397412a843cf6fe4966bc402983af",
+    "crates/tenq/kernels/tenq_opencl.cl": "32596d2cfaa731c88b97376951f7c796c7f4de3b39fc0f73b211a048a931dfcc",
+    "crates/tenq/src/kernels.rs": "283dbfb74a2f0cae7d9a49644608168fe2a500971ee4d53bb0e0f6036e0c7be1",
+    "crates/tenq/src/lib.rs": "e91b358a1ad38072ba17e658089e64d4d87115b11f29082a81ceabf8a3d89c56",
+    "crates/tenq/src/tenq.rs": "70de50ba952b5d14a04762b2d9ab155f88ff04f63bcdc29fc24eb0f19f9912cd",
+    "crates/tenq/src/tenq_templates.rs": "893228f9104a7f32465bead1cef1efeea6cf1a76dbc2ab94b968f0bba3de44f4",
+    "crates/tenq/src/tests/cost.rs": "a39cd0611f5e90ce186e17ae81891b625dfcb11dd56c4ece5b883ed0a0ebe769",
+    "crates/tenq/src/tests/differential.rs": "f0178e67e363bf072788a3dcdae5add187752d857d69c20b90a68fb9442b6843",
+    "crates/tenq/src/tests/engine.rs": "1cf4fce3bf078ac176a6c574a2ee61f811bfd70883b7f91b8864d108466c8de7",
+    "crates/tenq/src/tests/kernels.rs": "77d80b4c3bbcc942ffdb8e6aa78fddaa2eebd47efa7d08ecf355da5397af262b",
+    "crates/tenq/src/tests/template_dependency.rs": "35aa04daeea6719a56a5d293a14befe627ed5049d8b3b351e903347d7bd95cab",
+    "crates/tenq/src/tests/vectors.rs": "639df809173dc0c6b9595792b9b92117ee2850af0d10caf45a50f49491e91f83",
+    "crates/tenq/vectors/tenq_vectors.json": "d55b91fae154849164fbab6e26fa3439b8dd6c50ba7dd802322f71dc754d9207",
+    "crates/traidag/Cargo.toml": "106e8f86c218378c80df134407e0cc98bda66e3d93f590e79a8daa0a0957e226",
+    "crates/traidag/examples/genesis.rs": "44259e4e7b42a13fa7be19f3005432e15422a7371ed0b544a502e87a73a9d526",
+    "crates/traidag/examples/native_lock_live_fixture.rs": "a543e4ec03737285a6128cbf3d4f88e227260d91b56c294a8ce5803a02860399",
+    "crates/traidag/examples/native_lock_vectors.rs": "d6f8d0dde4b96afe9007c7b17fb95a7bf14a8e8cdaa68d8455bd883797dc421e",
+    "crates/traidag/src/anchor_changes.rs": "a0d9e3626d635db42ccc1affeedbb39e379a8a2c2d04defa8d85d3566563d447",
+    "crates/traidag/src/block_status/mod.rs": "df3a60dcac0306af3a0c2b684133d2c961de5117d4e056fbabd5e05cbc02033d",
+    "crates/traidag/src/block_status/record.rs": "460295ad1d043c5b882fe9cd2b15c40768dcd4cd05fc50e800235b73c2ddc7de",
+    "crates/traidag/src/block_status/state.rs": "09c14f5b5271b56e08dc91ff2917b89e378edbeb2485c05c6bc6451cb83176e8",
+    "crates/traidag/src/block_status/tests/record.rs": "466944c78483077567ed3fc9a8e729a198aa2bebcc6ebdec10f17dcbc1fe344b",
+    "crates/traidag/src/block_status/tests/state.rs": "82b182bc77c3db64d55bb755b960586aa2fe5082bbe8429528c12c2abfb003f1",
+    "crates/traidag/src/bootstrap_continuation.rs": "5d1d5a233555b5a1e049d97c5d527ab655b582bba8c1bfb659e4c0cbd35bff35",
+    "crates/traidag/src/client_rules.rs": "78a09d15168cba799fd8c0770e0b21890be385ce7f9e1403829458efb8d728bb",
+    "crates/traidag/src/collection.rs": "4dc9591f31606aecc600412b8f59cd6843e9dff07d8e85e2b22e7198b8a928f1",
+    "crates/traidag/src/compute.rs": "7cc8602eaf56d78b8966fd308609a40b26f4385cebd03bed55aa830e77d2f64d",
+    "crates/traidag/src/consensus_profile/canonical.rs": "001388a8052b3f1c33b671edbdda7eb60815d0c6dcac31a87f0ad99342eab1cd",
+    "crates/traidag/src/consensus_profile/canonical/tests.rs": "f64ab69d9083587b003c81e998490b37267126577ee29e6f65bbf3f6d78d16e6",
+    "crates/traidag/src/consensus_profile/mod.rs": "980fe2eb73cbd8a8ebff515db8accd24d2a68431f6a1126d653226e484d3c8cf",
+    "crates/traidag/src/consensus_profile/schedule.rs": "6bcbe85ad3a4e02cf74da476e5f31e67055fc67e3644e22eae667eda9a29c6d1",
+    "crates/traidag/src/consensus_profile/schedule_tests.rs": "aaea43f4d0282d29676e9019684008306e6511ed40f2797f18d064c41a4cc620",
+    "crates/traidag/src/consensus_profile/tests.rs": "20d9b4fb286170b51a4322d1df8bf27e98829b35ade98c215682e3325e0dbac6",
+    "crates/traidag/src/consensus_profile/tests/bindings.rs": "01b410e74ea525ac9e3a82f820071914d8d7f7df069a114f89ee18f4ef6182a7",
+    "crates/traidag/src/consensus_profile/tests/budgets.rs": "090a64c948aec3dc09d9f80e15d383ef3d733dd00c445d795b41bf9dab14e24e",
+    "crates/traidag/src/consensus_profile/validation.rs": "2cc75172c0942487d0f4c3d3f6bfff7410eee8adcae64a59a6bff24965dc98a9",
+    "crates/traidag/src/cut/anchor.rs": "b80f8e33dfed422d55b59ea8d40b8a434895de4ddc236d5e2cc7645fa4da2c31",
+    "crates/traidag/src/cut/anchor_derivation.rs": "59af728198200d4df8955e59ccb262e03c68b1cb2058e8c6e911250263839158",
+    "crates/traidag/src/cut/anchor_index.rs": "4eacc081335ef834ad8b398596b9c7057101a37b05bee47c894bcefd487a8c51",
+    "crates/traidag/src/cut/availability.rs": "2656ba9bebe81f865c082199f0eb71c5abf666cc1e7da07e634ab9006910f654",
+    "crates/traidag/src/cut/availability/registration.rs": "446ef0d5f1b26fbc1f072383c828ea10f0032774ef94fd331c56d81ac0c4ae01",
+    "crates/traidag/src/cut/availability_proposal.rs": "48b0426faf26e2b01772788b166a571d48b8fc99b13f227c5e2e7cf767f15a07",
+    "crates/traidag/src/cut/availability_receipt.rs": "066c94338278d40c4e30cde9b4219d28a7eb766fd18e5ab961e2678f16f1477a",
+    "crates/traidag/src/cut/availability_receipt/codec.rs": "7be3b54e39f9667a0cbd4a0f74fb94b4dc3f5ab1e9ebe2575444b6085d59bee8",
+    "crates/traidag/src/cut/availability_receipt_bundle.rs": "c141b188514eb2ddb17b6bef4a9a05143235b22b9a003504c922ad3a5c29677a",
+    "crates/traidag/src/cut/availability_transition.rs": "e8b0718cb5f2ece9cf82a98b50a5209da2e985666db57e2a49fd9e1cb1cc3a2f",
+    "crates/traidag/src/cut/certificate.rs": "ff78ccc1f0df64fbb7a01886559c643dad2bd6b1cf1b9c91ca47a4173b057cda",
+    "crates/traidag/src/cut/certified.rs": "a916041730931707684163a7b576f5f0f56569edb03c4b7cd892fcc38b2adbf4",
+    "crates/traidag/src/cut/commitment.rs": "b062845be670fa11db451a29b5653bd47e34448a538626114d52f22c243a50d1",
+    "crates/traidag/src/cut/committee.rs": "a22edfa1a6eb134ee3cb2437e672d5f552f1a9941d9fcb5bd8f43b546a41bc78",
+    "crates/traidag/src/cut/committee_members.rs": "5648f625a67fade816fed4c38ec4fb2417eebbdfde581805e1a2d1e84c0efe20",
+    "crates/traidag/src/cut/epoch_snapshot.rs": "5bf52584d4fde22477aed6cb37286f9ad2e17dba08da9a73e15e3040edf4fddc",
+    "crates/traidag/src/cut/execution.rs": "e24fd915a4cb31c498caa581a42722200de76b6a9b36abdec32579adf04a60c0",
+    "crates/traidag/src/cut/finality.rs": "5557dbf3a3bbd3a798830d8936e16c47bbc5bf262eae6033763b5fa693030b90",
+    "crates/traidag/src/cut/finality_history.rs": "59328e4cc533406176b62802439dfca91162dab69103fc9a8e73fe78c71241d7",
+    "crates/traidag/src/cut/finalized_cut_proof.rs": "dfa3ac0e0ec8d9ff5debf920ac4bc19b747c880715b686191df3b23fdcf2d94a",
+    "crates/traidag/src/cut/mod.rs": "670b2a83b8ef7213630ddfed2f648fb97de3fe2b5ed3dbb9a6b01083bdbc9f7e",
+    "crates/traidag/src/cut/parent_precommit_receipt.rs": "f35dc56751e9c6a572bd573e4e6bf98477e6fd219e2971ceebbc84bf2d12ca1b",
+    "crates/traidag/src/cut/producer/fees.rs": "76df489dc40ffbb3c771727ccf011e883106c853be5f40b0d8d5c244f7692ee8",
+    "crates/traidag/src/cut/producer/inputs.rs": "670e9e56ea5d10046b33844741cb0204937d7d70b4526ec06a3a4b6f5bbce8f1",
+    "crates/traidag/src/cut/producer/mod.rs": "d0e9c4bb9cedb4176b654a01626ae7f02b8ce6ec96b1523faebd848ea108b57b",
+    "crates/traidag/src/cut/producer/outcome.rs": "05b4506ef1721792f0f8d711db99981f659ecd066cf98a03278d1be9a821e4ec",
+    "crates/traidag/src/cut/producer/prefix.rs": "524580454bc08f487f602405e091340e9ca3006f18381332961c6a93f5e28aca",
+    "crates/traidag/src/cut/producer/private_effects.rs": "b7e2a9606ef707cd77028c9146c5bcf1609c7f6f4687f04e9dd181f721c7acea",
+    "crates/traidag/src/cut/producer/settlement.rs": "ea76fcd472d3dcc61b6c8a896fb67d8c4b6ca1e3cde6361f164f6fde0c8af7fa",
+    "crates/traidag/src/cut/producer/stake.rs": "86a5b1909a9b26fbeb699e071cf33e5e0f4a83da5fab8383264565514fe75f06",
+    "crates/traidag/src/cut/producer/tests.rs": "62dbded4358d3548b9647dfb94381f3cf59955c19dd9fb7c7dc4b9b37eea177f",
+    "crates/traidag/src/cut/producer/tests/burn_rewards.rs": "2ba32c028cf444ac294f9b1855fa3abfa5ba8b95480a882f46339fce9be8868b",
+    "crates/traidag/src/cut/producer/tests/fees.rs": "442f798e49351e92a2a96ddc7b8fc36e257cd1d5bba0b236fdcc1ae9ff0e6003",
+    "crates/traidag/src/cut/producer/tests/payout_bench.rs": "96d59e780c0cf62d6fa558552f90578372226933d1db5f13c0b2cabaf3449aa0",
+    "crates/traidag/src/cut/producer/tests/prefix.rs": "4feb8716f28116a0f24056ad93d132aa51666e657599b1f51a8ce2c3a9983bee",
+    "crates/traidag/src/cut/producer/tests/private_effects.rs": "007a5203376a770eb35c382bac9da02034fc10d002129fbe0b3aebb188ea7c8f",
+    "crates/traidag/src/cut/producer/tests/produce.rs": "546322df726f495c9b05f68ff8f3a55183c4349e9df2380211b78649a2bf1927",
+    "crates/traidag/src/cut/producer/tests/registration_funding.rs": "4abc2f93907a942c3a8c04d734e57905a4b3a02e47394b7b9f53cb60960dee8d",
+    "crates/traidag/src/cut/producer/tests/stake_phase.rs": "64be8012c409d1a98f27f9c1fab64fcc7b5b256c121befb65a744c11a89797dc",
+    "crates/traidag/src/cut/producer/tests/work_rewards.rs": "3c2797934271348e8422fe1d871d2e04afc544ed1fe6ca9b6ff1660dbb1023d8",
+    "crates/traidag/src/cut/profile.rs": "c006fd838693acf3210b9db21209404e79d57245330822630761dff8b0456967",
+    "crates/traidag/src/cut/profile_tests.rs": "804487c6212ef6955e1d3fd10f8c1b6ffbea1f9fe23b0ea658fa747d61f4783f",
+    "crates/traidag/src/cut/proposal.rs": "31b86e10b7a5b5d3d2fe45f542e3ac17bb0df16aed92dde7248641e42edd4782",
+    "crates/traidag/src/cut/proposal_envelope.rs": "856cf88eddaca0cbc8272877e77b5432b7ee2fb5c92785ebfcb58d1f239eafd3",
+    "crates/traidag/src/cut/queue.rs": "9e0831b7a4d1d38551b9939e1b3fcc1aa374a8b7d61814f74c4f8f11795050a7",
+    "crates/traidag/src/cut/quorum_signature.rs": "08a4dcb0c3b326dc75c95abb94e555e20827c0a6d996a8e26aacfbfd0e133864",
+    "crates/traidag/src/cut/registration.rs": "150dbb5a725e18a15e1b6aa0a58ee1fbe274e1188036649ef49a459a8fb2ff1a",
+    "crates/traidag/src/cut/resolved_state.rs": "610bf372585e977ae9ae8c78ea7d2be8f1a53c256dadabc0cfca8922b679c02e",
+    "crates/traidag/src/cut/round.rs": "f65146f8700285872aa7d898ed20d8dd6e3d635ac7d77508b97198d6dfc5849c",
+    "crates/traidag/src/cut/round/proposal.rs": "3ce9516bf2c6cc00ebc79295133964c94595392e72adeee37c5abc4faeace912",
+    "crates/traidag/src/cut/round/timeouts.rs": "fea2cb87ff0807dc027340701ece8c06fc801ddc490a23079ddb1fe149b9d0a4",
+    "crates/traidag/src/cut/round_view_sync.rs": "d505fad09eea8165c861d4f578a8370efb552f664686696b00d05581b97ca91d",
+    "crates/traidag/src/cut/snapshot_bridge.rs": "9cb9c72bb08ae70b36eb40b5393bee80eeb258344f581345b28ff7f59dc43b8d",
+    "crates/traidag/src/cut/snapshot_bridge/codec.rs": "2d92438c2dfb207acb0b333c57bb0d336d8df8a9301704067d11f511df7e6891",
+    "crates/traidag/src/cut/snapshot_bridge/links.rs": "8d79051db1f1f23562d255db8a7ca68738cc92605936b3651e8a3a3ddf62bcc8",
+    "crates/traidag/src/cut/snapshot_bridge/prefix.rs": "63927ce56663630b00ceced7d3160635d1477ec43064b261a31676dc233842bc",
+    "crates/traidag/src/cut/state.rs": "7607ca7dca6bd7afb9a53e714c3732d8a3dd076fb4d96a258eb612d3f792fbfa",
+    "crates/traidag/src/cut/tests/anchor.rs": "1ccda50882035564bc4260411db67bdbd609e446271deee312262c8d67a2ecb0",
+    "crates/traidag/src/cut/tests/anchor_derivation.rs": "02e2fab6d0d25711736af92bce5187c091ac56866d78dafe4d2cdb1da06c3abd",
+    "crates/traidag/src/cut/tests/anchor_index.rs": "56503b616abedff2c52ec07f4a0640d6dc95288a1008b829ff5a13c11c6c4a9b",
+    "crates/traidag/src/cut/tests/availability.rs": "4040fbcc8f4d4845c526187e75d15de0805ad3268587a29b792b43ce3aa5a65b",
+    "crates/traidag/src/cut/tests/availability_receipt.rs": "37ca6384ceab9b10cf8802352bf9f565d8dfa442db62673ed3e7f8c690b79bb5",
+    "crates/traidag/src/cut/tests/availability_receipt_bundle.rs": "00ba341943fa01701bf70b85435c3a495840581f742de198301b5ea93590b3e6",
+    "crates/traidag/src/cut/tests/availability_transition.rs": "ddc3f46280f54c8ed70dcf8dfc849d80d4f81843e00c913d82914a9af508af01",
+    "crates/traidag/src/cut/tests/certificate.rs": "ae9884ddb0dd78809b98c8e52f88c1e03195e3b5ca0eefcef7c9080c07ca9382",
+    "crates/traidag/src/cut/tests/certified.rs": "65d3586487c11262c49c5beb01716c38317cb6e3963ec013f9ad882491c45435",
+    "crates/traidag/src/cut/tests/commitment.rs": "594a0b9efb1848ded40cbdc475f77bb91430665cc08aa52808f30d5ffb80acea",
+    "crates/traidag/src/cut/tests/committee.rs": "413dfd53ed7187b7d18b80955c849353555183240e5b0f99a5557681f3c0dde0",
+    "crates/traidag/src/cut/tests/committee_members.rs": "9306a73b93ec2b11debc336ff446c7d515ddd884fbcdeec19eb4d1841d5c7fe6",
+    "crates/traidag/src/cut/tests/committee_profiles.rs": "5a13a08788b3308a6ab42a36808c1b39381ac509e353a467044ae5dbe5838e23",
+    "crates/traidag/src/cut/tests/epoch_snapshot.rs": "75521cbc5ba46506f6dbf67421c242927d9c5d13dcbb2496a535f4516ca351ce",
+    "crates/traidag/src/cut/tests/execution.rs": "ebb5f7fcf8699236221a59d57aa9a2468ebfc6ab8790de190bc97071553c4735",
+    "crates/traidag/src/cut/tests/finality.rs": "f4f0a3632b2d62ab2fe983b284ecebebd85c6b0dfd640f9564598551659f5afb",
+    "crates/traidag/src/cut/tests/finality_history.rs": "aa671cc737d05544fc6ff718362c289e3b2ac119af8322a1db752d386f00e84c",
+    "crates/traidag/src/cut/tests/finalized_cut_proof.rs": "c9b13673cee8bb41bfdde187a1b1b3c318be9b821396c7eee84c42d2c8bfccdf",
+    "crates/traidag/src/cut/tests/parent_precommit_receipt.rs": "6fe235247525feb3d5a81c9289b83a968b654df60467497abee4f2f78b85483d",
+    "crates/traidag/src/cut/tests/proposal_envelope.rs": "0ef7ec78e91f9e1a41eeee81edb691a157c8988fef5341ca78e6276c61308206",
+    "crates/traidag/src/cut/tests/proposal_envelope/construction.rs": "a18a86d29d07c7980110b279ddfe800dd9549abead17cdd44e97019e795c66d7",
+    "crates/traidag/src/cut/tests/proposal_envelope/framing.rs": "fe026d6c921b6383784f507c3e9f91ce362b40dfa5833f0bde1bc6fd5498cc72",
+    "crates/traidag/src/cut/tests/queue.rs": "d21fec02d5d562f23adf1082d88bb907246c4b99c881e1f1ca55b136f70c8298",
+    "crates/traidag/src/cut/tests/registration.rs": "7323c60f7fbdfd298b2118e338d5ab4f98b71233cdeb8de086aaac4b332195fe",
+    "crates/traidag/src/cut/tests/resolved_state.rs": "2f79706c99d05e791d829e2507520e37844c6babb26e95bb30745f94c291aff9",
+    "crates/traidag/src/cut/tests/round.rs": "87afa9c035e71003797c6b540e68bc45cbbf8347ada8216138647c98308d93f3",
+    "crates/traidag/src/cut/tests/round/precommit.rs": "0f7579dd7f0bf0df1c0af8be8bc93e6793637036c99ce2b2b1cd7b48b7ced980",
+    "crates/traidag/src/cut/tests/round/quorum_progress.rs": "b4c998a188d53fa2f08363fc54f6a96732c088f66785344a915c9ff285c4eaa2",
+    "crates/traidag/src/cut/tests/round_view_sync.rs": "5ed861b07964e5b94f8804b26d9ecd120f5197b3584fa007eabda7ac16ebbb52",
+    "crates/traidag/src/cut/tests/snapshot_bridge.rs": "585ced72e80d07c0f2a11deb50b7f91fed1e60e3c10b1e1cdb3c2781b801caef",
+    "crates/traidag/src/cut/tests/state.rs": "6fbfaac81b70157d876eba0e8c561136ecfc859c2ce1d07f675501b042dea2e8",
+    "crates/traidag/src/cut/tests/transition.rs": "9f81b170556d0746ecce0cc036044e51d9e668ef1595142d66a1f3ed2580f9db",
+    "crates/traidag/src/cut/tests/vote.rs": "2938c1bd0a68f00af707461262dd48f48f2c8369ad5f89acbdef3626529a12f2",
+    "crates/traidag/src/cut/transition.rs": "b6c2a15384f7d3883ad7aa4aed821406956bf2c1bfbc63e84906cb73c9118daa",
+    "crates/traidag/src/cut/vote.rs": "53a2c1d2b1990d34cd596eb7e429ceb78df4e009e9f4a05b3e88039751665a51",
+    "crates/traidag/src/daa/calibration.rs": "89cb79a7dc38951333f7941964c1ea35483afbefe72eca7001882b7a1cacab53",
+    "crates/traidag/src/daa/capacity.rs": "bfb9b1c7fedcd561d0677b878b528ac5fc05276d3f965e5cc914cfb120255230",
+    "crates/traidag/src/daa/controller.rs": "327ae48c976f34ccdc0bb5bfc57c33b2cd7783c17b6b16cab17ee8089c266c32",
+    "crates/traidag/src/daa/controller/state_record.rs": "65e712b661ccbc27a0303e823b0226c3924965e88a6775b917a3ea3e926136b4",
+    "crates/traidag/src/daa/controller/state_record/tests.rs": "b1a43020adbf79d0ec4ff4aa87cc1fd9c64f8b83131f52cdc18faacc9eaedb60",
+    "crates/traidag/src/daa/mod.rs": "1b0bcf25e09321c39a3c2c4bb3147df21411510581a54dae18572f382a78a727",
+    "crates/traidag/src/daa/rate.rs": "43576a8a90cee0df46f01059c0f4ee2f0d4819ae76cb7252a696d326a912e379",
+    "crates/traidag/src/daa/target.rs": "663b16e99cd3db62ce814059ef5604e6d346734a57a16abf72c559919778874b",
+    "crates/traidag/src/daa/tests.rs": "f4f1d4666659d3615819ddb4f3850ca08175fe40d006157fe83e6cb8bbb9b965",
+    "crates/traidag/src/daa/tests/calibration.rs": "663a23e57f0918a4795b63a7a86bde30ea57da5433eb1f02b17a644caaa36cc4",
+    "crates/traidag/src/daa/tests/capacity.rs": "daf8148ccd343c5976f62a18f1f173a78b4ac28e11e9886639dbd3b82f55954f",
+    "crates/traidag/src/daa/tests/controller.rs": "01bca6a377c564aa941bedc61f015cad1be5921faa8a11c66c7b2c35e25c4885",
+    "crates/traidag/src/daa/tests/rate.rs": "25fd7ec1c41f1060f39a3a0338bfcb5610ebc035c1dfeda9bdc6693b2f214589",
+    "crates/traidag/src/daa/tests/response.rs": "a2891f768166b7bacefe09e0a7b6e513b436dabbcda66fb5f819bd4aa8900ce1",
+    "crates/traidag/src/daa/tests/scenarios.rs": "60615c0eac7d67c10f8819ce24424495257d5cd57c2e7357bfe7a7d033227e7f",
+    "crates/traidag/src/daa/tests/succession.rs": "1f7b31fa28396375b79760bedf6086912093d88c29d44fb95d9a04d5459a79b7",
+    "crates/traidag/src/daa_int/i256.rs": "eea885600027c217d7bae76114cdabdcf06351dc0fddb249c2ce8ee694cc416c",
+    "crates/traidag/src/daa_int/mod.rs": "5a684fff3d32af7be31f608b3f38cbc7fffc5a843e09c2a723beb24d79c31b45",
+    "crates/traidag/src/daa_int/tests.rs": "5cc1bb58115b24ae8bf47e67711caa8a9b8fc6c667b56e50e95cef42977cf774",
+    "crates/traidag/src/daa_int/u256.rs": "290669b8dc8ff4f6d016356da68ed9d2263051dac7b343e16c9e13f72cfc0cbb",
+    "crates/traidag/src/daa_int/u512.rs": "dc8b6b2b15dabb58ea65da27cb578b2f1ed2126b0c3485c05368b3c9eea2c689",
+    "crates/traidag/src/direct_bootstrap.rs": "f54b2d3213cf36d17f26f5d83fce8784008386812b88be54759275b53c2a6cc7",
+    "crates/traidag/src/economics/accounting.rs": "fb256ec03014e210c96eefda19b03c95f3ea99e135e52f9be7f84ca2c25c00b8",
+    "crates/traidag/src/economics/mod.rs": "35011122faca3b12aa757bcd85c06ddedbe90f9d4cc6853bdfe2e3b9c7a6aaff",
+    "crates/traidag/src/economics/policy.rs": "48f1f14d29ea759208e57040708981596ff3320dc4cb4979c4f18cde0c5a69fe",
+    "crates/traidag/src/economics/state.rs": "7709402e91cdf87ac8f0fa4c990796aa9837456e2d8429d8bb9ce80843948b64",
+    "crates/traidag/src/economics/tests/accounting.rs": "6e9e586e09fb494b4a54f64c22b8a2f66302a63cb62cf1ebe203784f16c336da",
+    "crates/traidag/src/economics/tests/calendar.rs": "808f0de6d54b325393a0f86fe42037f5ac3d911eeed77a292f72ea3ecebb3275",
+    "crates/traidag/src/economics/tests/policy.rs": "3eca89450f7bfeeda35b8292a8e382426a27437a28af77ee477732897bf75619",
+    "crates/traidag/src/economics/tests/state.rs": "339c3a465ab3d86e0c1126b7e32f186ef5dc11b08bf06761a4ba628d16fbf7ac",
+    "crates/traidag/src/execution_rules.rs": "7f757609f615c03d3a731fa2b23072f64e1d21153b114379ad3ee3b2dd18ed93",
+    "crates/traidag/src/genesis/allocation.rs": "d07fcc578eef694e5a9ef2c423e2b2f91a3c3c33d93add65aa9752a330be440e",
+    "crates/traidag/src/genesis/anchor.rs": "09a73295cc5cf03abdf6a04fa7e96f9a16aa87c404e9ad4fc4abaaba6f56ceb1",
+    "crates/traidag/src/genesis/build.rs": "2d6603378370ca138e2eb994bb3920fd936934697f33056c0ef08753c6c41375",
+    "crates/traidag/src/genesis/checkpoint.rs": "94974ff29967c78477847db5ab9b65a6a68120d5026d13dc2f17244307a435b5",
+    "crates/traidag/src/genesis/descriptor.rs": "cec9a83396dcfe4c6a1c5c8cd651f2d64332effb2128096b7cbf9c64267eb04b",
+    "crates/traidag/src/genesis/manifest.rs": "1836943e3ec35c89206015f154b7f23d176a9cc2b8389494707532f30b067386",
+    "crates/traidag/src/genesis/mod.rs": "c08f9c1569debc8751de37e69db8b8ce16877d4f32487de7a468eba187b11547",
+    "crates/traidag/src/genesis/state.rs": "197a878ee703d3505d84f37de73c4c1e24ea446bf2dd938041d5a1f573dd7fd2",
+    "crates/traidag/src/genesis/tests/allocation.rs": "80b7b18c7c475672239563bdff7713699060a11c89e49043baca59dcc7e3f78a",
+    "crates/traidag/src/genesis/tests/anchor.rs": "65f85a40863b479a01815d8c58d05d06d3fc750fb3b62bfeba580e39a1010b8f",
+    "crates/traidag/src/genesis/tests/build.rs": "9d6ac85f4875357606044f111ea6365dc01ba4ef1fbd1039de930c0c257d9e07",
+    "crates/traidag/src/genesis/tests/checkpoint.rs": "68b54c56e45d73b4d80c64f078eb2add8f823f578ee22f6a740a8803f4ec8b5f",
+    "crates/traidag/src/genesis/tests/descriptor.rs": "d91b9f80deb73a1d32c9cb224bfc47f30d8e1eb13fc78378644210569561a7f4",
+    "crates/traidag/src/genesis/tests/manifest.rs": "8f3e89d862f1140b54b6e167ada1fece33cd59ff1059c97450d801b9ef82c874",
+    "crates/traidag/src/genesis/tests/state.rs": "8214aad9e515a4253069fff694a55131d301e25fc94c3e32e4c4ff082836b9ad",
+    "crates/traidag/src/genesis/tests/trusted.rs": "cf1cf9021f762f8807c3f910c49ea66e3c2ca6f5f26206390c2464372a7fec8a",
+    "crates/traidag/src/genesis/trusted.rs": "5704bd940ac95ba66064b222def8128806580b3697fdf0ff07c28971f1752b5f",
+    "crates/traidag/src/key_registry.rs": "3d9a2805d98b7804b1221d4c85a61bd8bd3fa715cf45f7fddcb9876a7838f8f1",
+    "crates/traidag/src/key_registry_proof.rs": "12e64861f72069a2b9344f32d5a8aeae314becbbf30acc69420d877c4fa897f8",
+    "crates/traidag/src/ledger/mod.rs": "60208590b7699a2391f0243b4700dbb7f0be4e06c1126e87888d87de7728461e",
+    "crates/traidag/src/ledger/rules.rs": "ff97dd96d599fe26ef39632eae82c36ad2b2022d8074d8de4f9028a25877c77f",
+    "crates/traidag/src/ledger/rules/tests.rs": "92e3f9119fe743c1349d5ec012f1b4b67dd0beead3bdb18285efb6487c72feb1",
+    "crates/traidag/src/lib.rs": "744c83cf7b6858bdbf1bf67a2683a50267cefcbb7bf7aa8b3dac4e0a6efba392",
+    "crates/traidag/src/ordered_index/memory.rs": "9224602596fa955fa11a208ad1ddfde29bd56a34a0392a21c43ed1ee92c9d3bf",
+    "crates/traidag/src/ordered_index/mod.rs": "3e0e4617ad979d94083d64fbce43715027bc62a415fa919a71ee408a4a28873f",
+    "crates/traidag/src/ordered_index/node.rs": "5af0c5c5f37041c46767fb67dbaafa61bbed78e6d932a579730f494f0bce41a7",
+    "crates/traidag/src/ordered_index/overlay.rs": "896d53af465b1b10442969d6cfc58d73f2ad92871db2bf2299e28126ceedb7c6",
+    "crates/traidag/src/ordered_index/tests/basic.rs": "68dd6c8fad28e172dc0b1bf21396d80f4d101b292b4d2c4fd74c6b2bc24007c1",
+    "crates/traidag/src/ordered_index/tests/differential.rs": "664485a52d4a57413e6ba7f1bb179b8d2ba4358879a4ba05a83fb2eef072556f",
+    "crates/traidag/src/ordered_index/tests/lower_bound.rs": "6cc0a24686893684f90a006b3cabaf428e9b19e879c5d1afdff9190180c2c5c9",
+    "crates/traidag/src/ordered_index/tests/mod.rs": "ae5261d9f81eb38e98695ec8e10c3b6df4590c355c939e0ceb7c190af3304e17",
+    "crates/traidag/src/ordered_index/tests/production_users.rs": "5ea7fae7fe73b21cd46798db833da98162f61ff37124c2eb7c03db4dbd49a6a7",
+    "crates/traidag/src/patricia/batch.rs": "b7814d4eb394bb2e9c01bffd1a5174c472928baaa42634b4d64f2dd9f80b7d16",
+    "crates/traidag/src/patricia/batch/paths.rs": "0c38dde1e15d7a8b76d71370d7c352c6f8cd1e0708f64281843c7cadbe3e55b7",
+    "crates/traidag/src/patricia/diff.rs": "f503f014ef1865be24abee2d6225a9327566343b19c303d972ff1e39a248b042",
+    "crates/traidag/src/patricia/map.rs": "4c0d71bc61e15af2c7f56e21fb492e196d31d96ef46174e595650d6defe83ba8",
+    "crates/traidag/src/patricia/maps.rs": "713b58a979295e4711cb665937902ea8fc33a09a5b1f1f17d4ae99c874896088",
+    "crates/traidag/src/patricia/memory.rs": "6fbbd16305e9fcbecbd1f7764a5dd36bf45d9306ce8febf4e2556bed8095fc63",
+    "crates/traidag/src/patricia/mod.rs": "c6f27883ef389f3b969062034c6d693c782d35a8694e2626555f891b13e17625",
+    "crates/traidag/src/patricia/node.rs": "a846800a0c6d83ac91617038d4e04391f6f2d41c49bac9adb551ce430ad2f9d0",
+    "crates/traidag/src/patricia/overlay.rs": "c429b8632965fc41bc01c9b6adb10057d9e242f918a87f9d4c6349c997ad2206",
+    "crates/traidag/src/patricia/proof.rs": "9cb4148328aa3574c104bccc471e2e68198386496dc55b97104685d52434e175",
+    "crates/traidag/src/patricia/released.rs": "337f36fba70f8b71f267d418926d05e1ff87bd9c1a9c2ac1a7b2e53d9745eca4",
+    "crates/traidag/src/patricia/sorted_root.rs": "68dc46df850207f1fbcc0bf559dc0e6fccf418c86adc5b76ae137a55be7f4908",
+    "crates/traidag/src/patricia/sorted_root/tests.rs": "7a48f0883604889119b10bbcf37f3a450dccdc1a2d3b8f087326c401aace4fe5",
+    "crates/traidag/src/patricia/sorted_root_stream.rs": "9cbac5409f7ebc918865ed29f7edac11c7eef5111e3556b5d3477ba6452c5b96",
+    "crates/traidag/src/patricia/sorted_root_stream/tests.rs": "c20ab26ab352c77b05e89b3b08a28536e454172f2e3b50dcb60ba327b0e77725",
+    "crates/traidag/src/patricia/state_map.rs": "9d5032e2ce6be379f299128e299a2e26552d55f94bdb50b97475b8f827912f2b",
+    "crates/traidag/src/patricia/tests/batch.rs": "f1119bce1de92659ecd8365d48694176e16ef9334c959a24793e81be0096cdb0",
+    "crates/traidag/src/patricia/tests/conformance.rs": "2d48b6b36b46d2ab373f15bd07f1a00490c051f54a28f346482fef84f7564304",
+    "crates/traidag/src/patricia/tests/decoder.rs": "ce940776d227125c1148741cb47ce26dec42ce4d64dc18333fe63ee2fce55179",
+    "crates/traidag/src/patricia/tests/diff.rs": "862308d1793e1f28966006b271524bb9a32bb19922b1e767e99a3716ba3efe68",
+    "crates/traidag/src/patricia/tests/golden.rs": "92290eabc013dcc1cb690bdc58d11b2908a2954f334bda9a79550c453a887170",
+    "crates/traidag/src/patricia/tests/maps.rs": "596aa42fa6deea78f45cf6ed9f210ea9f487fc4202c27dea8cc3323b7a1bf440",
+    "crates/traidag/src/patricia/tests/mod.rs": "d1cd456b2b36a0b767a4e69194d28429d1c8012cf76ae5b5b75aef8325508fcf",
+    "crates/traidag/src/patricia/tests/node.rs": "9dcf743e43e241d3b7bbba2e56ba8b9d526878a45cc2f5cbe59daba1e83660d2",
+    "crates/traidag/src/patricia/tests/overlay.rs": "baec9a145ebc798b5e82826f84b1dd09fc8f661b3bc8d037bf1cacfe1226536e",
+    "crates/traidag/src/patricia/tests/proof.rs": "218ae1fc09b145ea2ffb09c60bb536f6ab46ab6588cd53ab68784959a02c51a1",
+    "crates/traidag/src/patricia/tests/released.rs": "e005e7d88b690770e83a6ebed06c8b44dd790dd309aae497e5af303619e426e3",
+    "crates/traidag/src/patricia/tests/structure.rs": "d09175ef005ed685fc39c39ceaa6446753eaccb514e8fa86908529cb08d3a254",
+    "crates/traidag/src/patricia/tests/subtotal.rs": "5ad192eb4a42a7b791eef8d7c7e00e525fefd3e8612946898fd61678b0eb43bb",
+    "crates/traidag/src/patricia/tests/walk.rs": "bc6a9239caac11be9e6cca7ceaf6fdaa0bc682c2c88bb8dd50ff28336c96609d",
+    "crates/traidag/src/patricia/update.rs": "2f6135595fe86c436d94e38c6cc94bbcc24152052249940655928547d22325e1",
+    "crates/traidag/src/patricia/verify.rs": "42c59f62fd8bddbfae18d36546cdda9aaccc0fe408e93dce20aa86e4ba2b61ca",
+    "crates/traidag/src/patricia/walk.rs": "cfcc262ec0adc58e1ada78e802a946181a4b7942ee9856c071cfa1604e402ac8",
+    "crates/traidag/src/pos/admission.rs": "f7ea938ef4323c941cfcdb758be655a7ce01f1ddcc87d308900bdde5f00836f7",
+    "crates/traidag/src/pos/admission/operations.rs": "647932e9ea9aefb5c7e042edf605597e0aaf214cc2d398ebea4aaeb9d2acf971",
+    "crates/traidag/src/pos/admission_policy.rs": "8243d9f6ea8b658c61d0ef276f5e2b716a4af2ee363103b98781cff01623c6d8",
+    "crates/traidag/src/pos/anchor.rs": "ebb362806672bb44d6c48cf39b381fa4765a4eff2a851f531b26afea8f9d5fa9",
+    "crates/traidag/src/pos/attendance.rs": "6888ee31820c5a90f2c9223dc81739655885e42b2442f1c31a0c89cbf9262ed2",
+    "crates/traidag/src/pos/attendance_transition.rs": "0e5aab3a90afb46d40a846df4dd784d6b5cc17f2de66815dead2e0ac48801fff",
+    "crates/traidag/src/pos/batch/mod.rs": "520997b083d26be5684748caeae6364dfcb9d16824e11233f2d492e6802f66cf",
+    "crates/traidag/src/pos/batch/transition.rs": "067003ef0f5c22935ec42d1e3200f4f26219ac9bcfda7497c3daf1fcb3a34ded",
+    "crates/traidag/src/pos/batch/transition/exits.rs": "d6eeb1a9a1901e8d8d972932d497ad422dcc1bcb07937af16ecdf9d3b99b30c4",
+    "crates/traidag/src/pos/batch/transition/tests.rs": "5033e3605eb30e1122c5417a70c8e7898962a9ddac0bff948f2968430de5257e",
+    "crates/traidag/src/pos/batch/transition/tests/limits.rs": "64779dc7fa3ea1f5e3bca4d486406f48e6475a321a0cd04417d63e6f04656fe6",
+    "crates/traidag/src/pos/batch/transition/tests/stake_floors.rs": "d957e7d1e0f73617b4e8cf342910e7f9d49182adaf49b6660eaea929dc71bbe6",
+    "crates/traidag/src/pos/batch/types.rs": "515fdc18200fc860fbbef13db799f6c779586c084590d66ddec6a7dff7106010",
+    "crates/traidag/src/pos/calendar.rs": "eb22974fae2b4ba4cd5ee537daf2fb7ae761b0a2c192a18aae647e5ada678d8d",
+    "crates/traidag/src/pos/calendar_tests.rs": "ce5769c4c8d494a275156c30798c760c9e154144fd823d71c5d5f2259a9ccde9",
+    "crates/traidag/src/pos/epoch.rs": "11c26c15ebe1041d236a169328a9dce8c83e8c1f35377f99dec517071d24796e",
+    "crates/traidag/src/pos/epoch_state.rs": "0c83ea36d9671ee35cfc1c6ce5bbfab98bd7b5306817fa0de49d4c0513e66a27",
+    "crates/traidag/src/pos/evidence.rs": "9443649359ccda08d8ac9b263e35b731ebff15fd40493c138ab39a0d2b8be031",
+    "crates/traidag/src/pos/finalization.rs": "6d45c4b37e949e7fb7c3040169e56a5b37eda0cd09fffe30fe9c01011385582a",
+    "crates/traidag/src/pos/handoff.rs": "7bfd9ca64f7063968a9e151f3dd0e842fd19ad27da91cb134d3ce3000cba3e54",
+    "crates/traidag/src/pos/ids.rs": "31aeaef678bd1258be3480eae7b0b736f2a5ed7dcae47e4c928cedcc9e4c19c7",
+    "crates/traidag/src/pos/inactivity.rs": "85dac03439bf54335846ebea1ceef517f9e653c644925725f2ba8e8d54288945",
+    "crates/traidag/src/pos/mod.rs": "5c7dae3accef85b525b3a7558b5b7fec80dbc4d56ff0b56cd3c0469b4e083d3e",
+    "crates/traidag/src/pos/pending_exit/mod.rs": "f192a0f45cb4f4eed7b0df481981cdecc1c83bfdafa0e2b534ba6b9d6815a0d1",
+    "crates/traidag/src/pos/pending_exit/tests/budget.rs": "11b9454defcd77b003c38e69204e922c80786ad8ed58c0281a6d419dd0ab7da1",
+    "crates/traidag/src/pos/pending_exit/tests/integrity.rs": "9930890e2c51248b01a997cd8cad7c88409f5b9d3b3995ee5e64576d8b4e149c",
+    "crates/traidag/src/pos/pending_exit/tests/mod.rs": "c644fff2c3fad0010ac1718ee90ec5df2098b90ececf97cd82becb786c4c5eee",
+    "crates/traidag/src/pos/pending_exit/tests/paging.rs": "f100fdcdc1f7b07396d27155d3f56319c500bb5b06d7430d03d25c886e99e0f4",
+    "crates/traidag/src/pos/pending_exit/tests/queue.rs": "4f9f0f8e0bcabad2defec98be269f1f15be4b98559202220e9f66cc681e98ed6",
+    "crates/traidag/src/pos/pending_exit/tests/schedule.rs": "6c9b23ee04d95e0f3fc2f8aa7d17ffd7869cd6fe8fb43835a2ec84b2dca84129",
+    "crates/traidag/src/pos/position.rs": "6eb7f76f8a43710aaa02efa863774fd8ac0712593f8fc50d89e4940e1985ff6a",
+    "crates/traidag/src/pos/priority_transition.rs": "b784198383fdbe6fe3c4abc5d8a6129da3a5043116393025d41d982a42785d50",
+    "crates/traidag/src/pos/proposer_priority.rs": "a87f4cd554a287b0dac22402af0202b0cc7b8d00fb636be68e92bad256fbd6f1",
+    "crates/traidag/src/pos/release.rs": "9891859f9d8e48c471a32ae6b8f64260557c141e0982f28d1619454e2e6c851b",
+    "crates/traidag/src/pos/snapshot.rs": "a3dc694c3cee4b44ce02cd09b2192a73f9b4c6a45a6491ced9c643f38bc20bff",
+    "crates/traidag/src/pos/snapshot/committee.rs": "1a90997041dced53c3f565a6550dd715b21b37952f6776cd509aabef7292a927",
+    "crates/traidag/src/pos/snapshot_record.rs": "885156831e0670081fcdeda4a921ccb7771770faf6081fbd43bdc8e1c60682b1",
+    "crates/traidag/src/pos/snapshot_validation.rs": "ee0e61573925b74b25e2674b3e5f58b4e3beeda4c8acaacfebb972273651c6c8",
+    "crates/traidag/src/pos/stage.rs": "ff78d6d189cdc44260d3f4fd1383458f0f2bb5dfe73a04aab9d3edcce0fad096",
+    "crates/traidag/src/pos/state.rs": "4585d4ae52544912e0537b4d381b4357a12028e13bc4b16a2dd8d2f06630eadb",
+    "crates/traidag/src/pos/state/updates.rs": "fc1c04d7fa52efe90f518a7b69a0305ea77998fe349d081652d3cc1c3721b52c",
+    "crates/traidag/src/pos/tests.rs": "e05dbc348df8bc4ee8b23d51626ae0d19ee1d5686541ee16c517985462b71f14",
+    "crates/traidag/src/pos/tests/admission.rs": "88e74c04e4145f536a6c7b456e125cc7045313cfa50ee771ccacc0ad2bb8fcc9",
+    "crates/traidag/src/pos/tests/admission_policy.rs": "8a68241ce346d37677c397af4a3ec965d71d7381df8ef4929d524507821b576a",
+    "crates/traidag/src/pos/tests/attendance.rs": "e2409ee9c5f5fe133bf0c8796050c74c685a012e26fc0eb8c16b6392d8360e75",
+    "crates/traidag/src/pos/tests/attendance_transition.rs": "68e161c1a0d31c8d667072eaa2c6fe935ac9cd96b3d4dbdaaa3347677e0717f2",
+    "crates/traidag/src/pos/tests/batch.rs": "dfd6ef838639825763bbc44ae15cdb19b03ba8bccea059e069dc335ba22c8801",
+    "crates/traidag/src/pos/tests/batch/capacity.rs": "abd325b71132ec96921f7dc48e078ae82e56e4d69dd80cd629c5f38e4efdaa29",
+    "crates/traidag/src/pos/tests/batch/exits.rs": "cc5cb0c054c239109fcf9b12fce38e359f2226d45bbde8f9b9c1dd483cbb1956",
+    "crates/traidag/src/pos/tests/capacity.rs": "cd2c33e8d6492dc4242a06ac80e34262bee11332349a4d8c338c207210f3ab63",
+    "crates/traidag/src/pos/tests/epoch.rs": "78ceb99e5230481473193750d95817edcfe4999739fa3919a847c3756bfaab90",
+    "crates/traidag/src/pos/tests/epoch_boundary.rs": "c6ac351c65bb0625fcdde1bef29542979b1569edcdb8f1e7ca2d49d35c9dc556",
+    "crates/traidag/src/pos/tests/epoch_boundary/extension.rs": "601413863175f46d4ca770959a706a4bd14c95477c7a2cd72997a59aa61662fd",
+    "crates/traidag/src/pos/tests/epoch_boundary/successor.rs": "bd3ace0f9fbaf7208eabebae2774662d9d5c602206874bc8eda71e1302f67c97",
+    "crates/traidag/src/pos/tests/epoch_state.rs": "c85fe4a09fba97def9b4cd554dbcb895d02fbbc209f63581341557b7b319ce8d",
+    "crates/traidag/src/pos/tests/epoch_state/activation.rs": "83daeb7cb72b8ff67284c55f1336fb2c2cfee1526f838075ab34870520b495a9",
+    "crates/traidag/src/pos/tests/epoch_state/records.rs": "9d0b572ca16a2a2a727f7bb39c2f3f5b9da72fdc394cf7d0f4e37fab113a4f31",
+    "crates/traidag/src/pos/tests/evidence.rs": "837b0b0f03059789b59815c4c9277fedc2d558874a3ec61652438d27c8754d96",
+    "crates/traidag/src/pos/tests/finalization.rs": "4a4545dd93b2df1212d9a5f3ffbde515c7ce4e3ca3e2826b8b4eb6187cfe42cf",
+    "crates/traidag/src/pos/tests/handoff.rs": "61eb98b168742719896ddeb9bb84766bd557c9fd38145b8d8efb0976da24ad66",
+    "crates/traidag/src/pos/tests/inactivity.rs": "4c4b2013596ea92d42370b4cabaccab5e783a73a0e854e01daaa75e4eed4abf5",
+    "crates/traidag/src/pos/tests/lifecycle.rs": "2c81467d770194661eb2c5695cdc48362f1daff12a366f4b668fdfe2487d1035",
+    "crates/traidag/src/pos/tests/priority_transition.rs": "6578d4b903a0669d6a0c8f3523c8049c7e518b33f8ed0b6998075b8f8f17eaf4",
+    "crates/traidag/src/pos/tests/proposer_priority.rs": "90a7b809c8c49be3c503e2f63e3bdb68186a18f668676f6e8b2910555d55c6c4",
+    "crates/traidag/src/pos/tests/snapshot.rs": "3de94cc5c0857fc1d8024ce87a41e0b262a62495dd06515bc24bb2acdab27de3",
+    "crates/traidag/src/pos/tests/state.rs": "1533ab96616d1d56d54673e7ab0118327ae0de12e4d6894760c82b3017bad415",
+    "crates/traidag/src/pos/tests/transition_proof.rs": "6d80fe70979db3f832cb86f3f299aecc64c13f9965701fdcef765c4a3e0c7b9b",
+    "crates/traidag/src/pos/tests/validator_position_index.rs": "aae921785a563c8ade816713c933cb812bb3820815a41a76fcf8ca89d4b0eb5d",
+    "crates/traidag/src/pos/tests/validator_update.rs": "7893f7cdd6ce9195874beaa2e4eed53896f7c65975e5d49e522b6ac249480df4",
+    "crates/traidag/src/pos/transition_proof.rs": "2c138d75e154c3f390113a4f422d971514801b1e4cc384e18278f0e3789cdf28",
+    "crates/traidag/src/pos/unbonding.rs": "635e1779e8c39b6efabb0b47f80f2a5b5845530c2070fceaba9b30375642ab89",
+    "crates/traidag/src/pos/validator.rs": "4ee71e7d0b101fc6fbdd556e21f51aa22151167655570dcfb1bdeadd19f4a297",
+    "crates/traidag/src/pos/validator/codec.rs": "0cae3d24fd5e5da791e5709380006aebc4d80a779cfafb7618157a9310401cd8",
+    "crates/traidag/src/pos/validator_position_index.rs": "0db638df6670cf65e450397470da974a777bd6508de9c9c2c07b9dcca7ff5243",
+    "crates/traidag/src/pos/validator_update.rs": "fb4ef39edc3b5cd2e5fd7ec6e158f64aa7350d5f000180527f3e5d2530f70678",
+    "crates/traidag/src/settlement/distribution.rs": "2c9ddc8575b14fa8873a0688c2c94a07ab0929a9cf9ae45230ab472378384829",
+    "crates/traidag/src/settlement/forfeiture.rs": "6364ce2f491e25ea4bbe5c8fdec53344d279e4abee0dd33133b1e3a690381794",
+    "crates/traidag/src/settlement/layout.rs": "b2c21ea51c93ae3a2cbbc558ca61d600f219456907841ab09f34d0d5c273622c",
+    "crates/traidag/src/settlement/limits.rs": "5cda4aea2bcb3f07cc0f2f433d19ffde41c05a04bb35321826532b639aeedcb7",
+    "crates/traidag/src/settlement/memory.rs": "2f4dff0e9c096c4d9897b09e7677571d5113fd3ba665e93561a3c56c79b2b2e8",
+    "crates/traidag/src/settlement/mod.rs": "ece19575e9f801ede967138be4568ac486032ffc242688ab7bcfd03be4bd3e4d",
+    "crates/traidag/src/settlement/payout.rs": "b8a2cddcc50c2950b358a5628851531c47254dd9213a6ab51fbb8de1c2a5cf87",
+    "crates/traidag/src/settlement/pool.rs": "0b9ce056e7f9a41d163b5e377380318491ce285357422886bfa653c634443402",
+    "crates/traidag/src/settlement/receipt.rs": "95e98c439bf5648a612e7f32c64883ca65c49ae3dde4e27b3b17228c80635f99",
+    "crates/traidag/src/settlement/record.rs": "823cbce99a3dc6929dd962ccf13519ea21bcc53213cc57f3939db41000c7bb61",
+    "crates/traidag/src/settlement/state.rs": "93c16e3c13f0003c784402b0de8b670d04a18435d54d854b7e21a5915f79dedb",
+    "crates/traidag/src/settlement/state/payments.rs": "805182239314f6ee4a245d3fdb52b047f8f1b3baf64b570b8b37b04771e30b46",
+    "crates/traidag/src/settlement/state_record.rs": "8fe142744172c38f42ef05886d4a52de5a65182f07fc27b065c955bc3edda44c",
+    "crates/traidag/src/settlement/tests/distribution.rs": "b8e321e6caccf5323f7b6cacd8a0e14a3eb7730c411e9289a130a9d9d109427b",
+    "crates/traidag/src/settlement/tests/forfeiture.rs": "c81b934b67870b502bf3a48e110005b726393022ad045a9ca5aebf9bb54e5613",
+    "crates/traidag/src/settlement/tests/limits.rs": "6317492ca44c3f4ef8ea76df49d2651ccef1dc1cbaad71ca7810c6db8c044b07",
+    "crates/traidag/src/settlement/tests/payout.rs": "80f9e67257bfc3284add067d60e68c33724c04d33180a6b7b4bb96014f2a365b",
+    "crates/traidag/src/settlement/tests/pool.rs": "a5372b2d2ecf81a550f01b2df71d11bce5b66b577037bbcd27238e6ee76b7810",
+    "crates/traidag/src/settlement/tests/receipt.rs": "054caca2997393df09f4747affedcdb187d8c81fe6374b5a33d6aaab2a031830",
+    "crates/traidag/src/settlement/tests/record.rs": "32f632611d0d123b7b93bdfe5fb70722fddfd19caf1a0544def865189105849a",
+    "crates/traidag/src/settlement/tests/state.rs": "d757997cdc84d5cdd92e59375d13b90cbe010e0ab6aa1ea7530833218f39c8e2",
+    "crates/traidag/src/settlement/tests/state/payments.rs": "09ca40ef318cfff7a917887b540bcf0d19c58c79bd50ac3d06931b2f27aa4b44",
+    "crates/traidag/src/settlement/tests/state/pool.rs": "1ada6f63268bd2be943c8d77e4f93871953c5f0f094cecea2fc93097c416cad1",
+    "crates/traidag/src/settlement/types.rs": "12503a93965a0e9acbe640e6ee95410c1fe4506f6e1545e0e920fbf3a16e3f48",
+    "crates/traidag/src/settlement/validation.rs": "b822f9d434a81c8e173e33ddbcebb8656ec93723148c0c31f5b15a8349be23ff",
+    "crates/traidag/src/snapshot.rs": "29c0a29562411146b73d0aefe06c4666c686a81a0bb281df82aac9f9ea9cc86c",
+    "crates/traidag/src/snapshot_anchor.rs": "186fafa1e51f4e9268f916c3d47d5deced9f07ed7b4e08d73198105799a4aeb1",
+    "crates/traidag/src/snapshot_frame.rs": "1b3ebb277b4d10ecb1ec2aa5eadd4377cf69baa4387f3a2b3965c4dcdffbde05",
+    "crates/traidag/src/snapshot_materialize.rs": "7eec2ffd3726b7c1eacc91e6b8b32c81a9005cab2fb1b185294b6422111ae468",
+    "crates/traidag/src/snapshot_materialize/private_recovery.rs": "c10b8548210803ead6704e4fe6d96e60ea67096d6fa239c9af2ce5297ada8136",
+    "crates/traidag/src/snapshot_materialize/private_recovery/tests.rs": "96e944290bd98d5535c268dfc2be4da1d2f7cdbea41124c0e67faa070514bf99",
+    "crates/traidag/src/snapshot_materialize/segments.rs": "1a4a5c4fa2de0281e159da4852c029db55e69ea2240dd0add6eab4d0fef53137",
+    "crates/traidag/src/snapshot_payload.rs": "ff382a270171567cbe3c76784d597d29c9a708e81f63e17f407142ac83834bf5",
+    "crates/traidag/src/snapshot_records.rs": "fbcd8eb0e2caf85272cb3bf581ed083fa1904eb6e9bd4613aeda12a2127066ae",
+    "crates/traidag/src/snapshot_segment.rs": "0e92b7c8c4826689a39663599dc38a91a572da18f4925fd488926eda10e8ccb4",
+    "crates/traidag/src/snapshot_semantic.rs": "a9a5b5861442039900241f9e8d5677da3b086bba3392830f2267e274e9c6e1af",
+    "crates/traidag/src/snapshot_state_nodes.rs": "0d8f105bbeb65d5c5a3e3a18fa71da70b7d9f1a1b4a0766271fc79aed21bf09f",
+    "crates/traidag/src/state/cut_batch/evidence_lifecycle_tests.rs": "789a4397fc9bd88ab4a8310f4e99839fe6a973334e7716f2183a75de05c94336",
+    "crates/traidag/src/state/cut_batch/execute.rs": "bd0c8876220924475f721aa4375f6fae98bf05205062d7b3a4a6322361b6042e",
+    "crates/traidag/src/state/cut_batch/execute/pristine.rs": "c994474a2874bc65c8b44244cbdeaba338002dddcdeb9e26f7914fad8537c0d5",
+    "crates/traidag/src/state/cut_batch/many_payments_tests.rs": "3354d5a511f141ab06e96348c7855cafce74e5b51030afa2881ce9a71a8b4593",
+    "crates/traidag/src/state/cut_batch/mod.rs": "76bb326bba588a891dd625a998681a1d84d4404952931aa73c869cc738ef7628",
+    "crates/traidag/src/state/cut_batch/tests.rs": "9772ef03bedb6a5424128d5c1fe8fd1a0c252dd2acc890957681f0c18c349b3e",
+    "crates/traidag/src/state/cut_batch/tests/evidence.rs": "dc309cc8751caf98c8847ddb2b155b816c88cd3d24e35b318170759c43955173",
+    "crates/traidag/src/state/cut_batch/tests/operations.rs": "bbca753fcab4407fb9c2bbd8330f99a0dd4fcdcd0bc3e03dcc83643782006649",
+    "crates/traidag/src/state/cut_batch/update.rs": "5860e946987ec2ad25ff641c117bd7d488eb8a00b5b9d9e3fe32b458b8c9dedf",
+    "crates/traidag/src/state/cut_batch/upgrade_tests.rs": "0de690f2d9a8aac4980abfc5b56826fcd7f6c5c7ffb96aa631ef590438f8620d",
+    "crates/traidag/src/state/cut_phase_bench.rs": "1125e564da6e9537192b5314ff39fa8c90b0ee60a5765732b4ddff741416776e",
+    "crates/traidag/src/state/emission_transition.rs": "397a855e77a633164ae9042695b0c77cfebe1cc19c693b6948f7fa249150310e",
+    "crates/traidag/src/state/key_registry_authorization.rs": "bb2c68c45d282c53de8c2a1a03566f3da7acc53783ad9d746cbafc670dd90135",
+    "crates/traidag/src/state/key_registry_stage.rs": "f4ff7f17204fc214c075a7be9381d24e7b105f0b3ba9aa0228d96fd0026baa5b",
+    "crates/traidag/src/state/mod.rs": "8bc541a1dcfe3d6c98ba60ae66a582d38bd38223a39ab3614d4d7d593262ab5c",
+    "crates/traidag/src/state/payment.rs": "bb09b19cd3465999417c8e41bd8e1d18f85c73c6bc68ea845d2cd0c2fd511741",
+    "crates/traidag/src/state/payment_anchor.rs": "69993efd1e06a351d9318028af302ce7025b84b599b7645243155c7949c3854f",
+    "crates/traidag/src/state/payment_test_support.rs": "a63af1783c3b5c7e71691651539ad4dbeae5c051cfd42e4e543d1ba628623ed2",
+    "crates/traidag/src/state/snapshot_node_collector.rs": "06240ee26f72634816d66c6087bd991ea51ac611eb8234e6e027f15b168c5ab1",
+    "crates/traidag/src/state/staged_node_compaction.rs": "b6f0e37146cff159f9d0718bbade5e74f5e8f8929fb50235972d35ea016b610b",
+    "crates/traidag/src/state/staged_node_compaction/tests.rs": "a869e107f5eafb8ce275a7236c2191527c2b97d4c43b14e36fe832c235fb1883",
+    "crates/traidag/src/state/staged_node_reader.rs": "c2f914218205a4b2fbd15e2724c76ada5ec2a0557a58920cc5f55db32ffa75ee",
+    "crates/traidag/src/state/tests/adversarial_payment.rs": "ee4dc1df9dd179be9d2b0c4ba27b281a4fdeec7652f2f7f7464ed0d0986b555e",
+    "crates/traidag/src/state/tests/emission_transition.rs": "31e82a74851d03cd2e5a84afa6253acb86c53c4e8a463a8860bf8664ce276b42",
+    "crates/traidag/src/state/tests/native_payment.rs": "b01d4179b230df93b468105e72e97e81e02d61cd74d5bfd1698c8f67d8494e3b",
+    "crates/traidag/src/state/tests/payment.rs": "5dc864c5d744e4a056d326b924787893c6dc6b77ed3b9075b3c09685c5a90089",
+    "crates/traidag/src/state/tests/payment_commit.rs": "7ca4e47097f28bd06ea5df41171b27528b59abac17177f0899c36eff5ebc8a8a",
+    "crates/traidag/src/state/tests/payment_key_registry.rs": "d125f4fb9b882d5bfd33a5700d9b53c6ebdabc8fe7a3ed4663f04d981d9c2e11",
+    "crates/traidag/src/state/tests/staged_node_reader.rs": "a85e667a37acef7a38799e6eef1b72178d8d291c794a4826a0bbf6197515c2b6",
+    "crates/traidag/src/state/tests/work_execution.rs": "1d50aaa7975d14af90b5c5bc817c481488ab0ebad738d72503e2a0425a9b40a8",
+    "crates/traidag/src/state/tests/work_execution_duplicate.rs": "f324251d67d91305145f191e99d86d37f26b1e5951c4689feb5be37be47a09d7",
+    "crates/traidag/src/state/tests/work_execution_order.rs": "d18e5b6b42c7d8a40206676c11e6c8c1708a5b3083244db1e81f19b727264775",
+    "crates/traidag/src/state/utxo_stage.rs": "1988d79ffd5b248538952a27fbe875629f31e4d33e0d12c3272bf966561521d2",
+    "crates/traidag/src/state/work_execution.rs": "b0ab1bb0329220f3ae84a284c1063a36be56262e047a89c6dcf8f997c5ebe443",
+    "crates/traidag/src/state/work_execution/operations.rs": "a0609dd5519d492eea47a995b7cd1e0178851ba7b9f9597b9021131758dfa9a4",
+    "crates/traidag/src/test_support.rs": "df5bf9f08ac2ead7f23f47357fdb5632ea54458bc064b699d3074834da401f06",
+    "crates/traidag/src/tests/anchor_changes.rs": "e9cc615bdf688b885f05ed0fc1eb36205d26bafc936d50a876563c8bf1649519",
+    "crates/traidag/src/tests/bootstrap_continuation.rs": "2bcc819dccdb0471adff39d182aa6fccadf89299f8f532360c179419bd1361d7",
+    "crates/traidag/src/tests/client_rules.rs": "de361edc88bf6ac42be1aa6a847b1e82274c3b40faeab44b9000b04739bb7683",
+    "crates/traidag/src/tests/collection.rs": "9bf0d367c5bfc4dcd772a98f2c22d3bdcaa2816a7d92ca0dccb0d347a81d9ebb",
+    "crates/traidag/src/tests/compute.rs": "0d8ffc88a2e33c18db9e2a95b325c80411b9d0069c01ad32d543924584cb4ab4",
+    "crates/traidag/src/tests/execution_rules.rs": "130a8fa1fb64146afc13fa2d2341494de4e8c0ee0ddd4534feb8464ee5307587",
+    "crates/traidag/src/tests/key_registry.rs": "d937c1fbe43315c04a848158b0c4b8081eb6c7eb7a126c20220305e2ee1d3c81",
+    "crates/traidag/src/tests/key_registry_proof.rs": "529e15c0c2c4d752ead45c3c42bb9fa6b8247db7b1a4bf86173e88cfce8418ee",
+    "crates/traidag/src/tests/snapshot.rs": "3f52cac33e8061a115f379090ea456395eec6b3cb223c2cf325218a91bb0b037",
+    "crates/traidag/src/tests/snapshot_anchor.rs": "008fd6b680b5fdcca09b3ffbb4e29bff8b586dfa1adbb82702c00b0bf9de321f",
+    "crates/traidag/src/tests/snapshot_frame.rs": "8bac6541fe045c441f5b1c0eb0552c886cfb88d1fb37a57efb3c6e860cc875fb",
+    "crates/traidag/src/tests/snapshot_materialize.rs": "80f8379c542a1d803d4d27a962df3bae64776f3bde6a5650917bbac4d5572e21",
+    "crates/traidag/src/tests/snapshot_payload.rs": "bff6373a5e3a4ffe96cdaa9193da0ea31cc391b1d8f5422bb56e6da314d5057d",
+    "crates/traidag/src/tests/snapshot_records.rs": "beefe8b321c3aeaf16ace8a4863deaaa370a56dc48a1405bab167cbe0bcb2bff",
+    "crates/traidag/src/tests/snapshot_segment.rs": "85ad46cc1da6b4baffe9ab13d60cf1082be60b4990a0549c893cad8053f7c295",
+    "crates/traidag/src/tests/snapshot_semantic.rs": "dc699a955089c8d305a6d66b0bdfe744ce6efa13ddbf0f555fedcc2ee4405825",
+    "crates/traidag/src/tests/snapshot_semantic/limits.rs": "8aa1eaaaf31306b14e8716eb60fb615014398b2306ae451ac532dea12472c77c",
+    "crates/traidag/src/tests/snapshot_semantic/walked.rs": "81dd5110d01dd8a2c7f68b031d165dec0582b27090996f51e34b2a9a7bab761e",
+    "crates/traidag/src/tests/snapshot_state_nodes.rs": "df3ea1a577311c90d76c57bea34602b7468962ec9ee38c4d3544f98272173e74",
+    "crates/traidag/src/tests/utxo_proof.rs": "c1bd071217791a28f87d6c22a7e297c8e7af4659e3ad49023cf9d25c7811b394",
+    "crates/traidag/src/tests/utxo_proof/presence.rs": "6ca9971540146d199e07da9dda41e7af4287c0156aed223b7afec6552a3edb2e",
+    "crates/traidag/src/tests/utxo_schema.rs": "97617384e46de49c9bb29760f5c701b00b6a47e2a7d8fb507308f83dd83c92f4",
+    "crates/traidag/src/tsp2/admission_anchor.rs": "07462683b1823828501154dde5de7d311fafe05f60ecb68eb800c7bebd031016",
+    "crates/traidag/src/tsp2/admission_anchor/tests.rs": "44252349fc3738f37b2d4f1cfc2444a7d0d34afae26db78bb9875f608985db9b",
+    "crates/traidag/src/tsp2/admission_verifier.rs": "48d9bcf2e3b7c717ae0574b5d8774502e05d36574f65f520ceeb141a9abc4de1",
+    "crates/traidag/src/tsp2/capsule.rs": "44ebd430edff8580b19a3d6f21b0fda9ba6b11d1b4a51ae55d5ecf52f56eddb0",
+    "crates/traidag/src/tsp2/capsule/tests.rs": "d3c1cf9a38a8746e16ebda96d51dedc9f20eb171c6b47439f3603c63f8f5d9d3",
+    "crates/traidag/src/tsp2/chain.rs": "08d170dbe570ff04b94f1406c9995063c0129045e69278a57c4bb39fbaa022df",
+    "crates/traidag/src/tsp2/class_admission.rs": "3de657afec7bba5401d170f3e14bfdff820cd09ea69382bfe12bbc3197244037",
+    "crates/traidag/src/tsp2/class_frame.rs": "651711ea2be8fb10ad6f655f7e618f627b20daf4ee5d911b0839fe22569e6c81",
+    "crates/traidag/src/tsp2/class_prover_input.rs": "6916a0f214401c781278ebb668b7155be2a00597e2f647ea4165784316204dc4",
+    "crates/traidag/src/tsp2/class_statement.rs": "8c3fb3962456de941f1ae10e30c44cb8f67bf6ddef51e2c89388b9924e0ff202",
+    "crates/traidag/src/tsp2/class_statement_tests.rs": "46c8c8dc5626faf6007ee33b76049d99e13da5438db455d8415aaf22d6e9a40c",
+    "crates/traidag/src/tsp2/constraint_manifest.rs": "1f203e1e509f29a1b376d5020e4899976b3b33decca67e60f51bdb0c5459c275",
+    "crates/traidag/src/tsp2/constraint_manifest/tests.rs": "5959e5a3150eb48f666a3014e8be8c71faa086f47062759b54d1d41916947f87",
+    "crates/traidag/src/tsp2/creation_lineage.rs": "5bdf1dad16a1712495810aaaae579b0ed400319984fd44492d1b9ce30fd65ace",
+    "crates/traidag/src/tsp2/creation_lineage/tests.rs": "b11ffe92cade14c8dc4c941a1f78a5e69beda8ceefc4a24a66b5074b01387cce",
+    "crates/traidag/src/tsp2/cut_items.rs": "616dcb44c9adff321407f43339574078a4c15617724dd4523b90895e454616a1",
+    "crates/traidag/src/tsp2/cut_items/tests.rs": "1034e69ca9dca4c067bf20f0f24e657793ddc8d2f728883972d51873d942a425",
+    "crates/traidag/src/tsp2/cut_transition.rs": "42a667048da1367ee7b3910cceb0a6adee22d9ecd12159f77b4748a05af80820",
+    "crates/traidag/src/tsp2/cut_transition/tests.rs": "b696e49057de6cabad37c7903eb1a4e87db13a8e9001889ba15d9bf80ec50a7b",
+    "crates/traidag/src/tsp2/envelope.rs": "547eb2dd21c6fcefaa022e36e8062cc81791128062a69e54345ee09942ee718b",
+    "crates/traidag/src/tsp2/envelope/tests.rs": "c0856e8d413eaf193e1bfb0ffc8c9faac756b60808905f0d7b1d86b40aa67338",
+    "crates/traidag/src/tsp2/extension.rs": "7d641eef1e78436ed9ef7662f05683661e1a6472db99479c1c83fa4b147a16d9",
+    "crates/traidag/src/tsp2/extension/tests.rs": "d60102f1cbc4d1dff4ca7854b29b60994e2328b92552cbbdb9ef3936380987a4",
+    "crates/traidag/src/tsp2/funded_registration.rs": "27e94a6afe4c46ae1153af55ea370d03c74117ff1c306a5147cd0dff34165c53",
+    "crates/traidag/src/tsp2/lane.rs": "3a8881018ed5d0bd711a13c3b7765fcc96673a49f4270f4860db631e7ea73681",
+    "crates/traidag/src/tsp2/lane/tests.rs": "04a0f13115077d8eb896dda69eb3cb8e83f60268e33806a65eeca237969536af",
+    "crates/traidag/src/tsp2/mod.rs": "1a438b0d1d4cb957bf129576903f344b8245aadc0cf51617e52508929e8bde19",
+    "crates/traidag/src/tsp2/note_opening.rs": "6554b13845794bfef68a0f2f2c2c6b0f3601c3c3ccb5ffa8c140b24fc8765f01",
+    "crates/traidag/src/tsp2/note_opening/tests.rs": "ef43d4030934c1694d98e637a14ccc2f5aeda1e14dfda3f81967a3e579be6e61",
+    "crates/traidag/src/tsp2/note_tree.rs": "8862d14fc7bfc1b2196f8a19971f97a52b4ddfd30a1ebcda604630700d536171",
+    "crates/traidag/src/tsp2/note_tree/frontier.rs": "29906e1842052b488347a37dc2286183915b96b29748f06b8447f08ebdceb222",
+    "crates/traidag/src/tsp2/note_tree/local_append.rs": "7187097c22acb86b60616793bce649b3984534d3b850dd5847527c3f073e192c",
+    "crates/traidag/src/tsp2/note_tree/tests.rs": "90455a7d0db6533a8066012b415b0f662a139ec4852dc553e6304bdea0cc9d73",
+    "crates/traidag/src/tsp2/note_tree/tests/frontier.rs": "07c5115e7cbb1fe4924239ee21d29f3eaedd7a6236bea68300380362c44b68c2",
+    "crates/traidag/src/tsp2/note_tree/tests/retained.rs": "05b8b15a166ebd98aca7b6d1773dbbec527d8e5dbbf849a0e43eaf1dbfeae32b",
+    "crates/traidag/src/tsp2/note_tree/tracker.rs": "1b503a7429e4a846e65a5255d7777837a4af2f4389a1f57624ed61484439dc66",
+    "crates/traidag/src/tsp2/note_tree/tracker/tests.rs": "a7c6adbaeb19a90f63201abd88ce274b210d507fd44a988714b393b8c7f7bdb2",
+    "crates/traidag/src/tsp2/nullifier.rs": "68aa10b8ed88de247c759b1a947a07cacdc97c575aa310ad7162c0bbb61b88d9",
+    "crates/traidag/src/tsp2/nullifier/tests.rs": "f2a7447331157ce209a56226d7f2f621d9e5dfe31d0235307856f56f7fc36c38",
+    "crates/traidag/src/tsp2/nullifier_key_stream.rs": "72406e5fceb3018ae0a6114c5c3d3c284a32577a6e78bfecf3d7dc13e28a9519",
+    "crates/traidag/src/tsp2/nullifier_set.rs": "14591b74acf49403d41387e280fc8d071d57f25bfdad19bbddab599a718402f3",
+    "crates/traidag/src/tsp2/nullifier_set/tests.rs": "19758bbeb2fc55a840eb5f4ba933374fea1f8309ca17096c56f42565a27dde44",
+    "crates/traidag/src/tsp2/nullifier_update.rs": "eab137a39504dd93fce684f232fd5801f9dae3da6f9c3b1e1d4da252a8f7051e",
+    "crates/traidag/src/tsp2/nullifier_update_tests.rs": "65d8da9b28ad3b5f486abb6d94e3d5090a54a56795be1de34336bf890e975f70",
+    "crates/traidag/src/tsp2/owner_authorization.rs": "3f8f1c7ec330eae2554e1d118f2bc244b01373b121429c0386283d7ecae5df3e",
+    "crates/traidag/src/tsp2/owner_authorization/tests.rs": "60a712090d60a3cea95a0ae90d2f912f1ee07eaa9715191e4186d5852aa28131",
+    "crates/traidag/src/tsp2/params.rs": "17048a86059aaa1dc6ef0c7471a5f14dd8a1c1729567b2542464472ae1b2307c",
+    "crates/traidag/src/tsp2/private_note_log.rs": "68deb20837d5010d0bd79e0f0a72a044e91f61a068ad598a3490b900fad5a4a6",
+    "crates/traidag/src/tsp2/private_note_log/tests.rs": "dc3ce2a56fb41d4ecc9cafee668344f489d274ff87c88bbe0b5e75b21253b6e4",
+    "crates/traidag/src/tsp2/private_note_log_entry_bytes.rs": "94af7781da324086442a704e6940e84c066e949a61d12a4fb03405b10ecd4fcd",
+    "crates/traidag/src/tsp2/private_note_log_entry_bytes/tests.rs": "9f35977d09f3cabe88acb305419d0b8eb9d991b7c6481dd1514dc764fd02777c",
+    "crates/traidag/src/tsp2/private_pool.rs": "940bdca9c99e111a3a67dbf9845504acde4b33321e5d2e62539ee0b9f68ec289",
+    "crates/traidag/src/tsp2/private_pool/inventory.rs": "bbf1b06826ed8b3ba7a92c0efb134b12b636d25a2bfec11593d08c669f158094",
+    "crates/traidag/src/tsp2/private_pool/prepared.rs": "066ad65c658fe98008178da9b5c25a08e7583c148c2e8fe806c5731095679554",
+    "crates/traidag/src/tsp2/profile.rs": "661c9dadd442261d8901e6fa708842d1df977b8426ebc0131d607406030b08c8",
+    "crates/traidag/src/tsp2/profile/tests.rs": "1ff56e6b4b38a3ddecf0c8c3841fe4f802498dd32d063d60d90ff88a67a6e2fd",
+    "crates/traidag/src/tsp2/prover_input.rs": "8ae498be846da2f68540461e30769fde481fb0d7ab672307330816db74857e2c",
+    "crates/traidag/src/tsp2/recipient_record_log.rs": "2006472ce1cb3510f88a8e26ad2b0f0f7bdc4ccafc819f17d96ab07120ad7f8c",
+    "crates/traidag/src/tsp2/recipient_record_log/targets.rs": "b6361d54f9013cd73ff26e606f1071c0fad0832c4f49a8130fa55b2cff5e4ab4",
+    "crates/traidag/src/tsp2/recipient_record_log/targets/tests.rs": "09bae967e6d72cbf899b6f3487784a0978f523a241c1e3e9dcb7ecae2f7d242f",
+    "crates/traidag/src/tsp2/recipient_record_log/tests.rs": "928ec96404dc067e0866429f8ad70ae82793ec3ac3f5834cb726279dbe9ef8e2",
+    "crates/traidag/src/tsp2/recipient_registry.rs": "30e65999892680e7b2eaeab6c67c78d96748e561652d33221a889b3120a65cb8",
+    "crates/traidag/src/tsp2/recipient_registry/tests.rs": "c3c75d56df3740550ef12b1cb31d091557a5cdfd5203a3126b3688120607c5e6",
+    "crates/traidag/src/tsp2/recipient_registry_authorization.rs": "b8783a52074e642a358ac1e91945872f6b2c1856d0a35934338b9958e3ae118c",
+    "crates/traidag/src/tsp2/recipient_registry_authorization/tests.rs": "0cbe466542c62298ed3b296c0d4f1544c1d01c571cf9ac7dad15fd03f07b755f",
+    "crates/traidag/src/tsp2/recipient_registry_bundle.rs": "ecca45697ee3721cb62874ca0f3016bfa2b43c099f46e59c801319ae33c5c48f",
+    "crates/traidag/src/tsp2/recipient_registry_bundle/tests.rs": "840ac733824767e35bff5d2a12198fd26fee5f01bd527c068351a202d75eae8f",
+    "crates/traidag/src/tsp2/recovery_snapshot.rs": "451fe238265f7b18d4fcd4f7f49df0b3a3b9533f15d7f5bba82af780ae7b1b0f",
+    "crates/traidag/src/tsp2/recovery_snapshot/tests.rs": "291d7779c551c2e8c1ab1ade928ebc4d1ed614ee0466d57908025049a7189bfe",
+    "crates/traidag/src/tsp2/registration_frame.rs": "b47e7411f659939e195431c9be5a0ae8abd847c6022f20f44750e6396e3dae22",
+    "crates/traidag/src/tsp2/registration_funding.rs": "b57dc1a982b7bb5232ba26932a69d4ddd24556c80effb7f97717f4af9fe30a07",
+    "crates/traidag/src/tsp2/registration_funding_arithmetic_tests.rs": "ea9bf23d970ff55ed38acad267ed123e34f6b764dae58053c245484475152585",
+    "crates/traidag/src/tsp2/registration_funding_tests.rs": "17f6bc2cd30ac631e9343e1f8c6d2f53341c2c7cad1ab134b867153b66e528a5",
+    "crates/traidag/src/tsp2/relation.rs": "2a2726f0917cf9a943957e27991524f4ece569081bc0798fe0cf254ed4f0cf03",
+    "crates/traidag/src/tsp2/relation/tests.rs": "ef30642e067c838f56b0b0de43ac63d27b2201f0d8f1107e9a0806cdf7eacfc3",
+    "crates/traidag/src/tsp2/relation/tests/recovery.rs": "7664d70065abbcc70fc94dc19392a0ff4a5d01fb39855180c8e6036bed17ca95",
+    "crates/traidag/src/tsp2/relation/tests/transfer_vector.rs": "c1644e5de5b1ae40b1c5681ce035f0b94c03408ee19bb9ecf2e1f42c38c7e45a",
+    "crates/traidag/src/tsp2/relation/tests/transfer_vector/class_cut.rs": "83b73b990db5be9bd8fc96b05f9a1fb6882ac0cfb6490aed2892dd569a8bb80c",
+    "crates/traidag/src/tsp2/relation/tests/transfer_vector/class_vectors.rs": "2fdf9448780a54e9e129c53b67a0271683c48f45c433c30497dec19be6a11f0e",
+    "crates/traidag/src/tsp2/relation/tests/transfer_vector/cut_transition.rs": "3e98c6866357b99448df0b8272a14d4cf171fe057990e6c4c4dd2677620802ba",
+    "crates/traidag/src/tsp2/relation/tests/transfer_vector/vector.rs": "abd152b70d27338f97b8ffc59d07ac100af12e0dc4468b12290c6eed6f7bc5c0",
+    "crates/traidag/src/tsp2/relation/tests/transfer_vector/wallet.rs": "7390467e2fa4b4ce2f401e1fbc7ac8fc166e7a558a16f7f08d82518e170116f7",
+    "crates/traidag/src/tsp2/resource.rs": "d5d1a042a506b91e537ea9351603dc55e1f122fb7942899b2c432b2bdb794690",
+    "crates/traidag/src/tsp2/resource/schedule.rs": "93a02f5af845d0ecd527fbb43a72c2d5e599affa4996c143b94f0655565f338b",
+    "crates/traidag/src/tsp2/resource/tests.rs": "9df5ab1c3f2bd640acd23550f02130efd299f445f8dac9a4b50a20f0549c0845",
+    "crates/traidag/src/tsp2/state_record.rs": "8d8cb38e48ff19c3f89efad3770392c40148068bf32b42a9ba689ca3de83d81c",
+    "crates/traidag/src/tsp2/state_record/tests.rs": "c549fe2ab6a138308e09d4174181306d2b7dc6078c2f88ec58e2a83c55d499a5",
+    "crates/traidag/src/tsp2/statement.rs": "255c7a736a12c569bf6f3963861b80eb509f306a6f801635a93313fa092a23da",
+    "crates/traidag/src/tsp2/statement/tests.rs": "e960ca6c576428f9b7f0e6e730cb7cf86f2d78797a7d657169f9865b1dde105d",
+    "crates/traidag/src/tsp2/suite_binding.rs": "0adb4c0072deb5f059b7ecc858fa876b5f9bbd0cd83cbb9da55bc7373c701591",
+    "crates/traidag/src/tsp2/suite_binding/tests.rs": "75d2f74c38ccb1f27ddedff9c53f2ba4881cc7309d00fc002d0e2c300d46ea62",
+    "crates/traidag/src/tsp2/suite_descriptor.rs": "1605ab6984025296fa773c5d31d4e11298e5ad36375a1d931768922cf81d83d7",
+    "crates/traidag/src/tsp2/suite_descriptor/tests.rs": "122cd58a775b17280626fcc13868d6947b3f2906eb3ed6d03d8e30b3239c2524",
+    "crates/traidag/src/tsp2/transfer_identity.rs": "8608ff6ccfd8075d24cd4acb97fbc888b8d7529f1c429c9fc5283ead6fa850f7",
+    "crates/traidag/src/tsp2/transfer_identity/tests.rs": "0d89d9553e3e73e56dbd21f51a1f2c55422efbc17254db29d79f3bbb3c4a065a",
+    "crates/traidag/src/tsp2/transition.rs": "28ca1bef0dbf9e81cb4f1aa569d286b11f9c8809032f92799588cc9b05cac863",
+    "crates/traidag/src/tsp2/transition/tests.rs": "a262f3b6fe729d5ce9b8feae16855ec88eda49967e3d866e4245f7e51972bd59",
+    "crates/traidag/src/tsp2/transition/tests/historical.rs": "5f2ee0c3c9b8330440ff7faad95626a99acb45def412b07a2b60c2eb27b0682d",
+    "crates/traidag/src/tsp2/transition/tests/pool.rs": "51ee027df557a284a6391b5113c162f148e890f94f960b6299afec7a7a93cc49",
+    "crates/traidag/src/tsp2/transition/tests/resources.rs": "eb4f62deed821234feecda3420b28ee6dad604764065a83ea4fbd6653c5e87e1",
+    "crates/traidag/src/tsp2/transition/tests/verification.rs": "60772209ae0867441bab82ca9e19cd97b602420d17930181e0ada0ed8a72c88a",
+    "crates/traidag/src/tsp2/transition/verification.rs": "3cb764f090d99d60f5be86c2e4dde44a796c9bbe314144237ff445da2b9f077b",
+    "crates/traidag/src/tsp2/verifier_input.rs": "b40487ea7f11811c5c7dba13769781e01501895afb984481f3e42354ef3645eb",
+    "crates/traidag/src/tsp2/verifier_input/tests.rs": "e848bf1d4e180e678b0bbfd38f0bbe327d17ff93e1a46c78212543fda8d97d10",
+    "crates/traidag/src/tsp2/wallet.rs": "06924c13bd962f7439d249719462b419e97ba4a6ec5ad53d4ffda5617acaf86e",
+    "crates/traidag/src/tsp2/wallet/candidate_join.rs": "a77c3d4109f8300b8eaf769c10ffef3c00c46388b81466dd058f3b4ad931ef8e",
+    "crates/traidag/src/tsp2/wallet/candidate_join/checkpoint.rs": "20d186f165540298124178c65dd91f6da37fa88e7ffb3ffa5bbfe83ed3be8b3e",
+    "crates/traidag/src/tsp2/wallet/candidate_join/tests.rs": "4af9037e482284dccc23451ac283a0f04c4f4c3356d22fbb76a380285e7a1c6d",
+    "crates/traidag/src/tsp2/wallet/candidate_stream.rs": "5a39b9f500760b24299dba32f38afa3fe95f948809b22764f6044666f8a0443b",
+    "crates/traidag/src/tsp2/wallet/candidate_stream/checkpoint.rs": "71b6d7da7804109ca09295c98c9d348349923ec6478140de2300fbfa4319d97a",
+    "crates/traidag/src/tsp2/wallet/enter.rs": "b4e96fb846ad9ec482543090b4adee1374c5c0f5e321077e362729edede48fc7",
+    "crates/traidag/src/tsp2/wallet/exit.rs": "0a5af03be70f9b407596be975f74153bad15b346d17fb0f87b68385673c27938",
+    "crates/traidag/src/tsp2/wallet/external_sort.rs": "bcd4dd38e9e4f48ad26c6aa314e41421c8dde9fe344ff1d7a2f0fb4cb1427ed6",
+    "crates/traidag/src/tsp2/wallet/external_sort/checkpoint.rs": "d8a47e8317e4bb36e3f1f2921951aa6df2a376bec274c712c3a93dc5b29b60e9",
+    "crates/traidag/src/tsp2/wallet/external_sort/tests.rs": "3da10c1aca839173d76e9d712b49d41a088f694cc0db94aacde38d5bf4996503",
+    "crates/traidag/src/tsp2/wallet/historical_recovery.rs": "b6a4a961143ef79fd4609eb1b0f933d98df1cdac67ee04897abfcde4385a5988",
+    "crates/traidag/src/tsp2/wallet/historical_recovery/checkpoint.rs": "b4e83290157b73fb1d1355b7a2e4c93a63a73fe56371932af8fd06c6a9f1820e",
+    "crates/traidag/src/tsp2/wallet/historical_recovery/checkpoint/tests.rs": "1f3974f5a834413e7e91b3997fc7b21273c95624116ea1dc1564bca80db3f370",
+    "crates/traidag/src/tsp2/wallet/historical_recovery/tests.rs": "deebb15116451efa2d80152c3488f97b18a6da97f4d1e047cfcafcfc1644ef9b",
+    "crates/traidag/src/tsp2/wallet/inventory_change.rs": "b8fba507c60641f6dbb0fa66e1f7451b0b2299e2e28b13b66107d2c77ba37ef7",
+    "crates/traidag/src/tsp2/wallet/inventory_change/tests.rs": "07e1af38b8eb2b05fef7543fdc82bb98bc32f4cd9c1b80c90b50963046264624",
+    "crates/traidag/src/tsp2/wallet/inventory_change/tests/full_page.rs": "785d303e5231d95fd31e5c5fd2e1dec953441ee737bcc4162b747cd5f8c48964",
+    "crates/traidag/src/tsp2/wallet/inventory_checkpoint.rs": "8f78887fc1b6467e83f04cf3d3184eee91aae003423ebe2511fe678a99f547f7",
+    "crates/traidag/src/tsp2/wallet/inventory_delta.rs": "7b7220d76b3ccc32a16dd5978358afbe085cbadb48015ea8504354e52cd9641d",
+    "crates/traidag/src/tsp2/wallet/inventory_io.rs": "fb3311b7e2224a7054f4e97bd0e5037481b2a6db0202518ca212c3fc49ec13c3",
+    "crates/traidag/src/tsp2/wallet/inventory_io/tests.rs": "e0f5e599a2dcac328414cc5906aeb06aa1f0c763528cac75fc00b7398ad0dc52",
+    "crates/traidag/src/tsp2/wallet/inventory_io/tests/adversarial.rs": "bf1cdb1115e0ec0c08ce1f3beadc7fab65d2ce718f140e1bea17b3dfb1457383",
+    "crates/traidag/src/tsp2/wallet/inventory_pages.rs": "24ceba083b84e468beb7f053ca5712ea4185bbe2efabcbe1ac51f81ce5f70503",
+    "crates/traidag/src/tsp2/wallet/inventory_select.rs": "029efb3062878a58d576f2bbae7b4e5c9dab62f8ac5bbecbe25b78237eca3469",
+    "crates/traidag/src/tsp2/wallet/inventory_select/tests.rs": "661088a3531fa4af1e7f66ba728f5d1f935a394f13d25187f1b2c3a2fefdddce",
+    "crates/traidag/src/tsp2/wallet/inventory_spends.rs": "dbd9abc2614e422e172451156c2257760bcedbc3a1e58e540f649c238df97b3e",
+    "crates/traidag/src/tsp2/wallet/inventory_spends/tests.rs": "be8b6c12276aec7ab2f666a25055d31ee2bb04436db2296770c8e165b5d078e8",
+    "crates/traidag/src/tsp2/wallet/inventory_state.rs": "574e882b2ca6f45f9b9becf878d94ef0671e858dccd71c66c6c24a72b72a9cbd",
+    "crates/traidag/src/tsp2/wallet/inventory_tree.rs": "c073fe814076e8798d887d3af1a92586805da17a63bf71662163963a4687c337",
+    "crates/traidag/src/tsp2/wallet/inventory_window.rs": "40875eaa452fda452751fad8bbe0bf00bf52449124d081c2f82a6b7953650649",
+    "crates/traidag/src/tsp2/wallet/item_execution.rs": "394a178dbb16e6a4cf44bcb509a3171137d17d35b38d4d96c81f16ea5648abf2",
+    "crates/traidag/src/tsp2/wallet/local_pages.rs": "7e8984a4d09809cf4d52d6d97dbd17d51540450ec506cf9bf43e1070e644d2cd",
+    "crates/traidag/src/tsp2/wallet/local_pages/checkpoint.rs": "3aa56351077a0699e017327c1dea5f3089c98532ba2965d87d97a0cf3efe6c41",
+    "crates/traidag/src/tsp2/wallet/local_pages/tests.rs": "1b1688f1cb310dab2b4a0c679cce3d6388e77d0b045eb0cced34daa76e36f283",
+    "crates/traidag/src/tsp2/wallet/paged_refresh.rs": "482369a8cd16ff4872b3d735fa28b6a2eefeab519e5ebc0bd861d4d0e7b3013c",
+    "crates/traidag/src/tsp2/wallet/paged_refresh/checkpoint.rs": "e63958d712a7d210d461a0408b27382607237a2c7a9a35f554dd2eeb893c5e5b",
+    "crates/traidag/src/tsp2/wallet/paged_refresh/tests.rs": "ad674578f3bff226f6748e3ac22c7b9f2cc6b71ed216dcc2013de9da02f0b875",
+    "crates/traidag/src/tsp2/wallet/paged_state.rs": "7e13b897c646df57ccb58169f7ff8e70cc4e684364cd7946cbaf6460e8ef6d4d",
+    "crates/traidag/src/tsp2/wallet/paged_state/tests.rs": "64f0a182334e4222eefddc02846d5d1e12645574fad03583f7004cdf30c1ae4f",
+    "crates/traidag/src/tsp2/wallet/records.rs": "7718bfb493df90991ce4e774fc7c9fc05466d9ba1fb0ab0a866de03e1310ed28",
+    "crates/traidag/src/tsp2/wallet/registration.rs": "224ef0a9f197b96665857817702b280f858aa7b409ecddd96786e605e4934f6a",
+    "crates/traidag/src/tsp2/wallet/registration_tests.rs": "cd85e7c7038c29e98f6a37cca3e8be71b6585d2417d80d3b19e6cacc022750bd",
+    "crates/traidag/src/tsp2/wallet/scan_refresh.rs": "0543f406820f68ff2dd951bc7fd3c1bc756b922959f133170d254e0467faf170",
+    "crates/traidag/src/tsp2/wallet/scan_refresh/tests.rs": "852d3e788ab241bf6730e1757e60c95cfedb22814907f6acbd435ce890001faa",
+    "crates/traidag/src/tsp2/wallet/scan_state.rs": "876dfc2824b2e74d7d541873aa84501dbbddbbcc3a013691dcffec320f156031",
+    "crates/traidag/src/tsp2/wallet/scan_state/paged.rs": "f0074c501bc7b1781b8b8da6f98c32b5d8cda17725a5863da676d30e20433f14",
+    "crates/traidag/src/tsp2/wallet/scan_state_tests.rs": "33659f22c7432bef47fdfd7278f9f20ab5ca5c2dcbb4a4c17dcc40b786412cbb",
+    "crates/traidag/src/tsp2/wallet/select.rs": "cb78a66213ad24161976f187d40764c780ccbb6f9f5be8af9435d0d26a371ca1",
+    "crates/traidag/src/tsp2/wallet/select/tests.rs": "39b476d406b613a1903aaff01d4814fbe8dfc18eda7e140c0ba87bb83e95c969",
+    "crates/traidag/src/tsp2/wallet/tests.rs": "ea54cb9914fd86abf3b87a5537df9aa4f054b35f87cedad06ad4d9b8a46810b5",
+    "crates/traidag/src/tsp2/wallet/transfer.rs": "e10b8370e60950a7200735e74d78de296a64a749b6984682645413e64845c044",
+    "crates/traidag/src/utxo_map.rs": "8055724bd060abeddaf039d245bd8b1efa126f2bf5794c8cc212601971d5cbf9",
+    "crates/traidag/src/utxo_map/tests.rs": "26fa5bb498dac0ef845239432d792085269aa96bf59b5e527b7bd140a6a7411a",
+    "crates/traidag/src/utxo_proof.rs": "4cc495046853bb6a48559bb4a4bde644d409f71ba05e997b53aa723c9865ea8b",
+    "crates/traidag/src/utxo_schema.rs": "7031e205327a0e7f91516a1c0e0fe382747669baa4561d695c0b949844ee4338",
+    "crates/traidag/src/work/body.rs": "c10b5e4c69fe907ed29c89b2d1413ce08a2ded8d4c101ac924b705a7da5a8f10",
+    "crates/traidag/src/work/header.rs": "00f9309393f0053dc23c905a977f593bcc11b88bece33d5f5e79d809e95569a3",
+    "crates/traidag/src/work/mass.rs": "49f22b577aa01e46cd999f1f50eb9f3cfc09560c1626dd1b8fc83ab60fccb962",
+    "crates/traidag/src/work/mod.rs": "0dc7a784617926ca8bd40bc51133ebe3e25807a67cf4a1ed33416602f883b9e3",
+    "crates/traidag/src/work/parents.rs": "2f98b1cda80d0695c40acb54e6b10800f4d464e00b011a31ae174b5549545a74",
+    "crates/traidag/src/work/tag.rs": "ed10c1fdefbbd8251869130a19e3603f0653fc2ca35bb46cccd1ea3b1826ab5f",
+    "crates/traidag/src/work/tenq.rs": "2dfea433d141b9dfa0ea65410bd81ce7e3dfea7e847e7ea280eb3f3b202c063a",
+    "crates/traidag/src/work/tenq/fixtures.rs": "a29c71595f16a02dbad229a925529ddea1517546c6cc74a01438e7caa0d840bb",
+    "crates/traidag/src/work/tenq/verifier_tests.rs": "d1f8a7ac8136aec258cf05d975f4f0176b20430289deaa7ddc0641cf73a6879f",
+    "crates/traidag/src/work/tests/body.rs": "ec281ec95f742b107eef6166f637b3400a9359ffcb2c4ace1a863bec74ed5649",
+    "crates/traidag/src/work/tests/header.rs": "80be9a663f855d76c1acb31d86171a2404a5242982fe0a32ba99fbbeffe9d2af",
+    "crates/traidag/src/work/tests/mass.rs": "75c5b9d34f31cd3e7e63a2b946fb0359760f3df8994903bea7cda0f0d90c9f71",
+    "crates/traidag/src/work/tests/parents.rs": "b6a7f6f9eaa1bd10620d19830cc01032a64785233b65ce19ebe4530eef7eb53c",
+    "crates/traidag/src/work/tests/tag.rs": "fa3b3fdbb9bd77b30be579c57000a2676cee8981b9c9d42fc61ec89bda869f18",
+    "crates/traidag/src/work/tests/tenq.rs": "cfdb00b45bb400f2f2693d457c144dcb0d2b28931a8f447342a9f13922190ca7",
+    "crates/tsp2-verifier/Cargo.lock": "88f83677d12012d59088c1ac084ff3ae3bf0e658915e1fa9fb5936c6547473e4",
+    "crates/tsp2-verifier/Cargo.toml": "bfff2d6859924dabf53ad457e56b88b2c5f2723c94baead14d3a67eafe149e2c",
+    "crates/tsp2-verifier/keys/enter-1-verifier-key.bin": "3e183505f28653ce7085a7cd0c1eb75df8f27df7e5755791c6ededa4386c9120",
+    "crates/tsp2-verifier/keys/enter-2-verifier-key.bin": "16ef18898afcbaf5ba5512e5f19f88f56c1ba12611843e229ce1a949d69d0963",
+    "crates/tsp2-verifier/keys/exit-1-verifier-key.bin": "597bd835d331de3c8a94d5d764dbb720ec525fab8b207a2de9e55837fba7b01e",
+    "crates/tsp2-verifier/keys/exit-2-verifier-key.bin": "f07c5fd21746a3c043b95e58fff536caa675d34c5e27a8c5fdece23adf484731",
+    "crates/tsp2-verifier/keys/transfer-verifier-key.bin": "e0a930eed387705b96221bc95261050456722de8d9e43848baa9e4aedf466f5c",
+    "crates/tsp2-verifier/src/hash/mod.rs": "7d3bac5f760f2b71f6be0e976f9afdc92c0d96567a712ad1356b354abcaf46b2",
+    "crates/tsp2-verifier/src/hash/shake256.rs": "8e8aa70db6f7da0d9f44744ed162e60019516cb652523d0d97bf923733107be6",
+    "crates/tsp2-verifier/src/lib.rs": "4bcd1c3c176e01d9cf9c53b6731a01fd42d9bf747c598e0bcade28f9f6e74f23",
+    "crates/tsp2-verifier/src/native/blinding.rs": "2c8bb530832b878d823c974cb5a108ead6b09574406a62fb866bc1c0380c546c",
+    "crates/tsp2-verifier/src/native/gates/air.rs": "20a1edfdd460dafab2c749dfb281a4738c41aade99144b6613fdfd218889262b",
+    "crates/tsp2-verifier/src/native/gates/claims.rs": "7e5157f6d2e7484d20185222a8c1563edb1b521bc9304d44b22ada6644fa822e",
+    "crates/tsp2-verifier/src/native/gates/encoding.rs": "f1df6af1c43762b06d1183c3035e8f09f0482a0056c7ab544c65b6130c9e8380",
+    "crates/tsp2-verifier/src/native/gates/mod.rs": "d66307d23465e62c72f8cc37ae241e481ad7c87cad1ef785bf61d81e3bf2fd1a",
+    "crates/tsp2-verifier/src/native/gates/proving.rs": "04075850e9ab38c44e5bcbe87521205fa6c95e680683bf3aba384ffb13055f7e",
+    "crates/tsp2-verifier/src/native/gates/release.rs": "f4b33b982d587a8be6163ace1e2c36c188883d097f267061261b290302a34ac6",
+    "crates/tsp2-verifier/src/native/gates/statement.rs": "44ea171126f99d605d7de210bf0ffb75fe69e3bbd7cb21f2451ab7ff07e1ca0a",
+    "crates/tsp2-verifier/src/native/keccak/air.rs": "c78dd02af85e213755c0ff312ffb18fff6ed2efe55da0fe00a064ce1fb600852",
+    "crates/tsp2-verifier/src/native/keccak/mod.rs": "0cc4a46ef9535080a338e1899bf11910eaf3e3b99b68684cbc3b1f90fa610122",
+    "crates/tsp2-verifier/src/native/lookups.rs": "58e1a69f5332fed14c30faff73b2c4f90564c9643f40f955eafebdaf3fbb5c00",
+    "crates/tsp2-verifier/src/native/mod.rs": "07ce550c794201c34d85303f2c2079549ca908b3e83204d385cd4c9b05b1fe86",
+    "crates/tsp2-verifier/src/native/sha512/air.rs": "50493f87bc58803d2035b1fab554c97adfb379d43c2e31e59b8369d67fc8251c",
+    "crates/tsp2-verifier/src/native/sha512/mod.rs": "6db119bdaadaac7f903017812b3440ada57a865d4b7751e8e73915b44fa976cc",
+    "crates/tsp2-verifier/tests/compatibility.rs": "cc5d4c3aa497774d8445869a17db245551f3ffced1ad5a1d822da03485d126a2",
+    "crates/tsp2-verifier/tests/resources.rs": "32e548355e3af6d1cdfab92cde989a950b352913c3432510466f019683b608df",
+    "crates/tsp2-verifier/tests/vectors/q1/enter-1-proof.bin": "8087bc7d816c535a4b8f55889073c150a5c8aa376910571717d3e57cf69a9049",
+    "crates/tsp2-verifier/tests/vectors/q1/enter-1-statement-digest.hex": "5f12b8a2162b30f18288eb08f0483f23cd0c0296ee359e40fa05f753ab215019",
+    "crates/tsp2-verifier/tests/vectors/q1/enter-1-statement.bin": "12fb03ef3a587c7bd4c65af9e47231370ef7cc82cdc395a1aafd0bdd2841cb96",
+    "crates/tsp2-verifier/tests/vectors/q1/enter-2-proof.bin": "00a1f35618a5c1ac340a4fbdae47497b0ee19ac836121c61d05aa4107fa570ce",
+    "crates/tsp2-verifier/tests/vectors/q1/enter-2-statement-digest.hex": "d5d6a0a2ece552f6b614f29f90332ccba14605630d3c2cbd55eecec77af1eff1",
+    "crates/tsp2-verifier/tests/vectors/q1/enter-2-statement.bin": "ee8ddfb4f86689f52b81b4887bec244a17e63994f9bf38afac3cd462c5b79542",
+    "crates/tsp2-verifier/tests/vectors/q1/exit-1-proof.bin": "71ec3de09678bfb98174b652cd9e41b31aa1d21fcd25fd1934c7b6eb203eb042",
+    "crates/tsp2-verifier/tests/vectors/q1/exit-1-statement-digest.hex": "2108b056b7852eb0cc4723c002eb2cd5b47dec1a5b4499579e5e347d27e4ca52",
+    "crates/tsp2-verifier/tests/vectors/q1/exit-1-statement.bin": "31e948fe9ac171e531036a830c02270e679258bb021dfc943d8089292f6d21cb",
+    "crates/tsp2-verifier/tests/vectors/q1/exit-2-proof.bin": "57a9c0e31ce704269b5cd772abd9d60f35a95b80d8e0a3037ba74891b33ebec2",
+    "crates/tsp2-verifier/tests/vectors/q1/exit-2-statement-digest.hex": "eb3c665cf6c7b0b1a5d9e25af117ad33fbcde56426c29409d0c7297ca3221124",
+    "crates/tsp2-verifier/tests/vectors/q1/exit-2-statement.bin": "661ab231b6eef9f1b49e9dc63c3e107271b7443c14730978693c905a5eed6ae7",
+    "crates/tsp2-verifier/tests/vectors/q1/node-enter-1-proof.bin": "55a88801e762af52941d4e7c34e20da4594df2331e44544686f7971be5dcd27d",
+    "crates/tsp2-verifier/tests/vectors/q1/node-enter-2-proof.bin": "4ae5ffa79c245451d7d0a248da6108efe59194e41aac75d929c046c4c8a533a6",
+    "crates/tsp2-verifier/tests/vectors/q1/node-exit-1-proof.bin": "2222754de5ff5a8b06bda8a333df377208f061983251bf711bf52dcdc04c9456",
+    "crates/tsp2-verifier/tests/vectors/q1/node-exit-2-proof.bin": "8af27b834f8866fd730f81bd2c1eb0fadf617704d7c0d61f7c79e769c3bedc27",
+    "crates/tsp2-verifier/tests/vectors/q1/node-transfer-capsules.bin": "ea4c36d735280a3052e0cb105228fd18ae9e0a09ff8f57b47b1dcf9322b30e40",
+    "crates/tsp2-verifier/tests/vectors/q1/node-transfer-proof.bin": "fef3a72aa51ec31917081e8118cc83e21d00fa1c08148f5cfc1337d1c748c722",
+    "crates/tsp2-verifier/tests/vectors/q1/node-transfer-statement.bin": "a63cf5899d64ef898357029cdb8b8b1eed268f857706f08120beea1fdbb66aee",
+    "crates/tsp2-verifier/tests/vectors/q1/transfer-capsules.bin": "5730dfa4ec8ef7855c398525b19f2c075bc2a71d89a19b81438443d63c958abb",
+    "crates/tsp2-verifier/tests/vectors/q1/transfer-proof.bin": "62da0aa4cc9fb6338e3fb4799a52b8840d19b717b7f2bd04f7e97eba8a7ee19e",
+    "crates/tsp2-verifier/tests/vectors/q1/transfer-statement-digest.hex": "4e5534275d081fa9cd7940e8a1affeff5411048a3788bfb82ac3d97f1b98b399",
+    "crates/tsp2-verifier/tests/vectors/q1/transfer-statement.bin": "ba7fe80613ce64bc6201170e343f3104eb197f388b88ee89eca4e15c82a6275d",
+    "crates/wasm/Cargo.toml": "7492a5ce3512b314295749137ff21ce0af2a4a77dfcd912e3288fa72563c6627",
+    "crates/wasm/README.md": "9b9d3125716e024192fb9576f6f308d72046f813e979021d4da287ad23463268",
+    "crates/wasm/src/address_proof.rs": "c0710ab670f62aa4c9a30c4188444b7ebe6d73a42f2c721b4b1f09b7475706e9",
+    "crates/wasm/src/authorize.rs": "5a7a5d5cf6d49b501c3d71f27f9218d40a5d883eb4c961ce6e39ed2806e4060e",
+    "crates/wasm/src/build.rs": "5e03faac1e4e43eb3a7df89d69827621bf5fa6c686f6ef602016db36f939700b",
+    "crates/wasm/src/error.rs": "5bcc47abdc91d85742a6a852b956b5a0ed9467b3b5495f72486f12e7e6143cde",
+    "crates/wasm/src/hd.rs": "14af4932c54d2304b4aa35774034fa63ac1864c6cc73b3157a6b55e554d9f2f1",
+    "crates/wasm/src/lib.rs": "22a1183f05e967f3413b82380483976e3ef6820bef7d9fe10edd5a5b80dd161c",
+    "crates/wasm/src/manifest.rs": "a162f4514d23ccf5e72a24b93218409a4ee1c0fad388de8f723d468ace2ee0dc",
+    "crates/wasm/src/messenger.rs": "2609be17dfe079e3801d09373fc6376289368d8eced0a268d9d4d8437c115124",
+    "crates/wasm/src/multisig.rs": "2a9dc037d587a0b68d0e3ed3bad97a17a5c656cdd4f4f3dd573d1d112e376c19",
+    "crates/wasm/src/native.rs": "b00e6f1ba3f4b92ced72a84a11209264ed01faf3c1bf165d38036187a8403e7f",
+    "crates/wasm/src/private_scan.rs": "5423115195f2489dddcabbb6855be2166b5aed2bbf224d9728e04080470ca6c1",
+    "crates/wasm/src/private_scan/inventory.rs": "0d29beff15fc5543fa4daf4311751d78d1afd89ae2845d992f78ea11ea4ffb35",
+    "crates/wasm/src/private_scan/shared_finality.rs": "24abf330833b65b030f56fff61bcaad1ddc19efbc4ee2f8ff7b4cbdd236c1544",
+    "crates/wasm/src/private_scan/statement_execution.rs": "33ae4fdafc2fbd59513e88dbead8c212e71ee97338368769f96c8eae2b3aad32",
+    "crates/wasm/src/private_scan/statement_execution/registration.rs": "931b685d84a3a4e86daad391221d8bf6af0e8e63ad8880f517b8cf77635e3bfb",
+    "crates/wasm/src/private_scan/statement_execution/tests.rs": "8f77607864eca3a40a2c72e56b22d66aa2226b8c688d10786bc5e20ce3b0fa26",
+    "crates/wasm/src/private_scan/statement_execution/tests/historical.rs": "a6fbec6d50dd553ca91d887a4c58c191ba9746cc050f1f19485244a378009ce0",
+    "crates/wasm/src/private_scan/statement_execution/tests/registration.rs": "1f78ce14085d4c2dd38e7b318f1b044d134db2f81ec1316a67908b0714f72003",
+    "crates/wasm/src/private_scan/statement_execution/tests/shared_finality.rs": "936c81d48111a3b41de963c713c740bc8c2b5dbe8b75cc92eee7338d9c18ca10",
+    "crates/wasm/src/private_scan/tests.rs": "5b4d24689cdd6ea0a96bf17bd6f114f86c9ed1a05b7cce2148092d202612b19a",
+    "crates/wasm/src/private_send.rs": "3c1e298a962c60ee52e6506b700aef4008ffbcc7c7301784a7c6e9a3fab975f9",
+    "crates/wasm/src/private_send/registration.rs": "701d34fc7dade2d75ded09513d5ea958c6b2ae55e4d6e067b109b131cb8fef1b",
+    "crates/wasm/src/private_send/registration/inspect.rs": "603b69e8360f3a343084e2ebbc6197facc4260599e63cdd310247ded7d6a44c4",
+    "crates/wasm/src/public_coin_cache.rs": "823c5e8742eb8ce4876c28545f24b079ca12f1e8a4b84f29b9079fda0441269f",
+    "crates/wasm/src/public_coin_cache/tests.rs": "52462923a3827d948dd2532edf0f6bfc728dc468d378bdf26a9fcea7dcf29a59",
+    "crates/wasm/src/recipients.rs": "94e9ce7978109c246d482a4afa2498749db9db004659ceac88367efb8c8889af",
+    "crates/wasm/src/store_record.rs": "e7e50f855c3081951e8acdb44b12dfdab6db96e75f0426e1f92a2cb9097456cc",
+    "crates/wasm/src/store_record/tests.rs": "f2b9142ea7a313853d117a8b43389d5da32ffcbfcf3dc6cdb6ce358a0b8efc4d",
+    "crates/wasm/src/tests/address_proof.rs": "84326a7f80985dacf7136eecadcf55b1350df591d7bd5321708de32bda12f493",
+    "crates/wasm/src/tests/hd.rs": "10753a06e0d3f3eeb0e71ed274d7572123df17a8831d6b8e48fdcfb4ae6af5a2",
+    "crates/wasm/src/tests/messenger.rs": "af0193a05b04651171091c2e67860ede6197e39f2831ed6ee39f44d8f0594169",
+    "crates/wasm/src/tests/mod.rs": "c61d5d5c1940985d9b9a5c417bb1ab60881cbfa914f75aebae13c60b7f1515c1",
+    "crates/wasm/src/tests/multisig.rs": "d78c00db0177f6c605b8ae9e948ea708b6a617ce3bea213816c6f39d8e3e9542",
+    "crates/wasm/src/tests/native.rs": "bcfb62d5fd053ddc51c1d00688e01816c9b6f9bef397765820200e73fceb4827",
+    "crates/wasm/src/tests/payment.rs": "f6ba9673d643102aa4c77e6acbad19d97fe8526376877208915b762f31c50fbd",
+    "crates/wasm/src/tests/private_send.rs": "e5e2aff3e55dc0805aeae2c0473cac912df5ca822a54f9085f1254ccda31360f",
+    "crates/wasm/src/tests/recipients.rs": "ccad7ba863d73789df49ae937030b18cb7ce0beae2deba3d44dce1184f303d3b",
+    "crates/wasm/src/tests/service.rs": "d53c224da3324e7715d92b6c946e759bbd4bb9aa9b4ceebca2cf2e448099d4e0",
+    "crates/wasm/src/tests/staking.rs": "8087a5243046dc9c09b5ee34d265b8f85ef1c1518994a73b74f1b7de06a77e94",
+    "crates/wasm/src/tests/text.rs": "72d5eaf60889155f7d86341f780d2293022d529de930a620a31e42e488786776",
+    "crates/wasm/src/tests/utxo_proof.rs": "96d51a3fdbaa560a8b9e83d85882e62cf0d0bb9a1dcfafa033bf0f680700c671",
+    "crates/wasm/src/tests/utxo_proof/presence.rs": "9afcd636fc6063d72654c590db6e38f3221676307cdfc8fddc257fdda797d514",
+    "crates/wasm/src/tests/utxo_proof/selection.rs": "447b94a379fac2e7538b7f0df62a6558605f40886fa0481f9ec787328bb2accf",
+    "crates/wasm/src/tests/vault.rs": "5444529fed4c3ddd26340cc64e304f700ac2729d22493ee4e142e283d257de90",
+    "crates/wasm/src/tests/vectors.rs": "f92647b20776aa759350c299a1975b6ee9cdb93a4235b04ed9b792e2ba8168a4",
+    "crates/wasm/src/tests/vectors_text.rs": "e2b0e5215bd8bcf39dd44d934c599da287186060390394376a939c8d04d996ed",
+    "crates/wasm/src/text.rs": "60cacb5bdc3ce7fe84021be5af3b9b040e240ff6d1408c9c7fd0d68987b39b87",
+    "crates/wasm/src/utxo_proof.rs": "8c9b33d50f81264535243dc11d9b72f9e16eb6a03b010563de352b63152e1e24",
+    "crates/wasm/src/utxo_proof/selection.rs": "9a9546698671cccd628013f9ed4ce63e26b92876c0f2b04791c9fcb485166004",
+    "crates/wasm/src/vault.rs": "0c3348f6fe2af704d4b36459d8f617a28c18bd22b9ecad296f9f0d653e967f4e",
+    "crates/wasm/src/view.rs": "a50d6bf76fca0be603264d26cad449af42222792f45292a3cfc4d8c370f6bc57",
+    "crates/wasm/src/wallet_file.rs": "bc24c3f009041b1146936ae6d8fc9aec4eaf2a971f6a94a582c37ff9cc78bca6",
+    "crates/wasm/src/wallet_finality.rs": "cba8ad971041e35d635fa0642a7e281c4dde0cdd3bec0199499801f6cdc61f60",
+    "crates/wasm/src/wallet_finality/tests.rs": "060f015e4baa19787e27e723b2fdf3852c3afae912b29914f87f0249fa23f855",
+    "crates/wasm/src/wallet_finality_bindings.rs": "01a7e626e20f388413e0b47fd7352aee4b9c1e3e633440f10716ca4d2f1ab870",
+    "crates/wire/Cargo.toml": "3f8ac3b2df88b0e80a564aedd8a4bc1b2d2e3fcce10a2345855f8aa194ed4e68",
+    "crates/wire/src/codec.rs": "50c6161b46c1853498d9d17dd62ff92756796d5d064b04f4b29c76765da16d1a",
+    "crates/wire/src/lib.rs": "51d6ca8a34cbcc2f3ad67cefee9d6f074a4fc5836d8d292cd86f62634a2ae60d",
+    "crates/wire/src/tests/codec.rs": "3f662eca1e9d0cd7cbc457134f96cea12decb253d2f51898046c64f5a0caa4b0",
+    "crates/wire/src/tests/validator_endpoint.rs": "8db202e03aae673993d2df93a52092749d7360e5198a6538d79918c0074157cb",
+    "crates/wire/src/transaction/auth.rs": "6e2b46c6d90382e604fdd4f4fd8c48a7a062a64459d2d6050a7675cac6247aa4",
+    "crates/wire/src/transaction/body.rs": "e9cf2d2e627c29070840ce03cf3c1d1aa786664ccd2ce443317a5d28b0fa2c4d",
+    "crates/wire/src/transaction/body/decode.rs": "8e6954af3c02c0092b3ee3cb103d6e00398938d3b014e1e2ffb1de370270f8bc",
+    "crates/wire/src/transaction/evidence.rs": "b88fc2c7398a43cb18218269d8be50005328587fe441f0f98a7162f5642f26db",
+    "crates/wire/src/transaction/mass.rs": "34e849c4d785953b2d8748ffaff92f0524404dc68dede5b8355d0e0ac2cae772",
+    "crates/wire/src/transaction/mod.rs": "47b2302f8bd20783864a8b6e15e6376716110fd8e16130e90ea55073fd20d0c4",
+    "crates/wire/src/transaction/payload.rs": "2df1a0e6bc2e703c55804bb33d8ae75449c049cdc4f7aaca4918bad8bdf8e2bc",
+    "crates/wire/src/transaction/tests/adversarial.rs": "63c3ab42ea128da5c17e9cd501c3f4a0d598d62d20b930317d2b030aef848f41",
+    "crates/wire/src/transaction/tests/auth.rs": "d12a4b6830b0203861ea8d4f1a90068a2fe6591b110f7592c48f2410083a7614",
+    "crates/wire/src/transaction/tests/body.rs": "19d40a7552c9328444bbd080ccf89830fbe017b010ec2e205ba63cf0da391ef9",
+    "crates/wire/src/transaction/tests/evidence.rs": "cfee37655c078fc4cd06671169dd8ac324b7d359205937631e7112f806770b2c",
+    "crates/wire/src/transaction/tests/mass.rs": "978f4fa49a5ff5a54aec593d3f8f240bbafd79612edb170adc23ade90c057ae6",
+    "crates/wire/src/transaction/tests/native.rs": "7a4bdc9bccd80ad2dad828b8207b85351495a9d298b049ad2c5c539cd40eeca4",
+    "crates/wire/src/transaction/tests/payload.rs": "6bc4025e0c13febfdf22434ee772fb0c0b3d71d5b47fca7b52ca0dfc262c13e6",
+    "crates/wire/src/transaction/tests/size.rs": "d3c4267f44456178a82e3525a769cf5c22cca510d8b0bd301cdea0b3fba9c246",
+    "crates/wire/src/transaction/tests/wire.rs": "f82f410a479e504335b954f3249acd3585d630c5cbbcd6b5e461764464739b51",
+    "crates/wire/src/transaction/types.rs": "79d7e04445b36605d3dd9d4998ecd14f37faaef7dac053d3d29a95df5e0ed5d4",
+    "crates/wire/src/transaction/wire.rs": "2cbce775f31dbfee1d05e1fe9bfed6b2ef1b6b971078a0d856430a13b927db09",
+    "crates/wire/src/validator_endpoint.rs": "b017d6d6075a06a3b3083dd3987516bb5b810be14b15c61cd98bc31fd91ae190",
+    "crates/wire/tests/kept_signatures.rs": "d6c2e6b7b321822e25b06f9c43174ce58ddf050954f6c77d2a8b18d078d20c1e",
+    "rust-toolchain.toml": "b9224d97f0e203e34f51c307ae65d35ae1f0bf192eb4a38464d71389fcc50fb4",
+    "scripts/package-wasm.ps1": "cb68b0d59e4b40a0daa5bf082a6460be23b11182d8a81d3c1bc44e37354d1ae9",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/Cargo.toml": "7f5dc6291375aa168144f4dc297e2208b2bcc09b42368315881a9c4e40ee8f81",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/component.rs": "4d59104b217dba9e07138351e7469e38880e98a8e522bb379149f8ee78178639",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/expr/assignment.rs": "2e941bacc81f39c267f2131982dc5a9c5a1d1a59cd3101ddbdb1835a551cf500",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/expr/degree.rs": "7b8863744e51a898580fd02a381c295877e18a6a6396f9d792997d3f81b010a4",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/expr/evaluator.rs": "68ec192082b150e2759458ef7673d1c6c6efceb398e1825a33a91ffd452443d7",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/expr/format.rs": "a3d17888f0bfa49d2022d89c344868417aeb6b8c776d32c7fc4e25605b08633a",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/expr/mod.rs": "2ee69e08d3b6d7a9c4e6bc8843dad9a715e0f0ccd20ef0eef4b50725d10bad70",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/expr/simplify.rs": "1c394976237955071731ac6a6558f823cced1dd7d8d89ec737ad0208d31d7529",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/expr/utils.rs": "063dd5c5b11cb9e226a00b849f08048601c1dae54fa0ec0d8fcebd67a39d43e7",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/info.rs": "3a0e27316851c617542af671f82e58a526fec3f048208720b3eb91f20d308619",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/lib.rs": "678f57df950df331713a92f96d562aff569f89dac56fa766588fffa020c9d291",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/logup.rs": "b422fbf83dc2ea15217fc33d6581fbca2b407a4194868dae2880134182ae245b",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/point.rs": "3e228370364ba1120fe32bedc05e8b56b77289058fe6ad50cc1862d49ba2d765",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/preprocessed_columns.rs": "de2c4110f5053ef9ebdd93863f589e416ae4a3f30fc11d234a7b73b4ec33be09",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/prover/assert.rs": "7ec68b6ea2daf74ebbe3d7080ad3d623a1d60ef7f0bc295c7ab72f100c90407b",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/prover/component_prover.rs": "c36bb890f8e1f09e91f4ff8b9d0d13c86c1d8a75accf05517356cf6bd004a560",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/prover/cpu_domain.rs": "135c11e6be658dd084d4209b161e7a828d4c32115dac775fe4a2bb08ec764518",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/prover/interaction_store.rs": "df4ac8bf992df604fee05e98594ca44944e97e4c539393fd5833178ffe6839b9",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/prover/logup.rs": "34aa462ec59a22f481bbff84a523c0af1986bc0db078d756e4f3ffe2b15fd61d",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/prover/logup_store.rs": "98b6483d5e0b778191c1414767700889c0aaa1ce75430cdd764058b7cc9d99a7",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/prover/mod.rs": "7d720941b7df343eab1080e2e336aa45c7f86e75052c38d18c6c42833d4d6bd0",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/prover/relation_tracker.rs": "72b4905d32919e01937436679a36005cbcc268c4dbfe58ea23da92d4f81776c9",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/prover/simd_domain.rs": "a2c53b3d59ad1c2a697d91a2094b044bded1db0278e40ea67af6a16e715ad420",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/src/prover/trace_page.rs": "b4753ae9213ace9122979952cf6dc7d4a1ed053d5a8587e0b2fba844f58e2dc5",
+    "vendor/tsp2-proving-backend/crates/stwo/Cargo.toml": "bcb003828623ae66717c8150f3f9ef6716b41a645bdb40234f89d8ebbef9965d",
+    "vendor/tsp2-proving-backend/crates/stwo/benches/README.md": "d6f7d5b81050acacfa0a54aa56f94dda83a24835041d01d55688d7af59c4b821",
+    "vendor/tsp2-proving-backend/crates/stwo/benches/barycentric_eval_at_point.rs": "3fa758d6128a112a24c63af1acbaf0de704158f679cfc8a9c2dd069d8ad68e13",
+    "vendor/tsp2-proving-backend/crates/stwo/benches/eval_at_point.rs": "37c2b2692a4eb5ffe067b27431b92544709171a16578ce06f3445a90530b3658",
+    "vendor/tsp2-proving-backend/crates/stwo/benches/eval_at_point_by_folding.rs": "85aff69aab5d9e42634449aea24704662a5b337fe71e1b7e64504d951cffa946",
+    "vendor/tsp2-proving-backend/crates/stwo/benches/fft.rs": "34cd6c86a4151b52bcbd896d306038719b128e0117bc92018da43c352b0b8fb6",
+    "vendor/tsp2-proving-backend/crates/stwo/benches/field.rs": "6dd465231dba8bd967e40326745f91a72b8715fd6d921216238330f92b286487",
+    "vendor/tsp2-proving-backend/crates/stwo/benches/fri.rs": "fc1589d7019a1236448dc4901ebc76fd1ef710d9874cb62bbefc0f827ee609fe",
+    "vendor/tsp2-proving-backend/crates/stwo/benches/fri_quotients.rs": "a10011b8e8d3f59ba8b8a336e6e7c35614f993a0b8ea79b169c7cb9ec37c17a9",
+    "vendor/tsp2-proving-backend/crates/stwo/benches/lookups.rs": "8d8b07711088fff518573ee8eba559a833a2b6e163286972a93592c6d8510779",
+    "vendor/tsp2-proving-backend/crates/stwo/benches/merkle.rs": "d1f6f5a108346f2b73c206dc1b47dd66087be3e540d9abb0b55ded41d0e2a9ef",
+    "vendor/tsp2-proving-backend/crates/stwo/benches/pcs.rs": "507c09387940602a782a664d28e77b53af17963b9170e56c247218c10c2d563c",
+    "vendor/tsp2-proving-backend/crates/stwo/benches/prefix_sum.rs": "15e2ed5d8b92157ddfa639a9b9bca1fbd1406e19562249bebf205859e972ee65",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/air/accumulation.rs": "6a774dca7256b3e7168811da19931cdeee202f46d826e173c017a9f045c4b8e5",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/air/components.rs": "5efaf802df4bada6d4f3c021c8239bf47417bfc401ccc5492139ee08991e4246",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/air/mod.rs": "054d3159d45f234d72495c7415ec90f810ef007f2f17760e45fe65504995d003",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/channel/blake2s.rs": "910e9f38bae27dce24c32c9a623ff3dcbfa863674411b6a68cfeda69cddb61a1",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/channel/keccak256.rs": "8973997a3246f1e2836bf8a381d0d2d8fe4376585266a26d986ff86f9b659e42",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/channel/mod.rs": "de77a60418167debe3214ac18360f9e32af1ae57f4722d51b96a3c3e415f553f",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/channel/poseidon252.rs": "1440ef92101f5e6c61422de0af02bca45e08e9f90440fad1db57b5f6fced2fdb",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/circle.rs": "c379d678761e4151fc0f69f64b3e2912bbd336cadd851ea10871c213bb7ef04c",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/constraints.rs": "b94b46706480649dd05d890eb6427835ce5d0e0d26de0734d41919fa366ca881",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/fft.rs": "827f00d43b05851c4812f43aaa91fac1bc188f9207ae4f331a8f29d8a6ebe6e3",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/fields/cm31.rs": "023d86204792a6885d5f304dfcd72661f9f7981482abe710a96a1ebbe5cfb52c",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/fields/m31.rs": "938be32a731be4da90cf5b0eb504227a287b10a8bdb474bac1fc251d145f556c",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/fields/mod.rs": "ed2a8de11481424d272c8a2cbab21e16e396d6508428ab0da59b1fa436ed8462",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/fields/qm31.rs": "3dfec11451e8a175eaa7efac544cbc977560d57dc676f8ec8174abf29dd11aa9",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/fraction.rs": "88ded5df7e1a93c54b91b04b8886f8bdcbe43112e179f6597098b4b19c1fc2f0",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/fri.rs": "ec73465bcd44c7b62d2da374bdef0b445157e9b799d1f14e8f7a8cad280f6d6e",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/mod.rs": "808b0d57ec2322602c0c0c4da635315c5b21613e8944fa952a4265a5d385c254",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/pcs/mod.rs": "6c01a6f5e8ea595ea244eb3f641e6d9b31333c44a605b9c68656a1ec71249d65",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/pcs/quotients.rs": "bf17d8944df9915fbdd6def5547366bd63fb522c8be12115462c935317449a4a",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/pcs/utils.rs": "d010c175e1c0c94ad3e2051048776e9390aba0cf59f55fe1bd851f00caece97f",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/pcs/verifier.rs": "6d62064e597dfab7da5442954b6866560aa1ddd07c87c2d931e7bfdf26277d5e",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/poly/circle/canonic.rs": "e2916572036be305db5738f318b68930949cec1202314d2831f537a6af8cb4d3",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/poly/circle/domain.rs": "203fdb3253ae23fc4320e022a2b0044163f293c1e22f6644a8ae3aaafb3596e8",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/poly/circle/mod.rs": "5c077815ef7d8f5bc7399fb197c38ffd3d681a4a333daf9e4eb64fd8788d8d86",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/poly/line.rs": "bb73fbfd4f25911146d5c55d2f721698f77388cbccb2fccd7519de31a01e5a54",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/poly/mod.rs": "a532b34d8bb7ab45b204f4f917284d9589b0c6408352f91198d5f90402968cad",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/poly/utils.rs": "c529fd34d57ec9af58efd53e31b7afcc41ae3d2fb2c23b8d912a5e9fcd52c3da",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/proof.rs": "61e06fe1ce5f06afed70ed529e50e83f9c37d1ebbd42761a8a25c0fb9feb4b51",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/proof_of_work.rs": "869de3d367cbcccfeeb5552477acdc555a21a417293fdb4dde438bf46da9e3a8",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/queries.rs": "017ff3a88219c6a495d6efa59bd2e6a5b701610930f26e50c545fca03b9aa4ab",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/test_utils.rs": "8db2bdf139e086d623dcae749049adc9751579771dc53de2fc8939965fc29ce3",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/utils.rs": "048c8b9b83558707ad9da9ba531f633617409e774c4262670a8fe66e080fbfa9",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs/blake2_hash.rs": "147552ab626ca63f641e02dedf9211e3d0cab288b225ddae19f685aaef993a4b",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs/blake2_merkle.rs": "284dcd12ace293c3720aef262b8408290a49883f8f731aeb77e8e9acb306595a",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs/blake3_hash.rs": "7aaebdc023e316fecd7462c141793a4061c3d09acc13d9cb945bff47c6980085",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs/hash.rs": "2400f910d487ec1b06b227bf4fa0df2169f16ed6d7d6fa01acd4fd6baa0f3454",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs/keccak256_hash.rs": "3dd68a8b2409fb482745808cb50a7ddbec5d5c5f4307ea63505317e90532e669",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs/merkle_hasher.rs": "ffc8f1ad8aef0c49f6428f641fdd11e4de767e72480a82b325b488145ad98e71",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs/mod.rs": "ed859f00d451e2986f6a367edec71bcdb384f3e2235b1f1339f272d7ce9035e5",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs/poseidon252_merkle.rs": "156bf690190ae1de4cf4f29316088caced0849416be5acaac6c2fd55b3f49bb7",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs/test_utils.rs": "f11148e4ce51f3c817a55f0d3a9728611931aca9fbaad0e5dc0ac3b53bf15a71",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs/utils.rs": "81b47a0fb018f26181582bca1b2ca347a0de990069522e3c387025dfe3f722aa",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs/verifier.rs": "d1a02b313fc772844e73fe4bea5e125d0f29a33698ead4a67ab50b29fc945e3c",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs_lifted/blake2_merkle.rs": "15d181b1a70fc290c569d94c6ae6f731b38ea43fbce1652f74a4284986bddb23",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs_lifted/hasher.rs": "faf1e5949c22d6ccde37003e0c5ddda4d27fc45fb7657a9816ab085abaf8a1eb",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs_lifted/hasher_test.rs": "fdcd3ed0b255a31cd8b4541cb37f3b74aadf8f5dfe5cbf8a50056ab9134ba862",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs_lifted/keccak256_merkle.rs": "d287cf7c4d2dbba73d242bb22d5e0d9210d929ad213da8b0a2e43dcf03c3861d",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs_lifted/merkle_hasher.rs": "eb9abccf07de6053e2bbf0b69319735c17dc6d8a7ac4130e4b048bda714b3a91",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs_lifted/mod.rs": "4b17d1d86e899acf9dbd9903fb85ea7d02ee88f32180a11285bcfe76f0c799c6",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs_lifted/poseidon252_merkle.rs": "dbbde49b291c0ecbd3ec4809d404086441bd45e2900c8f6746fe5b77cea25b77",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs_lifted/test_utils.rs": "fce212ae78a1e409ca7d49fb80c4773c2a2df8a62b22d8388c5569c6ab6d2ae4",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/vcs_lifted/verifier.rs": "4e6d93b43c55ffd0f8b45210a762349244e5998d9422410d69e36ad93dfe58c0",
+    "vendor/tsp2-proving-backend/crates/stwo/src/core/verifier.rs": "939267e841bdf272a0ed495d857c0ba3eb9b757da8b7c9f2c634f883dfe67064",
+    "vendor/tsp2-proving-backend/crates/stwo/src/lib.rs": "3a32475e154b789eaf959906317f967275c826c2ce91356129a8a210556d6fb7",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/air/accumulation.rs": "2b580cdc69f1a0dc801583e3854ebc62ddbca285db4d9e7c1ff176e18464131f",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/air/component_prover.rs": "58a57619f0933ee52df51506ad02499304e56c643e8dfc4c1affcab0af5ea99e",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/air/composition_pages.rs": "3ee7896ea28ded16b70dd122bbe9491a32199fccebadd0553d73f350cf786d91",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/air/mod.rs": "fbb99c7c68f5801ce078da829edd0c3d3eebd07fa37760f9d7402bcf67b22ccd",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/cpu/accumulation.rs": "2712114c841df4f12ad04ac9f5ce6588aa935b52bd56ccb12f039c2493f9b0aa",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/cpu/blake2s.rs": "b35c3a30a250c45a68bbf1e84a34ebc18e21035d8833db0b097795055f96d81a",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/cpu/circle.rs": "07a2161eb50433062f98f950e2a2bd1719c921161900a1a9f3423fc3ce063fc5",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/cpu/fri.rs": "5acab6b5ff4d75602a8b96d32add00cac84203698db46337c0b2d342339cf3e3",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/cpu/grind.rs": "9e6de58e0b4101c8bd0b3d501ebc356e131a4e693dda9e12739b1ff5697dd54c",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/cpu/lookups/gkr.rs": "c81aa272070a2bab3b247b77a9994a1cfc7411b5f179a70cc0e56fe7dd5d6241",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/cpu/lookups/mle.rs": "4f4a5b267c1e4825fd0a08a8f9ee82fc46c0ff473d8a2e8efb7f49154307178a",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/cpu/lookups/mod.rs": "18a47f039cbac9b94aea1cb90d09233dde696f3e9ca338924ea8802721beaa1d",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/cpu/merkle_lifted.rs": "7b23e80d42815135952fcc7adef4bdebd8d7eb855e6cb96ed08dfbf3c4d0e427",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/cpu/mod.rs": "9b4b163616fa78bc43de0dd34bf3375c859717e228ad25cbc4363d0007049397",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/cpu/poseidon252.rs": "939a000a4b253a84abedbde2899f598c17385bd9646f0807ac0591a17d30aff3",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/cpu/quotients.rs": "5b2105219b2c62288325477e84544378d02eee1b08f98ab6e282ffdb10696d98",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/mod.rs": "9531deb2ff6a84496d6390ccfec14a9a95325f498dfa8370eb5f67c8934cb65b",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/accumulation.rs": "dbcae2311edc27b8ba60523bbf4df3f48a8ec41a6ea2e28cf2b44ccfdf658375",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/batch_inverse.rs": "e81a4cce16653df3f61e40e5653903cba6a737fad44aca76693a749d100aa9e2",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/bit_reverse.rs": "b0566ab120e236a4f3f0e006e774ceb02f8cb3c9155f9af3b0434e59b367d132",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/blake2s.rs": "8a7214596d96b61a50f1a0a0dbe32e41567995f378e05282a9a1a575603c6852",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/blake2s_lifted.rs": "87e877204636a649929836632a20dd0a433efea2eb7482d62e65b861a6a121a1",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/blake2s_ref.rs": "f9d720ccf4928343644b4b0b53e95a4487902e27dd60cff22abee3d9573a58fb",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/circle.rs": "092db838e59e0cf8e4298d80c2330c871605618cf727a7aada806bb4164682c0",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/cm31.rs": "def514c0f456d63f0ebd42cfe84425e34214f66f7f274ad263788b2bf28cf10a",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/column.rs": "382be79eeea4d6478a441e8066658ea84d72683da147d4d0ce993dc8f5347c0f",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/conversion.rs": "05a96a7a2a17466d36de79a44562cb69e0e22af34a6a876a287083ce0c39ce68",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/domain.rs": "3bc4744fce3fb18de99bb78faaa10c47934eb15ab77d7c0e8a32038df77da745",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/fft/ifft.rs": "7ce0a3c391fe8b6c3d9840f52881043f57c86cbd4ed6fda534d5fce5f6972bfc",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/fft/mod.rs": "78630ac6a52af95a22c388ede046112114be6424a6d144c8f02571f2782d42f6",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/fft/rfft.rs": "769a1f12e98ffc6a080aee4bd0a6945d8678c1e1188574166e28e65fe3a5b2f8",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/fri.rs": "1248c57969d856999c19772cea9f908283cdb81a7066c3fef8825fc34691c9bd",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/grind.rs": "c748158df360c95dd5a3ec77de5dc434179c7b2a7f8ab8ebe9660b1689cb7834",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/keccak256.rs": "df5c26612cc4bd992a1b66edf1ed913d39707f12e39b3374725096fe81adb88d",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/keccak256_permutation.rs": "7cf17163ddc750f9bb845aa85198f8efd735a0a0566d61e9e871155d4e2f36bd",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/lookups/gkr.rs": "6a8b5b7d85a0f5735a57bed882f54fd0089a42d598b1bef31948f65157758664",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/lookups/mle.rs": "ec6f55669e3eb44f953a32d587a7060a0a22e7fa42e68c19d54ae2f68733e42d",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/lookups/mod.rs": "3ce8445b1befd991d1ea9de4e04acc1b24d72e3130a97e425514c2a2839e0357",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/m31.rs": "9a3f9429d18943ed2ba1e8ec12fa73c83f12c6d0e8d431d082e6912dce7377f6",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/mod.rs": "3795add1b9ce35b54850babf22c32ee898d36ab2c0a3b1e536f94228c729d5c7",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/poseidon252.rs": "dd775a80a2ca081d98157598d404b86d1a5ea753700ee23082d7ef72868efb8e",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/poseidon252_lifted.rs": "b0958255c48273df91850d8208a96560409e2a79008d26079a74c45f9d4a3a12",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/prefix_sum.rs": "6821cd808b185205da6172d97b69672d031dc05a5c07342b8ffcd6a16fd6422d",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/qm31.rs": "4be0db985017e97d05fc53b637ed53422e09e6054db734e482a0950a868cd8aa",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/quotients.rs": "42d03ec6ab6d31f55d48dad9b685d12e5d4d26190f6d263d3dd6b62cb822e22a",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/utils.rs": "a7063c7684b12411d7d69a6d3c9b11d2486f39ff9f1d8312f51fd750e5eb8724",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/backend/simd/very_packed_m31.rs": "847b5a2182442d32af7cf99870cbb87c25b352f38f0c7a43cfc88d4b9e5e5cd5",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/channel/logging_channel.rs": "ea217099d229ab4942389758e06c9f94a291fe5dbf5b4569ef3642ae5e1d5bab",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/channel/mod.rs": "0f2c9918b5bf1774294190e96e400dc2eed01307acde6d2bf371a0b67836d103",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/fri.rs": "2d64140cd968507461445341994ba381d471814190d0e1523d0bea5b12792667",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/fri/paged.rs": "f6c4e9a392d5328c8b21149f961ae484252eb459fa1de74e35bfc19a42cd3ca4",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/line.rs": "32b5dc50a5af2bda3e7b048cdafb28b478bcd77a1ec4b070b4996e9cf33bca60",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/lookups/gkr_prover.rs": "363a6eed32435d3148e535922c4e9cee5a645e24a56ea01be05b65f0137281c1",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/lookups/gkr_verifier.rs": "bc9bfcc820b849edb8c9d57b3217ebcf76c9ee4176472a0845b20026e6c61409",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/lookups/mle.rs": "8b1a90739da25b37ff0e7c8b2edbce35ac0b3659e1fd3f04e15dcb9974336f00",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/lookups/mod.rs": "829663e9199cb0f9a3707e2d4740f1be77f624d8a5dbd0a68074a484feb8539a",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/lookups/sumcheck.rs": "bbc5512ee526ecc098629a16962d83b16f5878d7c7dca861c61528e61f66b5e3",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/lookups/utils.rs": "a6a0e8041d036dd42c43792da87d6f5dc5a457daceaab978edb6fca62a0206b8",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/mempool.rs": "6a74180f2b2a22bed22900cefa45ba9059fd23740ad72f797723e2f4b2d2a313",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/mod.rs": "bf9496f22442a572ca0cfa7951a7d7f173918c9ca232e522a27ff69c93b90311",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/pcs/direct_quotient_pages.rs": "a54737f9e5a42565c0184304040e604e41f35c99256570fff5c4e9bc617a3928",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/pcs/mod.rs": "9d43a23c4274a05e7bd15cd228cd90970506cbdb67d3af50fc3ea7cd688efe55",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/pcs/quotient_ops.rs": "2d79f9d9c9603c2230df57e0234ab874f935f958d90154a0b11c928839ea702c",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/poly/circle/evaluation.rs": "0af9d18120796da4574e672d50cad8b139596e88dff6b87e7ea65bcd999c73f6",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/poly/circle/mod.rs": "5d38c9b2b83ba86ed52c915778abd54d5f20a3bf882c72b51181504a452a9ad1",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/poly/circle/ops.rs": "809ea592e05d54efe4e342e1adc42d522eb18ab6b0702383bbf0314d67e78c6c",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/poly/circle/poly.rs": "484613a3a4fbe9426e95e8c3d67fa25d37045ddec68867f30b4a1560681b8ef8",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/poly/circle/secure_poly.rs": "dae83d3a2ebd6e62e1c6247e27177ffe4c8b77c70422374ba1bfd63751c6b3ce",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/poly/mod.rs": "31e75964a2fc474187372d7ae22d455bd8e436a79c802f1a88bff62a3060e63a",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/poly/twiddles.rs": "2346eaf5c4abf563527bd72a7f149d644125bbdfc7728e4fa6a3ed486797b684",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/secure_column.rs": "1cbc1e30fc26ceccdad828b621cbf1243d93be4aa18209bbcac1ac11553cc2fc",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/vcs/mod.rs": "787eb96dcd8d6fa8c49b50e39a3758b8c47effd36dda107b914e2877baf9a10e",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/vcs/ops.rs": "be162a42119dd85cea721bfb93f7a2bfe66ead0cc2edcbf5a47294b7ce78d564",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/vcs/prover.rs": "630d9e16be2717be1efa7a1b8f807a29eacffaa0c4f969f2f751f6f361604736",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/vcs_lifted/mod.rs": "3c8a3b8bfa44f5c73c27263c342de7c601fbcf19337fbbfd0e761571deef640b",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/vcs_lifted/ops.rs": "7182e3168e84ebfe7a462f5498a60c1f9a32b145e0cd4209c504b799ad0c6a19",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/vcs_lifted/persistent.rs": "0e7de60dff5434d2ec7f82e5ceb39fc4c3c4b4a3bf40911288ed92b02c198e65",
+    "vendor/tsp2-proving-backend/crates/stwo/src/prover/vcs_lifted/prover.rs": "1cfe81faab3cfcfb856dbb1a939722fd7bde813a680cab247ffa60c3e42465eb",
+    "vendor/tsp2-proving-backend/crates/stwo/src/tracing/mod.rs": "d5579bcebb712c1ca434edc21d6ca5c4d53230f8c3cd749bdaaa9e00be9d6c20",
+    "vendor/wasm-bindgen-shared-0.2.108/Cargo.toml": "a20981080799b4185934e830d62c293e9c7164a176cad907c6179af2a14fb301",
+    "vendor/wasm-bindgen-shared-0.2.108/LICENSE-APACHE": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+    "vendor/wasm-bindgen-shared-0.2.108/LICENSE-MIT": "378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397",
+    "vendor/wasm-bindgen-shared-0.2.108/README.tenrai": "679545347e09370a471b8615cbb5aa9d79cc4e6f6a81a536a425355d7842f486",
+    "vendor/wasm-bindgen-shared-0.2.108/build.rs": "6ce99fc55547b808d68e71b7bdd453fb2b5f12f8f9777df8dc2d97cf42b8b7e1",
+    "vendor/wasm-bindgen-shared-0.2.108/src/identifier.rs": "05ce1e3dbaaa2c5a9be7ab66ccb11c924c46c75df214fa7477aed9b35152b10f",
+    "vendor/wasm-bindgen-shared-0.2.108/src/lib.rs": "4ea1d1fb96c5ca31b81a6e39f0d8fa5f3c8fae2188eca21aef8f77303e7dbfe3",
+    "vendor/wasm-bindgen-shared-0.2.108/src/schema_hash_approval.rs": "9ee223b681d39b026405ec131a7128aa18d5096a648c68409a7801ca475251ee",
+    "vendor/wasm-bindgen-shared-0.2.108/src/tys.rs": "5c770fca9243824c822e2ea3412b65381ab9eb3ae199bca802cebc3b376cefd8"
+  },
+  "format": 2,
+  "git_base_revision": "162254e084c1ee4b092528aca9d1b0a417a4a9c6",
+  "input_scope": "all files of the local packages cargo tree resolves for tenrai-wasm on wasm32, plus workspace, toolchain, packaging and genesis config inputs; build output folders excluded",
+  "local_package_roots": [
+    "crates/auth/",
+    "crates/client-api/",
+    "crates/multisig/",
+    "crates/platform/",
+    "crates/primitives/",
+    "crates/tenq/",
+    "crates/traidag/",
+    "crates/tsp2-verifier/",
+    "crates/wasm/",
+    "crates/wire/",
+    "vendor/tsp2-proving-backend/crates/constraint-framework/",
+    "vendor/tsp2-proving-backend/crates/stwo/",
+    "vendor/wasm-bindgen-shared-0.2.108/"
+  ],
+  "package": "tenrai-wasm",
+  "proof_verification_bypassed": false,
+  "resolved_packages": [
+    {
+      "features": [
+        "alloc",
+        "getrandom",
+        "rand_core",
+        "std"
+      ],
+      "name": "aead",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.5.2"
+    },
+    {
+      "features": [
+        "alloc"
+      ],
+      "name": "allocator-api2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.21"
+    },
+    {
+      "features": [
+        "alloc",
+        "default",
+        "password-hash",
+        "rand"
+      ],
+      "name": "argon2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.5.3"
+    },
+    {
+      "features": [],
+      "name": "ark-ff",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.2"
+    },
+    {
+      "features": [],
+      "name": "ark-ff-asm",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.2"
+    },
+    {
+      "features": [],
+      "name": "ark-ff-macros",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.2"
+    },
+    {
+      "features": [],
+      "name": "ark-serialize",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.2"
+    },
+    {
+      "features": [],
+      "name": "ark-std",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.0"
+    },
+    {
+      "features": [],
+      "name": "arrayvec",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.7.8"
+    },
+    {
+      "features": [],
+      "name": "autocfg",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.5.1"
+    },
+    {
+      "features": [
+        "alloc"
+      ],
+      "name": "base64ct",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.8.3"
+    },
+    {
+      "features": [
+        "alloc",
+        "default",
+        "std"
+      ],
+      "name": "bech32",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.11.1"
+    },
+    {
+      "features": [],
+      "name": "bincode",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.3.3"
+    },
+    {
+      "features": [
+        "alloc",
+        "rand_core",
+        "serde",
+        "std",
+        "unicode-normalization",
+        "zeroize"
+      ],
+      "name": "bip39",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "2.2.2"
+    },
+    {
+      "features": [],
+      "name": "bitcoin_hashes",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.14.101"
+    },
+    {
+      "features": [
+        "std"
+      ],
+      "name": "blake2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.10.6"
+    },
+    {
+      "features": [
+        "std"
+      ],
+      "name": "blake3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.8.7"
+    },
+    {
+      "features": [],
+      "name": "block-buffer",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.10.4"
+    },
+    {
+      "features": [],
+      "name": "block-buffer",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.12.1"
+    },
+    {
+      "features": [
+        "default"
+      ],
+      "name": "bumpalo",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "3.20.3"
+    },
+    {
+      "features": [
+        "bytemuck_derive",
+        "derive",
+        "extern_crate_alloc"
+      ],
+      "name": "bytemuck",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.25.2"
+    },
+    {
+      "features": [],
+      "name": "bytemuck_derive",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.12.1"
+    },
+    {
+      "features": [],
+      "name": "cc",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.4.5"
+    },
+    {
+      "features": [],
+      "name": "cfg-if",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.4"
+    },
+    {
+      "features": [
+        "zeroize"
+      ],
+      "name": "chacha20",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.9.1"
+    },
+    {
+      "features": [
+        "alloc",
+        "default",
+        "getrandom",
+        "rand_core",
+        "std"
+      ],
+      "name": "chacha20poly1305",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.10.1"
+    },
+    {
+      "features": [
+        "zeroize"
+      ],
+      "name": "cipher",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.4"
+    },
+    {
+      "features": [
+        "std"
+      ],
+      "name": "constant_time_eq",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.2"
+    },
+    {
+      "features": [
+        "default",
+        "std"
+      ],
+      "name": "crossbeam-utils",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.8.23"
+    },
+    {
+      "features": [
+        "generic-array",
+        "zeroize"
+      ],
+      "name": "crypto-bigint",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.5.5"
+    },
+    {
+      "features": [
+        "getrandom",
+        "rand_core",
+        "std"
+      ],
+      "name": "crypto-common",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.1.7"
+    },
+    {
+      "features": [],
+      "name": "crypto-common",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.2"
+    },
+    {
+      "features": [],
+      "name": "dashmap",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "6.2.1"
+    },
+    {
+      "features": [
+        "use_core"
+      ],
+      "name": "derivative",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "2.2.0"
+    },
+    {
+      "features": [
+        "alloc",
+        "block-buffer",
+        "core-api",
+        "default",
+        "mac",
+        "std",
+        "subtle"
+      ],
+      "name": "digest",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.10.7"
+    },
+    {
+      "features": [
+        "alloc",
+        "block-api",
+        "default"
+      ],
+      "name": "digest",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.11.3"
+    },
+    {
+      "features": [
+        "Clone",
+        "Copy",
+        "Debug",
+        "Default",
+        "Deref",
+        "DerefMut",
+        "Eq",
+        "Hash",
+        "Into",
+        "Ord",
+        "PartialEq",
+        "PartialOrd",
+        "default"
+      ],
+      "name": "educe",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.5.11"
+    },
+    {
+      "features": [
+        "std",
+        "use_std"
+      ],
+      "name": "either",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.18.0"
+    },
+    {
+      "features": [
+        "derive"
+      ],
+      "name": "enum-ordinalize",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "4.4.2"
+    },
+    {
+      "features": [],
+      "name": "enum-ordinalize-derive",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "4.4.2"
+    },
+    {
+      "features": [],
+      "name": "equivalent",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.2"
+    },
+    {
+      "features": [],
+      "name": "find-msvc-tools",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.1.12"
+    },
+    {
+      "features": [],
+      "name": "fnv",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.7"
+    },
+    {
+      "features": [],
+      "name": "foldhash",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.0"
+    },
+    {
+      "features": [
+        "more_lengths"
+      ],
+      "name": "generic-array",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.14.7"
+    },
+    {
+      "features": [
+        "js",
+        "js-sys",
+        "wasm-bindgen"
+      ],
+      "name": "getrandom",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.17"
+    },
+    {
+      "features": [
+        "raw"
+      ],
+      "name": "hashbrown",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.14.5"
+    },
+    {
+      "features": [
+        "allocator-api2",
+        "default",
+        "default-hasher",
+        "equivalent",
+        "inline-more",
+        "raw-entry",
+        "serde"
+      ],
+      "name": "hashbrown",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.17.1"
+    },
+    {
+      "features": [
+        "default",
+        "macros"
+      ],
+      "name": "hax-lib",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.3.7"
+    },
+    {
+      "features": [],
+      "name": "hax-lib-macros",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.3.7"
+    },
+    {
+      "features": [
+        "alloc",
+        "default",
+        "std"
+      ],
+      "name": "hex",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.3"
+    },
+    {
+      "features": [],
+      "name": "hex-conservative",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.3"
+    },
+    {
+      "features": [
+        "reset"
+      ],
+      "name": "hmac",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.12.1"
+    },
+    {
+      "features": [],
+      "name": "hybrid-array",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.15"
+    },
+    {
+      "features": [
+        "std"
+      ],
+      "name": "indexmap",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "2.14.2"
+    },
+    {
+      "features": [],
+      "name": "inout",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.1.4"
+    },
+    {
+      "features": [],
+      "name": "itertools",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.10.5"
+    },
+    {
+      "features": [
+        "use_alloc",
+        "use_std"
+      ],
+      "name": "itertools",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.12.1"
+    },
+    {
+      "features": [],
+      "name": "itoa",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.18"
+    },
+    {
+      "features": [
+        "default",
+        "std"
+      ],
+      "name": "js-sys",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.3.85"
+    },
+    {
+      "features": [],
+      "name": "keccak",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.1.6"
+    },
+    {
+      "features": [],
+      "name": "keccak",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.2"
+    },
+    {
+      "features": [
+        "default",
+        "std"
+      ],
+      "name": "libc",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.189"
+    },
+    {
+      "features": [],
+      "name": "libcrux-intrinsics",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.0.8"
+    },
+    {
+      "features": [],
+      "name": "libcrux-macros",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.0.3"
+    },
+    {
+      "features": [
+        "mldsa65"
+      ],
+      "name": "libcrux-ml-dsa",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.0.10"
+    },
+    {
+      "features": [
+        "mlkem512",
+        "mlkem768"
+      ],
+      "name": "libcrux-ml-kem",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.0.10"
+    },
+    {
+      "features": [],
+      "name": "libcrux-platform",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.0.3"
+    },
+    {
+      "features": [],
+      "name": "libcrux-secrets",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.0.6"
+    },
+    {
+      "features": [],
+      "name": "libcrux-sha3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.0.10"
+    },
+    {
+      "features": [],
+      "name": "libcrux-traits",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.0.8"
+    },
+    {
+      "features": [
+        "atomic_usize",
+        "default"
+      ],
+      "name": "lock_api",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.14"
+    },
+    {
+      "features": [
+        "alloc",
+        "std"
+      ],
+      "name": "memchr",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "2.8.3"
+    },
+    {
+      "features": [],
+      "name": "num-bigint",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.8"
+    },
+    {
+      "features": [
+        "i128"
+      ],
+      "name": "num-integer",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.1.47"
+    },
+    {
+      "features": [
+        "i128",
+        "std"
+      ],
+      "name": "num-traits",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.19"
+    },
+    {
+      "features": [
+        "alloc",
+        "default",
+        "race",
+        "std"
+      ],
+      "name": "once_cell",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.21.4"
+    },
+    {
+      "features": [],
+      "name": "opaque-debug",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.3.1"
+    },
+    {
+      "features": [],
+      "name": "parking_lot_core",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.9.12"
+    },
+    {
+      "features": [
+        "alloc",
+        "default",
+        "rand_core"
+      ],
+      "name": "password-hash",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.5.0"
+    },
+    {
+      "features": [],
+      "name": "paste",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.15"
+    },
+    {
+      "features": [],
+      "name": "pin-project-lite",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.17"
+    },
+    {
+      "features": [],
+      "name": "poly1305",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.8.0"
+    },
+    {
+      "features": [
+        "simd"
+      ],
+      "name": "ppv-lite86",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.21"
+    },
+    {
+      "features": [
+        "default",
+        "proc-macro"
+      ],
+      "name": "proc-macro2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.107"
+    },
+    {
+      "features": [
+        "default",
+        "proc-macro"
+      ],
+      "name": "quote",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.47"
+    },
+    {
+      "features": [],
+      "name": "rand",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.10.2"
+    },
+    {
+      "features": [
+        "rand_chacha",
+        "std_rng"
+      ],
+      "name": "rand",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.8.8"
+    },
+    {
+      "features": [
+        "small_rng"
+      ],
+      "name": "rand",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.9.5"
+    },
+    {
+      "features": [],
+      "name": "rand_chacha",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.3.1"
+    },
+    {
+      "features": [],
+      "name": "rand_core",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.10.1"
+    },
+    {
+      "features": [
+        "getrandom"
+      ],
+      "name": "rand_core",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.6.4"
+    },
+    {
+      "features": [],
+      "name": "rand_core",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.9.5"
+    },
+    {
+      "features": [],
+      "name": "rfc6979",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.0"
+    },
+    {
+      "features": [],
+      "name": "rustc_version",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.1"
+    },
+    {
+      "features": [],
+      "name": "rustversion",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.23"
+    },
+    {
+      "features": [],
+      "name": "scopeguard",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.2.0"
+    },
+    {
+      "features": [
+        "default",
+        "std"
+      ],
+      "name": "semver",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.28"
+    },
+    {
+      "features": [
+        "alloc",
+        "default",
+        "derive",
+        "serde_derive",
+        "std"
+      ],
+      "name": "serde",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.229"
+    },
+    {
+      "features": [
+        "alloc",
+        "result",
+        "std"
+      ],
+      "name": "serde_core",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.229"
+    },
+    {
+      "features": [
+        "default"
+      ],
+      "name": "serde_derive",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.229"
+    },
+    {
+      "features": [
+        "default",
+        "std"
+      ],
+      "name": "serde_json",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.151"
+    },
+    {
+      "features": [
+        "default",
+        "std"
+      ],
+      "name": "sha2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.10.9"
+    },
+    {
+      "features": [
+        "default",
+        "std"
+      ],
+      "name": "sha3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.10.9"
+    },
+    {
+      "features": [
+        "alloc"
+      ],
+      "name": "sha3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.11.0"
+    },
+    {
+      "features": [
+        "default",
+        "std"
+      ],
+      "name": "shlex",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "2.0.1"
+    },
+    {
+      "features": [],
+      "name": "smallvec",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.16.0"
+    },
+    {
+      "features": [
+        "alloc",
+        "std"
+      ],
+      "name": "starknet-crypto",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.6.2"
+    },
+    {
+      "features": [],
+      "name": "starknet-crypto-codegen",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.3.3"
+    },
+    {
+      "features": [],
+      "name": "starknet-curve",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.4.2"
+    },
+    {
+      "features": [
+        "alloc",
+        "serde"
+      ],
+      "name": "starknet-ff",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.3.7"
+    },
+    {
+      "features": [
+        "std"
+      ],
+      "local_directory": "vendor/tsp2-proving-backend/crates/stwo",
+      "name": "stwo",
+      "source": null,
+      "version": "2.4.0"
+    },
+    {
+      "features": [
+        "std"
+      ],
+      "local_directory": "vendor/tsp2-proving-backend/crates/constraint-framework",
+      "name": "stwo-constraint-framework",
+      "source": null,
+      "version": "2.4.0"
+    },
+    {
+      "features": [
+        "std"
+      ],
+      "name": "stwo-std-shims",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.0"
+    },
+    {
+      "features": [],
+      "name": "subtle",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "2.6.1"
+    },
+    {
+      "features": [
+        "clone-impls",
+        "default",
+        "derive",
+        "extra-traits",
+        "full",
+        "parsing",
+        "printing",
+        "proc-macro",
+        "quote",
+        "visit"
+      ],
+      "name": "syn",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.109"
+    },
+    {
+      "features": [
+        "clone-impls",
+        "default",
+        "derive",
+        "extra-traits",
+        "full",
+        "parsing",
+        "printing",
+        "proc-macro",
+        "visit",
+        "visit-mut"
+      ],
+      "name": "syn",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "2.0.119"
+    },
+    {
+      "features": [
+        "clone-impls",
+        "default",
+        "derive",
+        "parsing",
+        "printing",
+        "proc-macro"
+      ],
+      "name": "syn",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "3.0.5"
+    },
+    {
+      "features": [],
+      "local_directory": "crates/auth",
+      "name": "tenrai-auth",
+      "source": null,
+      "version": "0.1.0"
+    },
+    {
+      "features": [],
+      "local_directory": "crates/client-api",
+      "name": "tenrai-client-api",
+      "source": null,
+      "version": "0.1.0"
+    },
+    {
+      "features": [],
+      "local_directory": "crates/multisig",
+      "name": "tenrai-multisig",
+      "source": null,
+      "version": "0.1.0"
+    },
+    {
+      "features": [],
+      "local_directory": "crates/platform",
+      "name": "tenrai-platform",
+      "source": null,
+      "version": "0.1.0"
+    },
+    {
+      "features": [],
+      "local_directory": "crates/primitives",
+      "name": "tenrai-primitives",
+      "source": null,
+      "version": "0.1.0"
+    },
+    {
+      "features": [],
+      "local_directory": "crates/tenq",
+      "name": "tenrai-tenq",
+      "source": null,
+      "version": "0.1.0"
+    },
+    {
+      "features": [],
+      "local_directory": "crates/traidag",
+      "name": "tenrai-traidag",
+      "source": null,
+      "version": "0.1.0"
+    },
+    {
+      "features": [],
+      "local_directory": "crates/tsp2-verifier",
+      "name": "tenrai-tsp2-verifier",
+      "source": null,
+      "version": "0.1.0"
+    },
+    {
+      "features": [],
+      "local_directory": "crates/wasm",
+      "name": "tenrai-wasm",
+      "source": null,
+      "version": "0.1.0"
+    },
+    {
+      "features": [],
+      "local_directory": "crates/wire",
+      "name": "tenrai-wire",
+      "source": null,
+      "version": "0.1.0"
+    },
+    {
+      "features": [
+        "default",
+        "std"
+      ],
+      "name": "thiserror",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "2.0.20"
+    },
+    {
+      "features": [],
+      "name": "thiserror-impl",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "2.0.20"
+    },
+    {
+      "features": [
+        "alloc",
+        "default",
+        "tinyvec_macros"
+      ],
+      "name": "tinyvec",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.13.2"
+    },
+    {
+      "features": [],
+      "name": "tinyvec_macros",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.1.1"
+    },
+    {
+      "features": [
+        "std"
+      ],
+      "name": "tracing",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.1.44"
+    },
+    {
+      "features": [
+        "once_cell",
+        "std"
+      ],
+      "name": "tracing-core",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.1.36"
+    },
+    {
+      "features": [
+        "alloc",
+        "std"
+      ],
+      "name": "tracing-subscriber",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.3.23"
+    },
+    {
+      "features": [
+        "const-generics"
+      ],
+      "name": "typenum",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.20.1"
+    },
+    {
+      "features": [],
+      "name": "unicode-ident",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.24"
+    },
+    {
+      "features": [
+        "default",
+        "std"
+      ],
+      "name": "unicode-normalization",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.1.25"
+    },
+    {
+      "features": [],
+      "name": "universal-hash",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.5.1"
+    },
+    {
+      "features": [],
+      "name": "version_check",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.9.5"
+    },
+    {
+      "features": [
+        "default",
+        "std"
+      ],
+      "name": "wasm-bindgen",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.108"
+    },
+    {
+      "features": [],
+      "name": "wasm-bindgen-macro",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.108"
+    },
+    {
+      "features": [],
+      "name": "wasm-bindgen-macro-support",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.2.108"
+    },
+    {
+      "features": [],
+      "local_directory": "vendor/wasm-bindgen-shared-0.2.108",
+      "name": "wasm-bindgen-shared",
+      "source": null,
+      "version": "0.2.108"
+    },
+    {
+      "features": [
+        "simd"
+      ],
+      "name": "zerocopy",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "0.8.56"
+    },
+    {
+      "features": [
+        "alloc",
+        "default",
+        "derive",
+        "zeroize_derive"
+      ],
+      "name": "zeroize",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.9.0"
+    },
+    {
+      "features": [],
+      "name": "zeroize_derive",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.5.0"
+    },
+    {
+      "features": [],
+      "name": "zmij",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "version": "1.0.23"
+    }
+  ],
+  "revision_kind": "source_tree_sha256",
+  "source_tree_sha256": "1043cce165d85fbf18a2108f0274cb6c1ba3220828301327d13b4b870e007220",
+  "target": "wasm32-unknown-unknown"
+}

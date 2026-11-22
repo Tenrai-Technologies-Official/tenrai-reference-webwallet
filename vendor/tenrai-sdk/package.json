@@ -1,0 +1,68 @@
+{
+  "name": "@tenrai/sdk",
+  "version": "0.1.1",
+  "description": "Client for the Tenrai node API: REST, WebSocket streams and signed responses",
+  "license": "Apache-2.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./verify": {
+      "types": "./dist/verify/index.d.ts",
+      "default": "./dist/verify/index.js"
+    },
+    "./wallet": {
+      "types": "./dist/wallet/index.d.ts",
+      "default": "./dist/wallet/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "wasm/tenrai_wasm.js",
+    "wasm/tenrai_wasm.d.ts",
+    "wasm/tenrai_wasm_bg.wasm",
+    "wasm/tenrai_wasm_bg.wasm.d.ts",
+    "wasm/release.json",
+    "scripts/verify-vendored-install.mjs",
+    "README.md",
+    "NOTICE",
+    "NATIVE-LOCKS.md",
+    "wasm/browser-source-inputs.json",
+    "prover"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check": "tsc -p tsconfig.json",
+    "test": "node --test \"test/**/*.test.ts\" && npm run test:synthetic",
+    "test:synthetic": "node --import ./test/support/synthetic-chain.ts --test \"test/**/*.synthetic.ts\"",
+    "docs": "typedoc",
+    "prepack": "npm run check && npm run build"
+  },
+  "homepage": "https://tenrai-technologies.org/",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@noble/hashes": "^2.4.0",
+    "@noble/post-quantum": "^0.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "@types/ws": "^8.18.2",
+    "minimatch": "file:vendor/minimatch/package.tgz",
+    "typedoc": "^0.28.20",
+    "typedoc-plugin-markdown": "^4.13.1",
+    "typescript": "~6.0.3",
+    "ws": "^8.22.0"
+  },
+  "overrides": {
+    "minimatch": "$minimatch"
+  }
+}
