@@ -118,6 +118,7 @@ export class NativeLockSession {
         }
         throw new RangeError("too many native lock outputs; use a dedicated integration");
     }
+    /** @internal Use `Wallet.reviewNativeLockSpend` to supply the wallet's verification context. */
     async prepareSpend(client, request, owner) {
         if (!owner)
             throw new TypeError("Use wallet.reviewNativeLockSpend to authenticate a conditional input before signing.");
@@ -194,6 +195,7 @@ export class NativeLockSession {
             throw new TypeError("review this native transaction in this session first");
         return prepared.protocol.transactionManifest();
     }
+    /** @internal Bind a spend review to the wallet that prepared it. */
     assertOwner(review, owner) {
         const prepared = this.#prepared.get(review);
         if (!prepared || prepared.owner !== owner)

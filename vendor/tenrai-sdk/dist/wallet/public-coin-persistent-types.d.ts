@@ -1,5 +1,5 @@
 import type { PublicCoin, PublicCoinStore } from "./public-coin-store.ts";
-/** Opaque JSON for the controller phase/address watermarks, never a financial authority. */
+/** Opaque controller phase and address watermarks. */
 export type CoinScanProgress = string;
 export interface PublicCoinCheckpoint {
     generation: string;
@@ -17,24 +17,24 @@ export type PublicCoinMutation = {
     address: string;
 };
 export type PublicCoinHashDomain = "coin_row" | "coin_chain" | "coin_end" | "coin_branch" | "coin_root";
-/** Synchronous crypto hooks: no network, prover, Promise, or raw key may enter an IDB transaction. */
+/** Synchronous crypto hooks for IndexedDB transactions. */
 export interface PublicCoinCheckpointCodec {
     readonly scope: string;
-    /** Rejects wrong wallet/chain/genesis/account/format and malformed bounded metadata. */
+    /** Validate bounded metadata and its wallet, chain, genesis and account scope. */
     open(sealed: Uint8Array): PublicCoinCheckpoint;
     seal(checkpoint: PublicCoinCheckpoint): Uint8Array;
-    /** CC-secret standard-MAC assignment: first20bits as exactly5 lowercase hex characters. */
+    /** Encode the first 20 bits of the keyed bucket MAC as five lowercase hex digits. */
     bucket(key: string): string;
     hash(domain: PublicCoinHashDomain, bytes: Uint8Array): string;
 }
 export interface PersistentPublicCoinStore extends Pick<PublicCoinStore, "get" | "page" | "largestPage"> {
-    /** Full streamed row/index integrity check once per open, including actual keyed bucket assignment. */
+    /** Stream rows and verify their indexes and keyed buckets when opening. */
     recover(codec: PublicCoinCheckpointCodec): Promise<PublicCoinCheckpoint | null>;
-    /** Atomic ordered rows+affected authenticated hash paths+sealed progress, <=256 mutations. */
+    /** Atomically persist up to 256 row mutations, their hash paths and sealed progress. */
     commitPage(mutations: readonly PublicCoinMutation[], progress: CoinScanProgress, codec: PublicCoinCheckpointCodec): Promise<PublicCoinCheckpoint>;
-    /** Fresh owned generation/empty digest. Only superseded positively owned data may be collected. */
+    /** Start an empty owned generation. Collect only owned superseded data. */
     reset(progress: CoinScanProgress, codec: PublicCoinCheckpointCodec): Promise<PublicCoinCheckpoint>;
-    /** Drain writes/release physical lease; preserve stable resumable generation and checkpoint. */
+    /** Drain writes, release the lease and retain the checkpoint for resume. */
     close(): Promise<void>;
 }
 export declare const MAX_PUBLIC_COIN_PROGRESS_BYTES: number;

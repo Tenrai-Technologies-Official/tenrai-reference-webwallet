@@ -64,6 +64,7 @@ export declare class NativeLockSession {
     hash(preimageHex: string): string;
     /** A bounded, consistent finalized snapshot; locked funds are kept separate from ordinary spendable balance. */
     watch(client: TenraiClient, descriptorHex: string): Promise<readonly UtxoRecord[]>;
+    /** @internal Use `Wallet.reviewNativeLockSpend` to supply the wallet's verification context. */
     prepareSpend(client: TenraiClient, request: {
         descriptorHex: string;
         branch: NativeLockBranch;
@@ -73,6 +74,7 @@ export declare class NativeLockSession {
         maxFee?: bigint;
     }, owner?: PublicSendEvidence): Promise<NativeLockSpendReview>;
     transactionManifest(review: NativeLockSpendReview): string;
+    /** @internal Bind a spend review to the wallet that prepared it. */
     assertOwner(review: NativeLockSpendReview, owner: PublicSendEvidence): void;
     /** Signs only a review produced by this session, with the exact key named by the selected branch; a repeat must sign validly again. */
     signSpend(review: NativeLockSpendReview, publicKey: Uint8Array, sign: (message: Uint8Array) => Uint8Array): Promise<SignedNativeLockSpend>;

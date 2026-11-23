@@ -13,7 +13,7 @@ const SIGNATURE_BYTES = 3309;
 const MAX_METHOD_BYTES = 16;
 const MAX_TARGET_BYTES = 2048;
 const MAX_U64 = (1n << 64n) - 1n;
-/** Checks the ML-DSA-65 signature of every REST answer; the key from /v1/node/identity must hash to `identity`. */
+/** Verify REST signatures against the ML-DSA-65 key bound to the operator identity. */
 export function signedResponses(trust) {
     const identity = bytes(trust.identity, 32, "identity");
     let key;
@@ -40,7 +40,7 @@ export function signedResponses(trust) {
         },
     };
 }
-/** The identity a node derives from its ML-DSA-65 public key. */
+/** Derive the node identity from its ML-DSA-65 public key. */
 export function nodeIdentity(publicKey) {
     const input = new Uint8Array(NODE_ID_DOMAIN.length + publicKey.length);
     input.set(NODE_ID_DOMAIN);
@@ -84,7 +84,7 @@ export function verifyExchange(exchange, publicKey, chainId, identity) {
         throw new TenraiSignatureError(`the signature on ${exchange.method} ${exchange.target} is invalid`);
     }
 }
-/** Byte for byte what `ResponseEnvelope::signable` in tenrai-auth writes; integers are little endian. */
+/** Encode the signed response envelope defined by `tenrai-auth`, with little-endian integers. */
 export function envelope(fields) {
     const method = encoder.encode(fields.method);
     const target = encoder.encode(fields.target);

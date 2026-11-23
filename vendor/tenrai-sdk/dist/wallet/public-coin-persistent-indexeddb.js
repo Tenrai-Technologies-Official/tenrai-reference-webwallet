@@ -57,7 +57,7 @@ function open(factory) {
         request.onblocked = () => { failed = true; reject(new Error("Persistent public coin storage is blocked by another tab.")); };
     });
 }
-/** Stable per-root/chain/genesis/account generation; close never discards a completed page. */
+/** Retain completed pages under the scoped generation when closing. */
 export async function indexedDbPersistentPublicCoinStore(namespace, options = {}) {
     scope(namespace);
     publicCoinBudget(options);

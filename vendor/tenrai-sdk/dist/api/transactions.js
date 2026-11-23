@@ -14,11 +14,11 @@ export class TransactionsApi {
         this.#http = http;
         this.#sockets = sockets;
     }
-    /** `POST /v1/transactions`: submits a signed transaction. Repeated only after an explicit 429 or 503, so a lost answer never submits twice. */
+    /** `POST /v1/transactions`. Retry only after an explicit 429 or 503. */
     submit(wireHex, options) {
         return this.#http.submit("/v1/transactions", { api_version: 1, wire_hex: hex(wireHex, "wireHex") }, options);
     }
-    /** `POST /v1/transactions/status`: statuses of up to 1024 transactions; ids the node does not know come back in `unknown`. */
+    /** `POST /v1/transactions/status`. Up to 1,024 IDs, with missing IDs in `unknown`. */
     statuses(transactionIds, options) {
         if (transactionIds.length === 0 || transactionIds.length > MAX_STATUS_BATCH) {
             throw new RangeError(`pass 1 to ${MAX_STATUS_BATCH} transaction ids`);
@@ -26,11 +26,11 @@ export class TransactionsApi {
         const ids = transactionIds.map((id) => hash384(id, "transactionId"));
         return this.#http.post("/v1/transactions/status", { api_version: 1, transaction_ids: ids }, undefined, options);
     }
-    /** `GET /v1/transactions/manifest`: limits, mass rules and fee floor a transaction must meet. */
+    /** `GET /v1/transactions/manifest`. Active transaction limits, mass rules and fee floor. */
     manifest(options) {
         return this.#http.get("/v1/transactions/manifest", undefined, options);
     }
-    /** `GET /v1/transactions/recent`: the transactions this node saw last, newest first. */
+    /** `GET /v1/transactions/recent`. Newest first. */
     recent(options = {}) {
         return this.#http.get("/v1/transactions/recent", { limit: limit(options.limit, Number.MAX_SAFE_INTEGER) }, options);
     }
@@ -38,11 +38,11 @@ export class TransactionsApi {
     get(transactionId, options) {
         return this.#http.get(`/v1/transactions/${hash384(transactionId, "transactionId")}`, undefined, options);
     }
-    /** Compact display data with explicit local provenance; no canonical witness bytes. */
+    /** Retained display data without canonical witness bytes. */
     compact(transactionId, options) {
         return this.#http.get(`/v1/transactions/${hash384(transactionId, "transactionId")}/compact`, undefined, options);
     }
-    /** `GET /v1/transactions/{id}/status`: where the transaction is in its lifecycle. */
+    /** `GET /v1/transactions/{id}/status`. */
     status(transactionId, options) {
         return this.#http.get(`/v1/transactions/${hash384(transactionId, "transactionId")}/status`, undefined, options);
     }
@@ -55,8 +55,8 @@ export class TransactionsApi {
         return new StatusStream(this.#http, factory, transactionId, { reconnect: this.#sockets.reconnect, ...options });
     }
     /**
-     * Resolves with the final status, see `isFinal`, or as `failed` with the node's reason or `expired` once the
-     * chain passed `validUntil` without executing it. All waits of a client share sockets and one batched poll.
+     * Wait for a terminal status, including expiry after `validUntil`.
+     * Waiters share the client's sockets and batched polling.
      */
     async waitForFinal(transactionId, options = {}) {
         const id = hash384(transactionId, "transactionId");
@@ -110,7 +110,6 @@ export class TransactionsApi {
             });
         });
     }
-    /** Sends the transaction again if the node does not know it; the next round tries once more. */
     async #again(id, wire) {
         try {
             await this.status(id);
@@ -131,7 +130,7 @@ export class TransactionsApi {
         return this.#waiters;
     }
 }
-/** Not seen by this server yet, for instance not relayed to it; with a bound the wait goes on until the chain passes it. */
+/** An unknown transaction can still execute before its validity bound. */
 function unseen(id) {
     return { api_version: 1, transaction_id: id, lifecycle: "processing", observed_work: null, registered_cut: null, finalized_cut: null, failure: null };
 }

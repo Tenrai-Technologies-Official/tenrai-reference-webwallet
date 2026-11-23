@@ -3,9 +3,9 @@ import type { NodeIdentity } from "./types/node.ts";
 export declare const DEFAULT_URL = "https://api.tenrai-technologies.org";
 export declare const NONCE_HEADER = "x-tenrai-request-nonce";
 export declare const SIGNATURE_HEADER = "x-tenrai-signature";
-/** `api` is the Tenrai API service (tenrai-api), `node` a node's own API. */
+/** Rate-limit profile for a gateway or a node. */
 export type Target = "api" | "node";
-/** One request and its answer, as the response signature covers them. */
+/** Request and response fields covered by the signature. */
 export interface SignedExchange {
     method: string;
     target: string;
@@ -15,7 +15,7 @@ export interface SignedExchange {
     headers: Headers;
     nonce: string;
 }
-/** Asks for signed answers and checks them; `signedResponses` from `@tenrai/sdk/verify` implements it. */
+/** Verifier for signed responses. See `signedResponses`. */
 export interface ResponseVerifier {
     prepare?(readIdentity: () => Promise<NodeIdentity>): Promise<void>;
     verify(exchange: SignedExchange): void | Promise<void>;
@@ -23,27 +23,27 @@ export interface ResponseVerifier {
 export interface TransportOptions {
     /** Node or gateway base URL; defaults to https://api.tenrai-technologies.org. */
     url?: string | URL;
-    /** What `url` points at, `api` by default; the request limits follow it. */
+    /** Controls request limits. Defaults to `api`. */
     target?: Target;
     fetch?: typeof fetch;
-    /** Per request, 15000 by default. */
+    /** Per-request timeout. Defaults to 15,000 ms. */
     timeoutMillis?: number;
-    /** Repeats of a read after a network error, a timeout, 429 or 503. */
+    /** Retries for reads after network errors, timeouts, 429 or 503. */
     retries?: number;
     headers?: Record<string, string>;
-    /** Larger answers are refused; 32 MiB by default. */
+    /** Maximum response size. Defaults to 32 MiB. */
     maxResponseBytes?: number;
     verify?: ResponseVerifier;
-    /** Requests started per second, bursts of twice that: 10 for `api`, no limit for `node`. 0 turns it off. */
+    /** Request rate with a burst of twice the rate. Zero disables it. */
     requestsPerSecond?: number;
-    /** Requests waiting on an answer at once: 4 for `api`, no limit for `node`. */
+    /** Concurrent request cap. Defaults to four for `api`, unlimited for `node`. */
     maxConcurrent?: number;
 }
 export interface CallOptions {
     signal?: AbortSignal;
-    /** This call's limit instead of the client's, as for a large upload. */
+    /** Override the request timeout for this call. */
     timeoutMillis?: number;
-    /** This response's byte limit, also bounded by the client's configured limit. */
+    /** Response byte limit for this call, within the client cap. */
     maxResponseBytes?: number;
 }
 export type Query = Record<string, string | number | undefined>;
@@ -52,7 +52,7 @@ interface Request {
     path: string;
     query?: Query | undefined;
     body?: unknown;
-    /** Submissions repeat only after an explicit refusal, never after a lost answer. */
+    /** Submission retries require an explicit 429 or 503 response. */
     repeat: "reads" | "refusals";
     signal?: AbortSignal | undefined;
     timeoutMillis?: number | undefined;
@@ -73,7 +73,7 @@ export declare class Transport {
     text(path: string, options?: CallOptions): Promise<string>;
     send<T>(request: Request): Promise<T>;
 }
-/** The error an answer with this status and body stands for, over HTTP or the socket. */
+/** Decode an API error from an HTTP or WebSocket response. */
 export declare function errorFrom(status: number, document: unknown, text?: string, retryAfterMillis?: number): TenraiApiError;
 export declare function sleep(millis: number, signal?: AbortSignal): Promise<void>;
 export {};

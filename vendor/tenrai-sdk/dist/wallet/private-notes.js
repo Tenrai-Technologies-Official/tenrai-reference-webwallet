@@ -10,18 +10,13 @@ import { privateSendEvidence, statementScan } from "./private-send-evidence.js";
 import { PrivateStoreSession } from "./private-store-session.js";
 import { registrationQuote, registrationRequest, sameRegistration } from "./private-registration.js";
 import { behindFinality, registrationContext, registrationHead, registrationHeight } from "./private-registration-context.js";
-/** What the WASM says when another part of the wallet verified a newer head than this context holds. */
+// The WASM reports this when another wallet path has advanced finality.
 const STALE_CONTEXT = "refresh this money context to the already verified wallet head";
 const staleContext = (error) => String(error instanceof Error ? error.message : error).includes(STALE_CONTEXT) || behindFinality(error);
-/** The most rows a node serves in one page. */
 const PAGE = 512;
 /**
- * A wallet's private notes, checked rather than believed. Every head comes with a proof of finality
- * from the wallet's trust root, the notes must rebuild the note tree of that head and the spends its
- * nullifier set, so a node can neither invent a head nor hide a note or a spend. All of it runs in
- * the protocol WASM, by the rules the command-line wallet runs by; this class only carries the bytes.
- * What it learned stays sealed in the store under the account's key, and the next refresh reads only
- * what is new.
+ * Verify the finalized head and rebuild the note and nullifier roots in WASM.
+ * Keep the verified scan state sealed under the account key for incremental refresh.
  */
 export class PrivateNotes {
     #scan;
@@ -47,9 +42,9 @@ export class PrivateNotes {
     #closing;
     #stopped = new AbortController();
     #turn = Promise.resolve();
-    /** What the statements under proof spend, by digest: nothing else of this object takes it meanwhile. */
+    /** Input reservations by statement digest while a proof is running. */
     #proving = new Map();
-    /** The public inputs the durable journal held when this scan closed; unset when that journal was uncertain. */
+    /** Durable public holds captured at close, if the journal was readable. */
     #retainedInputs;
     #registrationQuotes = new Map();
     #registrationStatusScan;
@@ -115,26 +110,21 @@ export class PrivateNotes {
             throw error;
         }
     }
-    /** Whether this scan has released its keys. Pending ENTER holds remain available. */
+    /** True after the scan releases its keys. Pending ENTER holds remain available. */
     get isClosed() { return this.#closed; }
-    /** This account's private address. */
     get address() {
         return this.#scan.privateAddress();
     }
-    /** Whether saved bytes were found that did not open: they were dropped and everything is read again. */
+    /** True when unreadable scan state was discarded for recovery. */
     get savedStateDamaged() {
         return this.#scan.damaged();
     }
-    /**
-     * The cut this wallet had verified when it last wrote, if the saved state is older than that: an
-     * older copy was put back. The refresh proves its way forward from it all the same, and refuses a
-     * node behind that cut.
-     */
+    /** Rollback marker. Recovery verifies forward and requires a head at least this recent. */
     get rolledBackFrom() {
         const height = this.#scan.rolledBackFrom();
         return height === undefined ? undefined : Number(height);
     }
-    /** The scan serves one refresh at a time, and what is read from it needs a finished refresh. */
+    /** Wait for the active refresh before using verified inventory. */
     #inTurn(work) {
         const run = this.#turn.then(() => {
             if (this.#closed || this.#storageFailed)
@@ -145,9 +135,8 @@ export class PrivateNotes {
         return run;
     }
     /**
-     * Reads what is new from the node, proves it and saves it. `rescan` forgets the notes first and
-     * reads the whole history, from the compact recovery log retained by full and pruned nodes. Throws when the node does not lead
-     * to a finalized state; nothing it served then counts.
+     * Verify and save new chain data. `rescan` replays the compact recovery log.
+     * Publish the result only after verifying the finalized state.
      */
     refresh(options = {}) {
         return this.#inTurn(() => this.#refresh(options));
@@ -165,7 +154,7 @@ export class PrivateNotes {
         const call = { ...options, signal: options.signal ? AbortSignal.any([options.signal, this.#stopped.signal, this.#journal.signal]) : AbortSignal.any([this.#stopped.signal, this.#journal.signal]) };
         try {
             await withFinalityProof(this.#root, this.#network, this.#genesis, () => scan.start(options.rescan ?? false));
-            // The decoded checkpoint must expose all provisional roots before any collection resumes.
+            // Restore provisional roots before collecting superseded data.
             if (options.rescan || !this.#lastSaved)
                 await this.#save();
             if (this.#lastSaved)
@@ -218,11 +207,11 @@ export class PrivateNotes {
             throw refusal(error);
         }
     }
-    /** Reads at most 128 already verified notes from this device; it makes no owned-note network query. */
+    /** Read up to 128 verified notes from local storage. */
     page(options = {}) {
         return this.#inTurn(() => inventoryNotePage(this.#scan, this.#inventoryPages, options.after === undefined ? undefined : String(options.after), options.limit ?? 128, () => this.#journal.assertOpen(), options));
     }
-    /** The record log of the last verified cut, which a statement rebuilds and checks against its anchor. */
+    /** Verified recipient records used to check a statement's anchor. */
     async #readRecords(call, addresses = []) {
         this.#scan.beginRecords(JSON.stringify(addresses));
         call = { ...call, signal: call.signal ? AbortSignal.any([call.signal, this.#stopped.signal, this.#journal.signal]) : AbortSignal.any([this.#stopped.signal, this.#journal.signal]) };
@@ -234,21 +223,21 @@ export class PrivateNotes {
             this.#scan.takeRecords(JSON.stringify(page));
         }
     }
-    /** Whether the account of `address`, or this wallet's without one, is registered at the cut the last refresh verified. */
+    /** Check recipient registration at the last verified cut. Defaults to this account. */
     registered(address, options = {}) {
         return this.#inTurn(async () => {
             await this.#readRecords(options, address === undefined ? [] : [address]);
             return this.#scan.registered(address);
         });
     }
-    /** Exports owner authorization only. This does not spend coins or publish a registration. */
+    /** Export owner authorization without funding or publishing a registration. */
     registrationAuthorization() {
         return this.#inTurn(async () => {
             await this.#advanceRegistrationHead();
             return this.#registrationStatusScan.registration();
         });
     }
-    /** Checks this owner from a separate head-only context before any note recovery. */
+    /** Check registration using a separate finality context. */
     registrationStatus(options = {}) {
         return this.#inTurn(async () => {
             const signal = AbortSignal.any([this.#stopped.signal, this.#journal.signal, ...(options.signal ? [options.signal] : [])]);
@@ -257,7 +246,7 @@ export class PrivateNotes {
             return scan.registered(scan.privateAddress());
         });
     }
-    /** Quotes selected public inputs, exact fee, change and validity before any sponsor signature. */
+    /** Quote public inputs, fee, change and validity before sponsor signing. */
     planRegistration(request, options = {}) {
         return this.#inTurn(async () => {
             await this.#requireUsable();
@@ -266,7 +255,7 @@ export class PrivateNotes {
             const signal = AbortSignal.any([this.#stopped.signal, this.#journal.signal, ...(options.signal ? [options.signal] : [])]);
             const scan = this.#registrationPlanScan ??= new this.#wasm.PrivateScan(this.#root, this.#network, this.#genesis, this.#account, undefined, undefined);
             {
-                // The coins' proofs carry the wallet's finality to the newest cut, so they come before the context reads up to it.
+                // Input proofs can advance finality. Read the registration context after them.
                 const held = this.#reservedInputs();
                 const available = (await this.#coins()).filter((coin) => !held.has(`${coin.transactionId}:${coin.outputIndex}`));
                 const requestText = registrationRequest(request, available, this.#account);
@@ -294,7 +283,7 @@ export class PrivateNotes {
             }
         });
     }
-    /** Discards an unsigned quote and frees its separate verification context. */
+    /** Discard the quote and release its verification context. */
     cancelRegistration(quote) {
         const reviewed = this.#registrationQuotes.get(quote);
         if (reviewed) {
@@ -302,14 +291,14 @@ export class PrivateNotes {
             reviewed.scan.free();
         }
     }
-    /** Signs only a quote issued by this session, durably records it and posts the complete frame. */
+    /** Sign the issued quote, commit its original frame and submit it. */
     register(quote) {
         this.#sends.requireOutcomeStore();
         return this.#inTurn(async () => {
             const reviewed = this.#registrationQuotes.get(quote);
             if (!reviewed)
                 throw new TenraiWalletError("review a registration quote from this wallet before signing", "rejected");
-            // This turn owns the context across awaits; cancelling the dialog cannot free it mid-sign.
+            // Hold the context across signing even if the dialog closes.
             this.#registrationQuotes.delete(quote);
             try {
                 if (this.#sends.list().some((send) => send.kind === "private_register" && send.to === quote.owner)) {
@@ -329,7 +318,7 @@ export class PrivateNotes {
                     const frameHex = toHex(prepared.frame());
                     const metadata = { input_amount_atoms: summary.input_amount_atoms, maximum_fee_atoms: summary.maximum_fee_atoms };
                     const inspected = JSON.parse(reviewed.scan.registrationFrameInfo(frameHex, JSON.stringify(metadata)));
-                    // The submission checks the registration against the status context, which the signing head may have passed.
+                    // The signing head may be newer than the status context.
                     await this.#advanceRegistrationHead();
                     return await this.#sends.send({ digest: summary.digest, kind: "private_register", route: "registrations", amountAtoms: "0",
                         feeAtoms: summary.fee_atoms, validUntil: summary.valid_until_height, sources: [], ownNoteCommitments: [],
@@ -346,8 +335,7 @@ export class PrivateNotes {
             }
         });
     }
-    /** Money is prepared at the newest head this wallet verified. When another part of the wallet verified a newer one
-     *  between the refresh and the statement, the statement is prepared again, from a refreshed scan. */
+    /** Refresh the scan and retry preparation if finality advances during the operation. */
     async #atNewestHead(prepare) {
         for (let attempt = 0;; attempt += 1) {
             try {
@@ -359,8 +347,7 @@ export class PrivateNotes {
             }
         }
     }
-    /** The reviewed registration planned again at the newest head this wallet verified, since the chain moves on while
-     *  a person reviews; it is signed only when its reviewed facts stay. */
+    /** Recheck the quote at the latest verified head before signing. */
     async #registrationAtNewestHead(reviewed, quote) {
         const ownerAuthorization = JSON.parse(reviewed.request).owner_authorization;
         const signal = AbortSignal.any([this.#stopped.signal, this.#journal.signal]);
@@ -388,10 +375,7 @@ export class PrivateNotes {
         await registrationHead(this.#wasm, this.#root, this.#network, this.#account, this.#genesis, this.#client, { ...options, signal: AbortSignal.any([this.#stopped.signal, this.#journal.signal, ...(options.signal ? [options.signal] : [])]) }, scan);
         return registrationHeight(scan);
     }
-    /**
-     * What stands in the way of spending here: the node's rules must be this build's, and on mainnet the
-     * review done.
-     */
+    /** Check the node rules and security qualification for private spending. */
     async usability() {
         const status = await this.#client.privateTransfers.status({ signal: AbortSignal.any([this.#stopped.signal, this.#journal.signal]) });
         if (!status.active)
@@ -421,7 +405,7 @@ export class PrivateNotes {
         await this.#requireUsable();
         const call = options.signal ? { signal: options.signal } : {};
         for (let attempt = 0; attempt < 4; attempt++) {
-            // Money is prepared only from a scan at the newest head this wallet verified, so the scan refreshes last.
+            // Refresh notes after any other work that can advance finality.
             const fresh = await this.#advanceRegistrationHead(call);
             await this.#refresh(call);
             await this.#readRecords(call, address === undefined ? [] : [address]);
@@ -448,7 +432,7 @@ export class PrivateNotes {
     #reservedInputs() {
         return new Set([...this.#sends.reservedInputs(), ...[...this.#proving.values()].flatMap((held) => held.inputs)]);
     }
-    /** From here until its proof ends, what the statement spends is held. A statement kept holds it on. */
+    /** Reserve inputs during proof creation, then transfer the hold to the retained statement. */
     #held(prepared) {
         const summary = JSON.parse(prepared.summary());
         const inputs = summary.inputs.map((input) => `${input.transaction_id}:${input.output_index}`);
@@ -459,7 +443,7 @@ export class PrivateNotes {
         this.#proving.set(summary.digest, { notes: summary.sources, inputs });
         return prepared;
     }
-    /** Proves, checks the proof with the node's verifier, keeps the statement and hands it to the node. */
+    /** Prove, verify, journal and submit the statement. */
     async #proveAndSend(prepared, to, options) {
         const summary = JSON.parse(prepared.summary());
         try {
@@ -494,15 +478,12 @@ export class PrivateNotes {
             prepared.free();
         }
     }
-    /**
-     * Moves transparent coins into private notes: `amount` atoms to `to`, this wallet without one. What the
-     * coins hold beyond the amount and the fee becomes a note of this wallet.
-     */
+    /** Move public coins into notes, with any change returning to this account. */
     async enter(request, options) {
         this.#sends.requireOutcomeStore();
         const toItself = request.to === undefined || request.to === this.address;
         const prepared = await this.#inTurn(async () => {
-            // The coins' proofs carry the wallet's finality to the newest cut, so they come before the scan reads up to it.
+            // Refresh notes after the public input proofs advance finality.
             const held = this.#reservedInputs();
             const coins = (await this.#coins()).filter((coin) => !held.has(`${coin.transactionId}:${coin.outputIndex}`));
             const plan = JSON.parse(this.#wasm.planPrivateEnter(request.amount.toString(), toItself, JSON.stringify(coins.map((coin) => coin.amount.toString()))));
@@ -535,7 +516,7 @@ export class PrivateNotes {
         });
         return this.#proveAndSend(prepared, toItself ? null : request.to, options);
     }
-    /** Sends `amount` atoms from two notes of this wallet to a private address; the rest comes back as a note. */
+    /** Send from two owned notes and return private change to this account. */
     async transfer(request, options) {
         this.#sends.requireOutcomeStore();
         const prepared = await this.#inTurn(() => this.#atNewestHead(async () => {
@@ -559,7 +540,7 @@ export class PrivateNotes {
         }));
         return this.#proveAndSend(prepared, request.to, options);
     }
-    /** Pays one or two whole notes out to a transparent address, less the fee. */
+    /** Exit one or two notes to a public address after fees. */
     async exit(request, options) {
         this.#sends.requireOutcomeStore();
         const prepared = await this.#inTurn(() => this.#atNewestHead(async () => {
@@ -574,22 +555,19 @@ export class PrivateNotes {
         }));
         return this.#proveAndSend(prepared, request.to, options);
     }
-    /** The statements on their way, which hold their notes and coins. */
+    /** Retained statements and their input holds. */
     onTheWay() {
         return this.#sends.list();
     }
-    /** The newest finished transactions and received payments this wallet saw, newest first. */
+    /** Settled transactions and received payments, newest first. */
     recent() {
         return this.#sends.recent();
     }
-    /**
-     * Asks about the statements on their way, given the newest final cut: sends again what no node knows
-     * while it is valid, and tells what became final, expired or was refused.
-     */
+    /** Reconcile retained statements at the latest verified cut and retry executable originals. */
     check(tip) {
         return this.#checkPending(tip, false);
     }
-    /** Reconciles public registration funding while the independent note recovery is incomplete. */
+    /** Reconcile registration funding independently of note recovery. */
     checkRegistrations() {
         return this.#checkPending(0, true);
     }

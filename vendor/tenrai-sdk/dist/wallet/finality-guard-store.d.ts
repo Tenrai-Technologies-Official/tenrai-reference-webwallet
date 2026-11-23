@@ -1,13 +1,13 @@
-/** Scope is returned by the full wallet root's finalityScope; it never contains an HD account. */
+/** Finality scope is bound to the full wallet root and shared across accounts. */
 export interface FinalityGuardStore {
-    /** Owns a short global proof/persistence section across instances and processes/tabs. */
+    /** Acquire the backend lease for verification and persistence. */
     run<T>(scope: string, work: (sealed: Uint8Array | null, saveExact: (bytes: Uint8Array) => Promise<void>) => Promise<T>): Promise<T>;
-    /** Stops new runs and waits for physical writes and their leases before releasing resources. */
+    /** Drain physical writes and release their leases on close. */
     close(): void | Promise<void>;
 }
-/** A dedicated disk connection transferred to the provider; close() owns its final close. */
+/** Dedicated SQLite connection owned by the provider. */
 export interface FinalityGuardSqlite {
-    /** Native sqlite3_get_autocommit state; needed to reject a missing/no-op COMMIT. */
+    /** Use SQLite's autocommit state to confirm that COMMIT completed. */
     readonly isTransaction: boolean;
     exec(sql: string): unknown;
     prepare(sql: string): {
@@ -24,7 +24,7 @@ export interface FinalityGuardIndexedDbOptions {
     lockManager?: LockManager;
 }
 export declare const MAX_FINALITY_GUARD_SEALED_BYTES = 65536;
-/** The scope is opaque here; only the native root authenticates its wallet/chain/genesis binding. */
+/** The native root authenticates the wallet, chain and genesis binding. */
 export declare function finalityGuardScope(value: unknown): string;
-/** Copy even Node Buffers; Buffer.slice() would retain a caller-owned mutable alias. */
+/** Copy Node Buffers too. Buffer.slice() aliases caller-owned memory. */
 export declare function finalityGuardBytes(value: unknown): Uint8Array;

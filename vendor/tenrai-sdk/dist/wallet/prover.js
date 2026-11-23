@@ -11,13 +11,13 @@ import { PROVER_FILES } from "./prover-pins.js";
 const NODE_CHILD_PROCESS = "node:child_process";
 const PLAIN_WASM = "plain/tenrai_tsp2_prover_wasm_bg.wasm";
 const THREADS_WASM = "threads/tenrai_tsp2_prover_wasm_threads_bg.wasm";
-/** One core stays free for the page; above this the proof's hash search gains little. */
+// Leave one logical core available for the page.
 const MOST_THREADS = 8;
-/** A worker that has not begun by then did not get its threads, which it cannot tell by itself. */
+// Fall back if the threaded worker misses its start deadline.
 const START_MILLIS = 60_000;
-/** A statement stays valid for 15 minutes; a proof that takes longer than this would come too late. */
+// Stop proofs that overrun the statement's validity window.
 const PROOF_MILLIS = 12 * 60_000;
-/** How far a proof has come when it reaches a stage, by proofs measured in browsers. */
+// Estimated progress at each prover stage.
 const STAGE_SHARES = {
     large: {
         started: 0.01,
@@ -42,16 +42,13 @@ const STAGE_SHARES = {
         "Decommit trace trees": 0.96,
     },
 };
-/**
- * Seconds a proof takes, by the threads it gets at least: from proofs measured in Chrome and Firefox on a desktop
- * of six cores. A slower device takes longer, which the ranges and then its own last proof allow for.
- */
+// Initial browser estimates by worker thread count.
 const BROWSER_SECONDS = {
     large: [[7, 30, 60], [4, 30, 90], [2, 60, 150], [1, 120, 300], [0, 120, 360]],
     exit: [[7, 10, 30], [4, 10, 40], [2, 20, 60], [1, 40, 120], [0, 60, 180]],
 };
 const NATIVE_SECONDS = { large: [10, 30], exit: [5, 15] };
-/** Why there is no proof. Nothing was sent, and nothing a wallet holds is held by it. */
+/** Local proving ended before submission. */
 export class ProofFailure extends TenraiError {
     name = "ProofFailure";
     kind;
@@ -63,7 +60,7 @@ export class ProofFailure extends TenraiError {
 function hex(bytes) {
     return Array.from(new Uint8Array(bytes), (byte) => byte.toString(16).padStart(2, "0")).join("");
 }
-/** The worker's scripts must be the reviewed ones; it checks the module itself. */
+/** Check the hashes of the packaged worker assets. */
 async function checkScripts(folder) {
     const scripts = Object.keys(PROVER_FILES).filter((file) => file.endsWith(".js"));
     await Promise.all(scripts.map(async (file) => {
@@ -74,16 +71,13 @@ async function checkScripts(folder) {
         }
     }));
 }
-/** Threads for a proof in this page; a page without the isolation headers has none. */
+/** Threaded proving requires cross-origin isolation. */
 export function proverThreads(scope = globalThis) {
     if (!scope.crossOriginIsolated)
         return 0;
     return Math.max(1, Math.min(MOST_THREADS, (scope.navigator?.hardwareConcurrency ?? 2) - 1));
 }
-/**
- * How long a proof of this kind takes here: by `lastSeconds`, what the last such proof took on this device, or
- * before there was one, by the threads it gets. A wallet keeps only that number, for the next estimate.
- */
+/** Estimate proving time from a prior local run or the available threads. */
 export function proofEstimate(kind, options = {}) {
     const last = options.lastSeconds;
     if (last !== undefined && Number.isFinite(last) && last > 0)
@@ -101,7 +95,7 @@ function failureOf(text, notes) {
     }
     return new ProofFailure("failed", `the proof could not be made: ${text}`);
 }
-/** The prover in a Web Worker of this page, one worker per proof; ending it releases all it held. */
+/** Run each browser proof in its own worker. */
 export function browserProver(options) {
     const folder = new URL(options.folder, globalThis.location?.href);
     const start = options.createWorker ?? ((url) => new Worker(url, { type: "module" }));
@@ -181,7 +175,7 @@ function joined(chunks) {
     }
     return all;
 }
-/** The native prover `tenrai-tsp2-prove` as a child process, which gets its input through a pipe. */
+/** Pass proof input to `tenrai-tsp2-prove` over a local pipe. */
 export function nativeProver(options) {
     return {
         async prove(input, { signal } = {}) {
@@ -219,10 +213,7 @@ export function nativeProver(options) {
         },
     };
 }
-/**
- * The prover that fits where this runs: a Web Worker in a page, the native program under Node. A wallet
- * never needs a server for it, and none is asked.
- */
+/** Select the local browser worker or native process. */
 export function localProver(options) {
     if (typeof Worker === "function" && options.folder !== undefined) {
         return browserProver({ folder: options.folder, ...(options.threads === undefined ? {} : { threads: options.threads }) });

@@ -1,4 +1,4 @@
-/** Disposable, generation-scoped public holdings. Absence is useful only after a complete live scan. */
+/** Generation-scoped public coin cache. Trust absence only after a complete scan. */
 export interface PublicCoin {
     address: string;
     transactionId: string;
@@ -6,7 +6,7 @@ export interface PublicCoin {
     amount: bigint;
     height: number;
 }
-/** Lowercase TXID96 followed by the eight lowercase hex digits of its output index. */
+/** Lowercase 96-digit transaction ID followed by the eight hex digits of the output index. */
 export type PublicCoinCursor = string;
 export interface PublicAmountCursor {
     amount: bigint;
@@ -36,16 +36,16 @@ export interface PublicCoinStore {
     removePage(keys: readonly PublicCoinCursor[]): Promise<void>;
     get(key: PublicCoinCursor): Promise<PublicCoin | null>;
     page(query?: PublicCoinQuery): Promise<PublicCoinPage>;
-    /** Amount descending, then canonical outpoint key ascending; no global RAM sort. */
+    /** Amount descending, then canonical outpoint ascending. */
     largestPage(query?: PublicLargestCoinQuery): Promise<PublicLargestCoinPage>;
-    /** Refuses new work, drains started transactions, then deletes/rolls back this cache and releases its lease. */
+    /** Drain started transactions before dropping this cache and releasing the lease. */
     close(): Promise<void>;
 }
-/** A finite disposable cache; reaching the cap refuses completion and requires a new scan. */
+/** The row cap blocks scan completion until the cache is rebuilt. */
 export interface PublicCoinStoreOptions {
     maxCoins?: number;
 }
-/** Disk callers choose this finite cap for their dedicated volume and monitored headroom. */
+/** Dedicated disk cache capacity. */
 export interface PublicCoinDiskOptions {
     maxCoins: number;
 }
@@ -55,7 +55,7 @@ export interface PublicCoinSqliteStatement {
     get(...parameters: PublicCoinSqliteValue[]): Record<string, unknown> | undefined;
     all(...parameters: PublicCoinSqliteValue[]): Record<string, unknown>[];
 }
-/** Application-owned, dedicated disk cache connection. Financial journal tables are refused. */
+/** SQLite connection owned by the cache. Use a dedicated file. */
 export interface PublicCoinSqlite {
     exec(sql: string): unknown;
     prepare(sql: string): PublicCoinSqliteStatement;
@@ -77,7 +77,7 @@ export declare function publicLargestCoinQuery(query?: PublicLargestCoinQuery): 
     limit: number;
 };
 export declare function samePublicCoin(left: PublicCoin, right: PublicCoin): boolean;
-/** Serializes bounded physical requests. Close cannot release ownership while an ACK is pending. */
+/** Serialize requests and hold ownership until outstanding writes settle. */
 export declare class PublicCoinOperations {
     #private;
     constructor(cleanup: () => Promise<void>);

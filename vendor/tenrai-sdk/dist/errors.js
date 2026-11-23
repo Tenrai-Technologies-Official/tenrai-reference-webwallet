@@ -1,14 +1,14 @@
-/** Base class of the SDK's own errors. Invalid arguments throw TypeError or RangeError before any request. */
+/** Base SDK error. Invalid arguments throw TypeError or RangeError before I/O. */
 export class TenraiError extends Error {
     name = "TenraiError";
 }
-/** The server answered with an error document, or an HTTP error without one. */
+/** HTTP or node API error. */
 export class TenraiApiError extends TenraiError {
     name = "TenraiApiError";
     status;
     code;
     retryAfterMillis;
-    /** On a refused transaction: what became of it. On `not_found`, `history_not_held`: this node just does not hold it. */
+    /** Specific API reason, including `history_not_held` on a 404. */
     reason;
     constructor(status, code, message, retryAfterMillis, reason) {
         super(message);
@@ -17,28 +17,26 @@ export class TenraiApiError extends TenraiError {
         this.retryAfterMillis = retryAfterMillis;
         this.reason = reason;
     }
-    /** `rate_limited` and `unavailable`: the same request may succeed later. */
+    /** Whether the server reports a retryable status. */
     get retryable() {
         return this.code === "rate_limited" || this.code === "unavailable";
     }
 }
-/** The request got no answer: connection refused, reset or DNS failure. */
+/** The request failed before receiving a response. */
 export class TenraiNetworkError extends TenraiError {
     name = "TenraiNetworkError";
 }
-/** No answer within `timeoutMillis`. */
 export class TenraiTimeoutError extends TenraiError {
     name = "TenraiTimeoutError";
 }
-/** The answer does not have the shape or size the API defines. */
+/** The response exceeds its size limit or has an invalid shape. */
 export class TenraiResponseError extends TenraiError {
     name = "TenraiResponseError";
 }
-/** A signature was expected and is missing or does not verify. */
+/** The expected response signature is missing or invalid. */
 export class TenraiSignatureError extends TenraiError {
     name = "TenraiSignatureError";
 }
-/** A transfer the wallet cannot build or confirm; `code` says why. */
 export class TenraiWalletError extends TenraiError {
     name = "TenraiWalletError";
     code;

@@ -6,21 +6,21 @@ import type { Network, UtxoSource } from "../types/common.ts";
 import type { TransactionLifecycle } from "../types/transaction.ts";
 export type Branch = "receive" | "change";
 export interface WalletOptions {
-    /** Full-wallet chain/Genesis guard; all accounts share its physical lease. */
+    /** Durable finality guard shared by all accounts of this wallet root. */
     finalityStore?: FinalityGuardStore;
-    /** Retained authenticated advisory cache. Node.js callers must supply a dedicated disk provider. */
+    /** Authenticated coin cache. Node.js callers supply a dedicated disk adapter. */
     publicCoinStore?: (scope: string) => Promise<PersistentPublicCoinStore>;
-    /** Browser cache row cap; defaults to 1000000. Never truncates a completed inventory. */
+    /** Browser coin-cache row cap. Defaults to 1,000,000. */
     publicCoinMaxCoins?: number;
-    /** Maximum history events processed during one resumed scan; defaults to200065536. */
+    /** Per-scan history event cap, including resumed work. Defaults to 200,065,536. */
     publicCoinEventLimit?: number;
-    /** Public local Genesis manifest for a custom chain; built-in networks use compiled trust. */
+    /** Trust root for a custom chain. Built-in networks use the protocol WASM pins. */
     genesisManifest?: string;
     network: Network;
-    /** The optional recovery passphrase set when the wallet was created. */
+    /** Recovery passphrase, if configured. */
     passphrase?: string;
     account?: number;
-    /** Restores durable private ENTER holds before the wallet is returned. The provider must use the same store as privateNotes. */
+    /** Opens the account journal and restores pending inputs before returning the wallet. */
     privateStore?: (owner: {
         readonly network: Network;
         readonly account: number;
@@ -29,23 +29,23 @@ export interface WalletOptions {
     }) => PrivateNotesOptions | Promise<PrivateNotesOptions>;
 }
 export interface FeeOptions {
-    /** Fee level from the node's estimate, `normal` by default. */
+    /** Fee estimate priority, `normal` by default. */
     priority?: FeePriority;
-    /** A fixed fee rate in atoms per unit of mass instead of the estimate. */
+    /** Fixed fee rate in atoms per unit of mass. */
     feePerMass?: bigint;
 }
 export interface Payment {
     to: string;
-    /** In atoms; `parseTrai("2.5")` converts from TRAI. */
+    /** Integer atoms. Use `parseTrai` to convert TRAI text. */
     amount: bigint;
-    /** This recipient's own payload, `protocol/recipient-payloads-v1.md`; then the request has no `payload` for all. */
+    /** Recipient-specific payload. Omit the shared payload when using it. */
     payload?: string | Uint8Array;
 }
-/** One recipient as `to` and `amount`, or several in `payments`. */
+/** One recipient or a batch of payments. */
 export type SendRequest = FeeOptions & {
-    /** Text, checked for invisible characters, or raw bytes stored with the transfer. */
+    /** Display-safe text or raw bytes stored with the transaction. */
     payload?: string | Uint8Array;
-    /** Outputs of this wallet the transfer has to spend, as a chat accept does. */
+    /** Input outpoints the wallet must include. */
     include?: readonly {
         transactionId: string;
         outputIndex: number;
@@ -57,53 +57,53 @@ export interface SweepRequest extends FeeOptions {
     to: string;
 }
 export interface BurnRequest extends FeeOptions {
-    /** In atoms; burned coins cannot be recovered. */
+    /** Burn amount in atoms. Burning is irreversible. */
     amount: bigint;
 }
-/** What compounding first takes, for a confirmation. */
+/** Totals for the compounding confirmation. */
 export interface MergeSummary {
-    /** Outputs the first round spends. */
+    /** Inputs in the first round. */
     outputs: number;
-    /** Transfers of every round until the payment fits. */
+    /** Transfers across all rounds needed to make the payment fit. */
     transfers: number;
-    /** Fee of every round, in atoms. */
+    /** Total fee in atoms. */
     fee: bigint;
 }
 export interface MergeOptions {
-    /** Sees what compounding first takes before anything is sent; false stops it. */
+    /** Return false to cancel before that round is sent. */
     confirm?: (merge: MergeSummary) => boolean | Promise<boolean>;
-    /** How long each round may take to become final, 10 minutes by default. */
+    /** Finality timeout per round. Defaults to 10 minutes. */
     timeoutMillis?: number;
 }
 export interface CompoundOptions extends FeeOptions {
-    /** Merge only addresses that hold more than this many outputs; 1 by default, so every address with several. */
+    /** Minimum output count to exceed before merging. Defaults to one. */
     above?: number;
-    /** Merge only addresses whose outputs besides the largest add up to at least this many atoms. */
+    /** Minimum total atoms outside the largest output. */
     atLeast?: bigint;
 }
 export interface BondRequest extends FeeOptions {
     validatorId: string;
-    /** In atoms. */
+    /** Delegation amount in atoms. */
     amount: bigint;
-    /** The wallet address that owns the position and receives its rewards; the first receiving address by default. */
+    /** Position owner. Defaults to the first receiving address. */
     owner?: string;
 }
 export interface PositionRequest extends FeeOptions {
     positionId: string;
 }
-/** Registers a validator with a self-bond, an overlay endpoint and a wallet-derived consensus key. */
+/** Self-bond and consensus-key parameters for a validator registration. */
 export interface RegisterValidatorRequest extends FeeOptions {
-    /** In atoms; it must meet the finalized minimum self-bond. */
+    /** Self-bond in atoms, at least the finalized minimum. */
     selfBond: bigint;
-    /** Canonical hex exported by the validator node for its private overlay route. */
+    /** Canonical hex of the validator's overlay endpoint. */
     overlayEndpointHex: string;
     /** Reserved change-branch index for the validator consensus key. */
     consensusKeyIndex?: number;
-    /** Delegator commission in basis points, 500 (5.0%) by default. */
+    /** Delegator commission. Defaults to 500 basis points. */
     commissionBps?: number;
-    /** Wallet address that owns the registry record; the first receiving address by default. */
+    /** Registry owner. Defaults to the first receiving address. */
     owner?: string;
-    /** Reward destination; the owner address by default. */
+    /** Reward destination. Defaults to the owner address. */
     rewardAddress?: string;
 }
 export interface ExitValidatorRequest extends FeeOptions {
@@ -111,22 +111,22 @@ export interface ExitValidatorRequest extends FeeOptions {
 }
 export interface RotateValidatorRequest extends FeeOptions {
     validatorId: string;
-    /** Canonical hex exported by the validator node for its new private overlay route. */
+    /** Canonical hex of the new overlay endpoint. */
     overlayEndpointHex: string;
     /** Reserved change-branch index for the new validator consensus key. */
     consensusKeyIndex?: number;
 }
-/** Schedules an overlay endpoint change without replacing the validator consensus key. */
+/** Overlay endpoint update signed by the current consensus key. */
 export interface UpdateValidatorEndpointRequest extends FeeOptions {
     validatorId: string;
-    /** Canonical hex exported by the validator node for its replacement private overlay route. */
+    /** Canonical hex of the replacement overlay endpoint. */
     overlayEndpointHex: string;
     /** Reserved change-branch index of the active validator consensus key. */
     consensusKeyIndex?: number;
 }
 export interface ScheduleValidatorCommissionRequest extends FeeOptions {
     validatorId: string;
-    /** New delegated-reward commission in basis points, in 10-bps steps. */
+    /** New commission in 10-basis-point increments. */
     commissionBps: number;
 }
 export interface SetStakeRewardAddressRequest extends FeeOptions {
@@ -138,33 +138,31 @@ export interface ValidatorHeartbeatRequest extends FeeOptions {
     /** Reserved change-branch index of the active validator consensus key. */
     consensusKeyIndex?: number;
 }
-/** A transfer to review: no input is held and its signed bytes stay in the wallet. */
+/** Review metadata. Signed bytes stay in the wallet until durable reservation. */
 export interface PreparedTransfer {
     transactionId: string;
-    /** In atoms: what the recipients get, what a bond locks or what a withdrawal returns. */
+    /** Atoms paid, bonded or withdrawn by the operation. */
     amount: bigint;
     fee: bigint;
     change: bigint;
     inputs: number;
-    /** The last cut height at which the transfer can still execute; pass it to `waitForFinal`. */
+    /** Last executable cut height, also accepted by `waitForFinal`. */
     validUntil: bigint;
 }
-/** A transfer from `exportSigned`; its inputs stay held until a finality proof after `validUntil`. */
+/** Signed export with inputs reserved until verified reconciliation. */
 export interface SignedTransfer extends PreparedTransfer {
-    /** The signed transaction, ready for `client.transactions.submit`. */
+    /** Wire bytes ready for `client.transactions.submit`. */
     wireHex: string;
     /** Canonical transaction manifest it was signed under. */
     manifest: string;
 }
 export interface SentTransfer extends PreparedTransfer {
-    /** The signed transaction as sent. */
     wireHex: string;
     lifecycle: TransactionLifecycle;
 }
 export interface WalletBalance {
-    /** Finalized balance of all used addresses, in atoms. */
+    /** Finalized balance in atoms across the wallet's used addresses. */
     atoms: bigint;
-    /** Unspent outputs (UTXOs) of all used addresses. */
     outputs: number;
     addresses: {
         address: string;
@@ -175,30 +173,28 @@ export interface WalletBalance {
     }[];
     indexedHeight: number;
 }
-/** One unspent output the wallet can spend now. */
 export interface WalletOutput {
     address: string;
     transactionId: string;
     outputIndex: number;
-    /** In atoms. */
+    /** Amount in atoms. */
     amount: bigint;
-    /** Finalized height of the cut that created it. */
+    /** Finalized cut that created the output. */
     height: number;
 }
 export interface ActivityOptions {
-    /** Entries to return, 50 by default, at most 1000. */
+    /** Page limit. Defaults to 50 and is capped at 1,000. */
     limit?: number;
 }
-/** What one transaction did to the wallet; `received - spent` is the change of the balance. */
+/** Finalized activity. `received - spent` is the balance change. */
 export interface WalletActivity {
-    /** Null only for an output whose spender the node does not know. */
+    /** Null when the node cannot identify the spender. */
     transactionId: string | null;
-    /** Finalized height of the transaction. */
     height: number;
-    /** Atoms paid to the wallet's addresses, change included. */
+    /** Atoms received, including change. */
     received: bigint;
-    /** Atoms that left the wallet's addresses. */
+    /** Atoms spent from wallet inputs. */
     spent: bigint;
-    /** Where the received outputs came from, `stake_reward` for a staking payout. */
+    /** Origin of the received outputs. */
     sources: UtxoSource[];
 }

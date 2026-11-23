@@ -5,15 +5,15 @@ export const NONCE_HEADER = "x-tenrai-request-nonce";
 export const SIGNATURE_HEADER = "x-tenrai-signature";
 const DEFAULT_TIMEOUT_MILLIS = 15_000;
 const DEFAULT_RETRIES = 2;
-/** A busy node or an address over its budget has room again within seconds; each attempt waits longer. */
+// Back off after a busy or rate-limited response.
 const DEFAULT_BUSY_RETRIES = 5;
 const DEFAULT_MAX_RESPONSE_BYTES = 32 * 1024 * 1024;
 const MAX_RETRY_DELAY_MILLIS = 30_000;
 const MAX_RESPONSE_CHUNKS = 4_096;
-/** The Tenrai API's budget for reads that reach its node: ten units per second, four of them waiting at once. */
+// Tenrai API read defaults.
 const API_REQUESTS_PER_SECOND = 10;
 const API_MAX_CONCURRENT = 4;
-/** The Tenrai API relays two submissions per second and one at a time for each client. */
+// Tenrai API submission defaults.
 const API_SUBMISSIONS_PER_SECOND = 2;
 const encoder = new TextEncoder();
 const decoder = new TextDecoder();
@@ -127,7 +127,6 @@ export class Transport {
             if (!error.retryable || (request.repeat === "refusals" && !refused) || attempt >= (refused ? this.#busyRetries : this.#retries)) {
                 return undefined;
             }
-            // The lane holds back this request with all others.
             if (error.status === 429) {
                 return 0;
             }
@@ -156,7 +155,7 @@ export class Transport {
             throw interrupted();
         let nonce = "";
         if (verifier) {
-            // Identity preparation is shared; cancelling this waiter must not cancel other callers.
+            // Let this caller cancel without cancelling the shared identity request.
             await untilAborted(this.#prepare(verifier), signal, interrupted);
             nonce = randomNonce();
             headers.set(NONCE_HEADER, nonce);
@@ -300,7 +299,7 @@ function apiError(response, bytes) {
     const text = decoder.decode(bytes.subarray(0, 200)).replace(/[\u0000-\u001f\u007f]+/g, " ").trim();
     return errorFrom(response.status, document, text, retryAfter);
 }
-/** The error an answer with this status and body stands for, over HTTP or the socket. */
+/** Decode an API error from an HTTP or WebSocket response. */
 export function errorFrom(status, document, text = "", retryAfterMillis) {
     if (isErrorDocument(document)) {
         const retry = document.retry_after_millis ?? retryAfterMillis;
@@ -309,7 +308,7 @@ export function errorFrom(status, document, text = "", retryAfterMillis) {
     return new TenraiApiError(status, statusCode(status), text || `HTTP ${status}`, retryAfterMillis);
 }
 const REASONS = ["already_pooled", "input_pooled", "input_missing", "note_pooled", "note_spent", "already_registered"];
-/** A reason this SDK does not know, or one on another status than its own, reads as none. */
+/** Accept known reasons only on the statuses where they apply. */
 function reasonOf(status, value) {
     if (status === 404 && value === "history_not_held")
         return "history_not_held";

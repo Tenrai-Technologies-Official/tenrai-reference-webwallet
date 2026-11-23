@@ -65,7 +65,6 @@ export async function resendPublic(state, client) {
     await state.save();
     return taken;
 }
-/** Everything a plan needs, read from the node once per transfer. */
 export async function publicContext(state, client, fee) {
     state.assertOpen();
     if (fee.feePerMass !== undefined && (typeof fee.feePerMass !== "bigint" || fee.feePerMass <= 0n)) {
@@ -94,14 +93,13 @@ export async function publicContext(state, client, fee) {
         rules = protocol.rules;
         const estimate = firstEstimate === undefined ? undefined : await client.fees.estimate();
         const present = new Set();
-        // The journal is bounded; presence checks never materialize the complete account UTXO set.
+        // Check only the inputs in the retained journal.
         for (const key of new Set([...state.pending.keys(), ...[...state.open.values()].flatMap(entry => entry.spends.map(spend => spend.key))])) {
             if (await inventory.get(key))
                 present.add(key);
         }
-        // Holds belong to their exact original artifact. Expiry/absence alone cannot free
-        // another artifact's or an in-progress batch's reservation; verified closure owns releaseOwned.
-        // Missing indexed outputs can pause an uncertain transfer, without disposing of its original artifact.
+        // Verified reconciliation releases the original transaction's reservations.
+        // A missing indexed input can pause retries. Keep the original artifact.
         let publicChanged = false;
         for (const entry of state.open.values()) {
             if (entry.spends.some((spend) => state.keys.path(spend.address) !== undefined && !present.has(spend.key))) {
@@ -146,7 +144,7 @@ export async function publicContext(state, client, fee) {
         throw error;
     }
 }
-/** Holds an original's inputs in the durable journal before its bytes leave the wallet; nothing is sent. */
+/** Commit the input reservations before exporting the signed bytes. */
 export async function retainPublic(state, original) {
     state.assertOpen();
     const journal = state.journal();
@@ -171,7 +169,7 @@ export async function retainPublic(state, original) {
         await state.save();
     }
     catch (cause) {
-        // The hold stays and spending stops until the journal is reopened.
+        // Preserve the hold until the journal is reopened.
         state.failRestore();
         throw new TenraiWalletError("the signed transfer could not be held durably; its bytes stay in the wallet", "unconfirmed", { transactionId: entry.transactionId }, { cause });
     }

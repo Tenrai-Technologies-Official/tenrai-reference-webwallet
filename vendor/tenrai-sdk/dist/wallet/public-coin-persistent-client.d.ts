@@ -2,11 +2,11 @@ import type { PublicCoin, PublicCoinStoreOptions, PublicCoinQuery, PublicLargest
 import type { CoinScanProgress, PersistentPublicCoinStore, PublicCoinCheckpoint, PublicCoinCheckpointCodec, PublicCoinMutation } from "./public-coin-persistent-types.ts";
 export interface PersistentCoinTransport {
     run(plan: Generator<unknown, unknown, unknown>, write: boolean): Promise<unknown>;
-    /** Deletes at most256 positively scoped superseded rows/index entries. */
+    /** Collect up to 256 superseded rows or index entries in this scope. */
     collect(generation: string): Promise<number>;
     close(): Promise<void>;
 }
-/** One physical owner; incomplete scan progress never publishes a complete wallet balance. */
+/** Hold one physical lease and publish balances after scan completion. */
 export declare class PersistentCoins implements PersistentPublicCoinStore {
     #private;
     constructor(namespace: string, transport: PersistentCoinTransport, options: PublicCoinStoreOptions);

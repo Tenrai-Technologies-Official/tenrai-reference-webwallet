@@ -10,7 +10,7 @@ import { Transport } from "./http.js";
 import { EventStream } from "./sockets/events.js";
 import { LiveSocket } from "./sockets/live.js";
 import { webSocketConstructor } from "./sockets/socket.js";
-/** A client for one Tenrai node or gateway; both answer the same routes. */
+/** Client for a Tenrai node or gateway. */
 export class TenraiClient {
     node;
     chain;
@@ -70,7 +70,7 @@ export class TenraiClient {
             ...options,
         });
     }
-    /** Opens `/v1/events`: every finalized cut in order, resumed by height after each reconnect. */
+    /** Follow finalized cuts, resuming by height after reconnects. */
     events(options = {}) {
         return new EventStream(this.#http, webSocketConstructor(this.#WebSocket), {
             reconnect: this.#reconnect,

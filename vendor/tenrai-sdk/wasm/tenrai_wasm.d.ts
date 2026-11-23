@@ -287,11 +287,7 @@ export function burnAddress(network: string): string;
 export function combineMultisigPackages(left: Uint8Array, right: Uint8Array, manifest: string): Uint8Array;
 
 /**
- * Returns the exact height-zero trust root compiled into this WASM build.
- *
- * This is not a post-launch checkpoint and it does not authenticate a remote
- * node's latest state. It is the local starting point for a later verified
- * finality path only.
+ * Return the compiled mainnet genesis anchor for verifying a finality path.
  */
 export function compiledMainnetGenesisFinalityBundle(): Uint8Array;
 

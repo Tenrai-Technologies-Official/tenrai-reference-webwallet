@@ -119,7 +119,7 @@ class BucketHash {
         return digest(this.codec, "coin_end", bytes);
     }
 }
-/** A streaming sparse tree fold: one bucket chain and at most256+256+16 digests. */
+/** Streaming sparse tree fold with bounded per-level digests. */
 class TreeFold {
     codec;
     empty;

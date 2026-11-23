@@ -4,7 +4,7 @@ import { sameBytes, scope } from "./public-coin-persistent-core.js";
 const COINS = "coin_persistent_rows_v1", META = "coin_persistent_meta_v1", NODES = "coin_persistent_nodes_v1";
 const OWNED = new WeakSet();
 const OWNED_FILES = new Set();
-/** A dedicated disk file. Its lifetime EXCLUSIVE pager lease survives each durable page COMMIT. */
+/** Hold an exclusive SQLite lease across durable page commits. */
 export async function sqlitePersistentPublicCoinStore(database, namespace, options) {
     scope(namespace);
     if (!options || options.maxCoins === undefined)
@@ -95,7 +95,7 @@ export async function sqlitePersistentPublicCoinStore(database, namespace, optio
                 run(`DELETE FROM ${COINS} WHERE scope=? AND generation=? AND coin_key=?`, [namespace, generation, request.key]);
                 return null;
             case "scan": {
-                // Without the forced index SQLite scans the whole generation for one bucket, once per changed coin.
+                // Use the bucket index to avoid a full scan for each mutation.
                 let sql = select + " INDEXED BY coin_persistent_bucket WHERE scope=? AND generation=?";
                 const values = [namespace, generation];
                 if (request.bucket !== undefined) {

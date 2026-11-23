@@ -20,7 +20,7 @@ export declare function sameGuardBytes(a: Uint8Array, b: Uint8Array): boolean;
 export declare function guardRecord(value: unknown, scope: string): GuardRecord;
 export declare function sameGuardRecord(a: GuardRecord | null, b: GuardRecord | null): boolean;
 export declare function nextGuardRecord(scope: string, previous: GuardRecord | null, bytes: Uint8Array): GuardRecord;
-/** Bounded local scheduling; the backend lease is the actual cross-instance/process authority. */
+/** Bound local scheduling. The backend lease coordinates instances. */
 export declare class FinalityGuardRuns implements FinalityGuardStore {
     #private;
     constructor(begin: (scope: string) => Promise<GuardLease>, cleanup: () => Promise<void>);
@@ -28,7 +28,7 @@ export declare class FinalityGuardRuns implements FinalityGuardStore {
     run<T>(scope: string, work: (sealed: Uint8Array | null, saveExact: (bytes: Uint8Array) => Promise<void>) => Promise<T>): Promise<T>;
     close(): Promise<void>;
 }
-/** Web Locks own the real short lease; no timer permits a second owner while work remains. */
+/** Hold the Web Lock until verification and persistence finish. */
 export declare function finalityBrowserLease(scope: string, manager: LockManager): Promise<{
     release(): Promise<void>;
 }>;

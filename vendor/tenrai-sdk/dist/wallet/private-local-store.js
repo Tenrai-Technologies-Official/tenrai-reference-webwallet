@@ -11,7 +11,7 @@ function address(generation, page) {
         }
     }
 }
-/** The caller owns the account-session lease; plaintext note openings never reach this store. */
+/** Store ciphertexts while the caller holds the account lease. */
 export function browserPrivateLocalScanStore(namespace) {
     if (!/^[a-zA-Z0-9:_-]{1,512}$/.test(namespace))
         throw new Error("Invalid private scan store namespace.");

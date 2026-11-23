@@ -70,7 +70,7 @@ export function samePublicCoin(left, right) {
     return left.address === right.address && left.transactionId === right.transactionId && left.outputIndex === right.outputIndex
         && left.amount === right.amount && left.height === right.height;
 }
-/** Serializes bounded physical requests. Close cannot release ownership while an ACK is pending. */
+/** Serialize requests and hold ownership until outstanding writes settle. */
 export class PublicCoinOperations {
     #tail = Promise.resolve();
     #failed;

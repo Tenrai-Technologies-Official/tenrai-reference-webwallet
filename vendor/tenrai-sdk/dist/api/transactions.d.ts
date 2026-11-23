@@ -10,39 +10,36 @@ export interface SocketContext {
 }
 export interface WaitOptions extends CallOptions {
     timeoutMillis?: number;
-    /** The last cut height the transaction can execute at, such as `SentTransfer.validUntil`; read from the node when missing. */
+    /** Final executable cut, inferred from the node when omitted. */
     validUntil?: number | bigint;
-    /** Status polling interval when the runtime has no WebSocket, 2000 by default. */
+    /** Polling interval without WebSocket support. Defaults to 2,000 ms. */
     pollMillis?: number;
-    /**
-     * The signed transaction, such as `SentTransfer.wireHex`: while the node does not know it, it goes out again
-     * unchanged, at most every 30 s, as a node that restarts forgets what only its pool held.
-     */
+    /** Retry these exact signed bytes at most every 30 seconds when status is unknown. */
     wireHex?: string;
 }
 export declare class TransactionsApi {
     #private;
     /** @internal */
     constructor(http: Transport, sockets: SocketContext);
-    /** `POST /v1/transactions`: submits a signed transaction. Repeated only after an explicit 429 or 503, so a lost answer never submits twice. */
+    /** `POST /v1/transactions`. Retry only after an explicit 429 or 503. */
     submit(wireHex: string, options?: CallOptions): Promise<TransactionSubmissionReceipt>;
-    /** `POST /v1/transactions/status`: statuses of up to 1024 transactions; ids the node does not know come back in `unknown`. */
+    /** `POST /v1/transactions/status`. Up to 1,024 IDs, with missing IDs in `unknown`. */
     statuses(transactionIds: readonly string[], options?: CallOptions): Promise<TransactionStatusBatch>;
-    /** `GET /v1/transactions/manifest`: limits, mass rules and fee floor a transaction must meet. */
+    /** `GET /v1/transactions/manifest`. Active transaction limits, mass rules and fee floor. */
     manifest(options?: CallOptions): Promise<TransactionManifest>;
-    /** `GET /v1/transactions/recent`: the transactions this node saw last, newest first. */
+    /** `GET /v1/transactions/recent`. Newest first. */
     recent(options?: RecentOptions): Promise<TransactionList>;
     /** `GET /v1/transactions/{id}`: the full transaction with inputs, outputs, fee and status. */
     get(transactionId: string, options?: CallOptions): Promise<TransactionView>;
-    /** Compact display data with explicit local provenance; no canonical witness bytes. */
+    /** Retained display data without canonical witness bytes. */
     compact(transactionId: string, options?: CallOptions): Promise<CompactTransactionView>;
-    /** `GET /v1/transactions/{id}/status`: where the transaction is in its lifecycle. */
+    /** `GET /v1/transactions/{id}/status`. */
     status(transactionId: string, options?: CallOptions): Promise<TransactionStatus>;
     /** `WS /v1/transactions/{id}/status/stream`: every status change until the transaction is final. */
     watch(transactionId: string, options?: StatusStreamOptions): StatusStream;
     /**
-     * Resolves with the final status, see `isFinal`, or as `failed` with the node's reason or `expired` once the
-     * chain passed `validUntil` without executing it. All waits of a client share sockets and one batched poll.
+     * Wait for a terminal status, including expiry after `validUntil`.
+     * Waiters share the client's sockets and batched polling.
      */
     waitForFinal(transactionId: string, options?: WaitOptions): Promise<TransactionStatus>;
 }

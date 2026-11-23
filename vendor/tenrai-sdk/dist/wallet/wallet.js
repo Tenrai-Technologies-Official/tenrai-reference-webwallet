@@ -22,16 +22,15 @@ import { toHex } from "./protocol.js";
 import { transferPayloadHex } from "./recipients.js";
 import { protocolBindings } from "./runtime.js";
 import * as staking from "./staking.js";
-/** An HD wallet from a 24-word recovery phrase; keys never leave the protocol WASM. */
+/** HD wallet backed by the protocol WASM. */
 export class Wallet {
     network;
     account;
     #wasm;
     #keys;
-    /** Outputs spent by transfers this wallet sent, until they leave the UTXO set or expire. */
+    /** Outpoint reservations for public transfers. */
     #reservations = new PublicReservations((key) => this.#privatelyHeld(key));
     #pending = this.#reservations.deadlines;
-    /** The wallet as the staking and compounding modules see it. */
     #desk = {
         address: (index, branch) => this.address(index, branch),
         context: (client, fee) => this.#context(client, fee),
@@ -52,9 +51,8 @@ export class Wallet {
     #openingPrivate;
     #closed = false;
     #closing;
-    /** Transfers from `prepare` that `submit` may still send. */
+    /** Prepared reviews that this wallet can submit. */
     #prepared = new WeakMap();
-    /** Transfers on their way, by id; `resend` sends them again while the node does not know them. */
     #open = new Map();
     #addresses;
     #publicState;
@@ -106,7 +104,7 @@ export class Wallet {
             entropy.fill(0);
         }
     }
-    /** A new wallet and its recovery phrase; store the phrase, it is the only backup. */
+    /** Generate a wallet and its recovery phrase. Back up the phrase and passphrase. */
     static async generate(options) {
         const wasm = await protocolBindings();
         const entropy = crypto.getRandomValues(new Uint8Array(32));
@@ -118,41 +116,36 @@ export class Wallet {
             entropy.fill(0);
         }
     }
-    /** The recovery fingerprint of this wallet. */
     get fingerprint() { return this.#addresses.fingerprint; }
-    /** The highest used receive/change indices, once a scan has completed. */
+    /** Highest used receive and change indices after a scan. */
     get usedAddresses() { return this.#addresses.usedAddresses; }
-    /** Restores the receive/change scan boundaries without lowering them. */
+    /** Restore scan boundaries without lowering them. */
     rememberUsed(used) { this.#addresses.rememberUsed(used); }
-    /** Hands out the next receiving address after a scan or rememberUsed. */
+    /** Issue the next receiving address after scanning or restoring used indices. */
     newAddress() { return this.#addresses.newAddress(); }
-    /** The receiving index last handed out by newAddress. */
     get lastIssued() { return this.#addresses.lastIssued; }
-    /** Restores the highest receiving index already handed out. */
     rememberIssued(index) { this.#addresses.rememberIssued(index); }
-    /** Scans addresses; rebuildCoinCache explicitly replaces only this account's advisory coin cache. */
+    /** Scan owned addresses. An explicit rebuild replaces the advisory coin cache. */
     rescan(client, options = {}) { return this.#addresses.rescan(client, options); }
-    /** Derives receiving or change address number index. */
     address(index = 0, branch = "receive") { return this.#addresses.address(index, branch); }
-    /** Returns the public key for one wallet path. */
     multisigMemberPublicKey(index = 0, branch = "receive") { return this.#addresses.multisigMemberPublicKey(index, branch); }
-    /** Returns a validator public key from its reserved derivation range. */
+    /** Derive a validator key from the reserved change-index range. */
     validatorConsensusPublicKey(index = DEFAULT_VALIDATOR_CONSENSUS_KEY_INDEX) { return this.#addresses.validatorConsensusPublicKey(index); }
-    /** Signs the exact reviewed multisig template with one wallet member key. */
+    /** Sign the exact reviewed multisig template with this member key. */
     signMultisigPackage(session, bytes, reviewed, index = 0, branch = "receive") {
         return this.#addresses.signMultisigPackage(session, bytes, reviewed, index, branch);
     }
-    /** Authenticate a conditional input under this wallet's local Genesis and durable finality guard. */
+    /** Verify a conditional input using the local trust root and finality guard. */
     reviewNativeLockSpend(session, client, request) {
         this.#requirePrivateRestored();
         return session.prepareSpend(client, request, this.#publicEvidence);
     }
-    /** Signs a reviewed native-lock spend; as with `exportSigned`, its input is held in the durable journal first. */
+    /** Sign a reviewed native spend and durably reserve its input before export. */
     async signNativeLockSpend(session, review, index = 0, branch = "receive") {
         const { transactionId, wireHex, amount, fee, validUntil } = await this.exportSigned(await this.prepareNativeLockSpend(session, review, index, branch));
         return Object.freeze({ transactionId, wireHex, amount, fee, validUntil });
     }
-    /** Prepares a native spend for the wallet's ordinary submission, input reservation and retry handling. */
+    /** Prepare a reviewed native spend for managed submission. */
     async prepareNativeLockSpend(session, review, index = 0, branch = "receive") {
         session.assertOwner(review, this.#publicEvidence);
         const signed = await this.#addresses.signNativeLockSpend(session, review, index, branch);
@@ -162,26 +155,22 @@ export class Wallet {
             manifest: session.transactionManifest(review),
         });
     }
-    /** Whether this wallet derived the address. */
     owns(address) { return this.#addresses.owns(address); }
-    /** Returns an already derived address path, if owned. */
+    /** Return the derivation path for an address already known to the wallet. */
     pathOf(address) { return this.#addresses.pathOf(address); }
-    /** Scans owned addresses and returns their finalized balance. */
     balance(client) { return this.#addresses.balance(client); }
-    /** Returns up to256 largest available outputs. outputPage reads a bounded canonical page. */
+    /** Return up to the 256 largest outputs. Use `outputPage` for a canonical page. */
     outputs(client, options = {}) { return this.#addresses.outputs(client, options); }
     outputPage(client, query = {}) { return this.#addresses.outputPage(client, query); }
-    /** Returns finalized address activity, newest first. */
+    /** Finalized activity, newest first. */
     activity(client, options = {}) { return this.#addresses.activity(client, options); }
-    /** Returns stake positions controlled by the used addresses. */
     positions(client) { return this.#addresses.positions(client); }
-    /** Signs a reviewed address-proof request for an owned path. */
     proveAddress(request, options = {}) { return this.#addresses.proveAddress(request, options); }
-    /** Builds and signs a transfer for review; `submit` sends exactly this transfer, `exportSigned` hands out its bytes. */
+    /** Build a transfer review and retain its original signed bytes for `submit` or `exportSigned`. */
     async prepare(client, request) {
         return this.#review(await this.#payment(client, request, false));
     }
-    /** Submits a transfer from `prepare` and holds its inputs back from other transfers, as `send` does. */
+    /** Reserve and send the exact transfer prepared by this wallet. */
     async submit(client, prepared) {
         this.#requirePublicSubmission();
         this.#requirePrivateRestored();
@@ -189,7 +178,7 @@ export class Wallet {
         if (!built) {
             throw new TenraiWalletError("only a transfer this wallet prepared can be submitted", "invalid");
         }
-        // An exported transfer holds its inputs under its own id already.
+        // An exported transfer already owns its reservations.
         if (this.#open.get(built.prepared.transactionId)?.exported !== true) {
             if (built.spent.some((coin) => this.#held(coin))) {
                 throw new TenraiWalletError("a transfer sent since then holds these outputs; prepare it again", "rejected");
@@ -200,7 +189,7 @@ export class Wallet {
         this.#prepared.delete(prepared);
         return sent;
     }
-    /** Signed bytes of a prepared transfer, returned once its inputs are held in the durable journal; nothing is sent. */
+    /** Export signed bytes after the input reservations commit durably. */
     async exportSigned(prepared) {
         this.#requirePublicSubmission();
         const built = this.#prepared.get(prepared);
@@ -223,20 +212,19 @@ export class Wallet {
         return { transactionId: built.prepared.transactionId, wireHex: built.prepared.wireHex, manifest: built.manifest,
             validUntil: built.prepared.validUntil, sentAt: Date.now(), spends: built.spent.map((coin) => ({ key: funds.outpoint(coin), address: coin.address })) };
     }
-    /** Builds, signs and submits a transfer; a lost answer whose status cannot be read throws `unconfirmed`. */
+    /** Submit a transfer. An ambiguous response raises `unconfirmed`. */
     async send(client, request) {
         this.#requirePublicSubmission();
         return this.#submitBuilt(client, await this.#payment(client, request, true));
     }
-    /** Burns `amount`: pays it to the burn address of the wallet's network. It cannot be undone. */
+    /** Send to the network's unspendable burn address. */
     async burn(client, request) {
         this.#requirePublicSubmission();
         return this.send(client, { ...request, to: burnAddress(this.network) });
     }
     /**
-     * Sends transfers on their way again, unchanged, while the node does not know them and they can still
-     * execute, each at most every 30 s: a node that restarts forgets what only its pool held. Every transfer
-     * runs it first; call it now and then while waiting. Returns the ids the node took.
+     * Retry unknown, executable transfers using their original bytes, at most every 30 seconds.
+     * Returns the IDs accepted by the node.
      */
     async resend(client) {
         this.#requirePrivateRestored();
@@ -255,11 +243,11 @@ export class Wallet {
         throw new TenraiWalletError("configure a durable public journal first", "rejected"); return this.#publicJournal.unknown(transactionId); }
     unknownPublicOutcomes(options = {}) { this.#requirePrivateRestored(); if (!this.#publicJournal)
         throw new TenraiWalletError("configure a durable public journal first", "rejected"); return this.#publicJournal.unknownPage(options.after, options.limit); }
-    /** The transfers on their way, to keep across a restart of the program and hand to `keepOpen`. */
+    /** Return copies of the retained public transfers. */
     openTransfers() {
         return [...this.#open.values()].map((entry) => ({ ...entry, spends: entry.spends.map((spend) => ({ ...spend })) }));
     }
-    /** Takes back what `openTransfers` gave: their inputs stay held and `resend` looks after them. */
+    /** Import retained transfers when the wallet has no managed public journal. */
     keepOpen(transfers) {
         if (this.#publicJournal)
             throw new TenraiWalletError("the durable public journal restores this wallet; close it before explicit recovery import", "rejected");
@@ -278,85 +266,81 @@ export class Wallet {
                 needsReview: authenticatedJournal && entry.needsReview === false ? false : true });
     }
     /**
-     * The most one transfer can pay to `to` (the first receiving address when left out): the largest spendable
-     * outputs up to the input limit, less the fee, which a `payload` raises. 0 when they cannot pay the fee.
+     * Return the most a single transfer can send after fees, within the input limit.
+     * Defaults to the first receiving address and returns zero if the fee cannot be covered.
      */
     async maxSendable(client, request = {}) {
         return compounding.maxSendable(this.#desk, client, request);
     }
     /**
-     * Compounds first when `request` needs more outputs than one transfer spends, and waits until that is final;
-     * `confirm` sees every round before it goes out. At most 64 compounds per call; returns none when the payment
-     * already fits and throws `insufficient` when compounding cannot make it fit.
+     * Confirm and finalize each needed compounding round before preparing the payment.
+     * Up to 64 compounds per call. Throws `insufficient` when compounding cannot make it fit.
      */
     async mergeFor(client, request, options = {}) {
         this.#requirePublicSubmission();
         return compounding.mergeFor(this.#desk, client, request, options);
     }
-    /** Sends every spendable output to `to`, at most 64 transfers per call; run it again for the rest or after a failure. */
+    /** Sweep spendable outputs to one address, up to 64 transfers per call. */
     async sweep(client, request) {
         this.#requirePublicSubmission();
         return compounding.sweep(this.#desk, client, request);
     }
     /**
-     * Merges the outputs of every address that holds more than `above` of them (several, by default),
-     * at most 64 transfers per call; the way out of `compound-needed`. `autoCompound` runs it on a timer.
+     * Merge outputs per address above the configured threshold, up to 64 transfers per call.
      */
     async compound(client, options = {}) {
         this.#requirePublicSubmission();
         return compounding.compound(this.#desk, client, options);
     }
-    /** Bonds `amount` to a validator after checking its finalized delegation state. */
+    /** Bond to a validator after checking finalized delegation state. */
     async bond(client, request) {
         this.#requirePublicSubmission();
         return staking.bond(this.#desk, client, request);
     }
-    /** Starts unbonding a bonded position of this wallet. */
     async unbond(client, request) {
         this.#requirePublicSubmission();
         return staking.position(this.#desk, client, request, "unbond");
     }
-    /** Returns the stake of a position that is `withdrawable` to the wallet. */
+    /** Withdraw a position once it is `withdrawable`. */
     async withdraw(client, request) {
         this.#requirePublicSubmission();
         return staking.position(this.#desk, client, request, "withdraw");
     }
-    /** Registers a validator using a self-bond, owner signature and proof of the new consensus key. */
+    /** Register a self-bond and prove possession of the new consensus key. */
     async registerValidator(client, request) {
         this.#requirePublicSubmission();
         return staking.registerValidator(this.#desk, client, request);
     }
-    /** Schedules the validator's exit with the current finalized owner nonce. */
+    /** Schedule exit using the finalized owner nonce. */
     async exitValidator(client, request) {
         this.#requirePublicSubmission();
         return staking.exitValidator(this.#desk, client, request);
     }
-    /** Rotates a validator key and overlay endpoint after checking the finalized registry record. */
+    /** Rotate a validator key and endpoint using the finalized registry record. */
     async rotateValidator(client, request) {
         this.#requirePublicSubmission();
         return staking.rotateValidator(this.#desk, client, request);
     }
-    /** Schedules an overlay endpoint change while retaining the active consensus key. */
+    /** Update the endpoint using the current consensus key. */
     async updateValidatorEndpoint(client, request) {
         this.#requirePublicSubmission();
         return staking.updateValidatorEndpoint(this.#desk, client, request);
     }
-    /** Schedules a delayed validator commission change in the active rules' 10-bps grid. */
+    /** Schedule commission in the active rules' 10-basis-point increments. */
     async scheduleValidatorCommission(client, request) {
         this.#requirePublicSubmission();
         return staking.scheduleValidatorCommission(this.#desk, client, request);
     }
-    /** Changes the finalized reward lock for one stake position. */
     async setStakeRewardAddress(client, request) {
         this.#requirePublicSubmission();
         return staking.setStakeRewardAddress(this.#desk, client, request);
     }
-    /** Publishes one signed heartbeat for the next finalized epoch of an eligible validator. */
+    /** Sign a heartbeat for the next finalized epoch. */
     async heartbeatValidator(client, request) {
         this.#requirePublicSubmission();
         return staking.heartbeatValidator(this.#desk, client, request);
     }
-    /** Chats of this wallet, `protocol/messenger-v1.md`; the messenger key stays in the WASM. Keep one per wallet. */
+    /** Keep one messenger session per wallet. Its key stays in WASM. */
     messenger(client) {
         return new Messenger({
             root: () => this.#keys.root(),
@@ -538,7 +522,7 @@ export class Wallet {
             throw error;
         }
         finally {
-            // Signed artifacts now own their holds by TXID; only never-signed batch inputs are released.
+            // Signed transactions own their reservations. Release the unused batch inputs.
             this.#reservations.releaseOwned(claim, points);
         }
     }
@@ -562,7 +546,7 @@ export class Wallet {
             throw error;
         }
     }
-    /** Relays an already signed reviewed public artifact through this wallet's durable submission path. */
+    /** Relay an already signed artifact through the wallet's durable submission path. */
     async submitSignedPublic(client, artifact) {
         this.#requirePublicSubmission();
         this.#requirePrivateRestored();
@@ -577,7 +561,7 @@ export class Wallet {
         }
         return { transactionId: entry.transactionId, lifecycle: await this.#submitPublic(client, entry) };
     }
-    /** Retries the retained original bytes; it never constructs or signs a replacement transaction. */
+    /** Retry the retained original signed bytes. */
     async retryPublic(client, transactionId) {
         this.#requirePublicSubmission();
         this.#requirePrivateRestored();
@@ -591,7 +575,6 @@ export class Wallet {
         const run = () => submitPublic(this.#publicState, client, original);
         return this.#privateJournal ? this.#privateJournal.run(run) : run();
     }
-    /** Whether a transfer on its way or a private statement on its way spends this output. */
     #held(coin) {
         const outpoint = funds.outpoint(coin);
         return this.#pending.has(outpoint) || this.#privatelyHeld(outpoint);
@@ -620,7 +603,7 @@ export class Wallet {
             throw new TenraiWalletError("the stored payment journals must be restored before spending", "rejected");
         }
     }
-    /** Restores pending ENTER holds only; this reads the supplied store without contacting a node or creating a proof. */
+    /** Restore public and private submission journals locally before spending. */
     async restorePrivatePending(options) {
         if (this.#closed)
             throw new TenraiWalletError("the wallet is closed", "rejected");

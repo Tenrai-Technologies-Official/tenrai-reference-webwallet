@@ -30,7 +30,7 @@ export function nextGuardRecord(scope, previous, bytes) {
         throw new Error("The finality guard generation is exhausted.");
     return { format: 1, scope, revision: revision.toString(), sealed: finalityGuardBytes(bytes) };
 }
-/** Bounded local scheduling; the backend lease is the actual cross-instance/process authority. */
+/** Bound local scheduling. The backend lease coordinates instances. */
 export class FinalityGuardRuns {
     #begin;
     #cleanup;
@@ -161,7 +161,7 @@ export class FinalityGuardRuns {
         return this.#closed ??= this.#tail.then(this.#cleanup);
     }
 }
-/** Web Locks own the real short lease; no timer permits a second owner while work remains. */
+/** Hold the Web Lock until verification and persistence finish. */
 export async function finalityBrowserLease(scope, manager) {
     const name = finalityGuardLock(scope);
     let acquired, rejected, unlock;

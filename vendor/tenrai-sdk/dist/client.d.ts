@@ -11,12 +11,12 @@ import { EventStream, type EventStreamOptions } from "./sockets/events.ts";
 import { LiveSocket, type LiveSocketOptions } from "./sockets/live.ts";
 import { type ReconnectOptions, type WebSocketConstructor } from "./sockets/socket.ts";
 export interface ClientOptions extends TransportOptions {
-    /** For runtimes without a global WebSocket, for example `WebSocket` from the ws package. */
+    /** WebSocket implementation for runtimes without a global one. */
     WebSocket?: WebSocketConstructor;
-    /** Delays between reconnect attempts of every socket this client opens. */
+    /** Reconnect policy shared by the client's sockets. */
     reconnect?: ReconnectOptions;
 }
-/** A client for one Tenrai node or gateway; both answer the same routes. */
+/** Client for a Tenrai node or gateway. */
 export declare class TenraiClient {
     #private;
     readonly node: NodeApi;
@@ -41,6 +41,6 @@ export declare class TenraiClient {
     health(options?: CallOptions): Promise<boolean>;
     /** Opens `/v1/ws` for subscriptions and read requests. */
     live(options?: LiveSocketOptions): LiveSocket;
-    /** Opens `/v1/events`: every finalized cut in order, resumed by height after each reconnect. */
+    /** Follow finalized cuts, resuming by height after reconnects. */
     events(options?: EventStreamOptions): EventStream;
 }

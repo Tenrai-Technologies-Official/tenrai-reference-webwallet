@@ -40,7 +40,7 @@ function database() {
         opening = undefined; });
     return attempt;
 }
-/** Immutable per-digest records survive rotation of the bounded active journal. */
+/** Keep final records after the active journal rotates. */
 export function indexedDbOutcomeStore(namespace) {
     if (!/^[a-zA-Z0-9:_-]{1,512}$/.test(namespace))
         throw new Error("Invalid outcome-store namespace.");

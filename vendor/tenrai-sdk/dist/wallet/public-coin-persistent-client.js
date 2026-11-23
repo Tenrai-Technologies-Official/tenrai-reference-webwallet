@@ -3,7 +3,7 @@ import { commitPlan, decoded, document, mutations, progress, recoverPlan, resetP
 function* action(value) {
     return yield value;
 }
-/** One physical owner; incomplete scan progress never publishes a complete wallet balance. */
+/** Hold one physical lease and publish balances after scan completion. */
 export class PersistentCoins {
     #scope;
     #maximum;

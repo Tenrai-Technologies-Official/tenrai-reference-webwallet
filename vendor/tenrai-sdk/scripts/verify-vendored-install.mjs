@@ -58,7 +58,7 @@ function sameFile(left, right) {
     left.mtimeNs === right.mtimeNs && left.ctimeNs === right.ctimeNs;
 }
 
-/** Hash bounded chunks; prover binaries need not be retained twice in the verifier's heap. */
+/** Hash large assets in bounded chunks. */
 function fileHash(root, relativePath) {
   const before = file(root, relativePath);
   if (before.metadata.size > BigInt(Number.MAX_SAFE_INTEGER)) fail(`oversized release file ${relativePath}`);
@@ -86,7 +86,7 @@ function readJson(root, relativePath) {
   catch { fail(`invalid ${relativePath}`); }
 }
 
-/** Only explicitly published roots are walked; node_modules bookkeeping outside them is ignored. */
+/** Walk only package.json and the published file list. */
 function releaseInventory(root, packageDocument) {
   const listed = packageDocument?.files;
   if (!Array.isArray(listed) || listed.length === 0 || listed.length > 256) fail("package.files is missing or invalid");

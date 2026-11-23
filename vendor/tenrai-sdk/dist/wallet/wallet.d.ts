@@ -8,82 +8,75 @@ import type { MultisigSession } from "./multisig.ts";
 import type { NativeLockSession, NativeLockSpendReview, SignedNativeLockSpend } from "./native-locks.ts";
 import { PrivateNotes, type PrivateNotesOptions } from "./private-notes.ts";
 import type { ActivityOptions, Branch, BondRequest, BurnRequest, CompoundOptions, ExitValidatorRequest, FeeOptions, MergeOptions, PositionRequest, PreparedTransfer, RegisterValidatorRequest, RotateValidatorRequest, ScheduleValidatorCommissionRequest, SendRequest, SentTransfer, SetStakeRewardAddressRequest, SignedTransfer, SweepRequest, UpdateValidatorEndpointRequest, ValidatorHeartbeatRequest, WalletActivity, WalletBalance, WalletOptions, WalletOutput } from "./types.ts";
-/** The retained original authorization artifact; an HTLC claim can include its preimage before broadcast. */
+/** Retained signed transaction. An HTLC claim may include its preimage. */
 export interface OpenTransfer {
     transactionId: string;
     wireHex: string;
-    /** Canonical native transaction manifest retained with the original wire. */
+    /** Manifest used for the original signature. */
     manifest?: string;
     validUntil: bigint;
     sentAt: number;
-    /** An uncertain attempt retains its frame and inputs until verified reconciliation. */
+    /** Keep unresolved submissions until verified reconciliation. */
     needsReview?: boolean;
-    /** A reported expiry/final/spend stops automatic POSTs, without proving settlement. */
+    /** Pause retries after a reported expiry, settlement or spent input. */
     resendPaused?: boolean;
-    /** Handed out by `exportSigned`; the wallet resends it only after `submit`. */
+    /** Exported transactions become eligible for resends after `submit`. */
     exported?: boolean;
-    /** The outputs it spends; once one leaves the UTXO set it was included or another transfer won. */
+    /** Outpoints reserved by the original transaction. */
     spends: {
         key: string;
         address: string;
     }[];
 }
-/** An HD wallet from a 24-word recovery phrase; keys never leave the protocol WASM. */
+/** HD wallet backed by the protocol WASM. */
 export declare class Wallet {
     #private;
     readonly network: Network;
     readonly account: number;
     private constructor();
     static fromMnemonic(mnemonic: string, options: WalletOptions): Promise<Wallet>;
-    /** A new wallet and its recovery phrase; store the phrase, it is the only backup. */
+    /** Generate a wallet and its recovery phrase. Back up the phrase and passphrase. */
     static generate(options: WalletOptions): Promise<{
         wallet: Wallet;
         mnemonic: string;
     }>;
-    /** The recovery fingerprint of this wallet. */
     get fingerprint(): string;
-    /** The highest used receive/change indices, once a scan has completed. */
+    /** Highest used receive and change indices after a scan. */
     get usedAddresses(): Readonly<Record<Branch, number>> | undefined;
-    /** Restores the receive/change scan boundaries without lowering them. */
+    /** Restore scan boundaries without lowering them. */
     rememberUsed(used: Record<Branch, number>): void;
-    /** Hands out the next receiving address after a scan or rememberUsed. */
+    /** Issue the next receiving address after scanning or restoring used indices. */
     newAddress(): {
         index: number;
         address: string;
     };
-    /** The receiving index last handed out by newAddress. */
     get lastIssued(): number;
-    /** Restores the highest receiving index already handed out. */
     rememberIssued(index: number): void;
-    /** Scans addresses; rebuildCoinCache explicitly replaces only this account's advisory coin cache. */
+    /** Scan owned addresses. An explicit rebuild replaces the advisory coin cache. */
     rescan(client: TenraiClient, options?: {
         depth?: number;
         rebuildCoinCache?: boolean;
     }): Promise<Readonly<Record<Branch, number>>>;
-    /** Derives receiving or change address number index. */
     address(index?: number, branch?: Branch): string;
-    /** Returns the public key for one wallet path. */
     multisigMemberPublicKey(index?: number, branch?: Branch): Uint8Array;
-    /** Returns a validator public key from its reserved derivation range. */
+    /** Derive a validator key from the reserved change-index range. */
     validatorConsensusPublicKey(index?: number): Uint8Array;
-    /** Signs the exact reviewed multisig template with one wallet member key. */
+    /** Sign the exact reviewed multisig template with this member key. */
     signMultisigPackage(session: MultisigSession, bytes: Uint8Array, reviewed: string, index?: number, branch?: Branch): Uint8Array;
-    /** Authenticate a conditional input under this wallet's local Genesis and durable finality guard. */
+    /** Verify a conditional input using the local trust root and finality guard. */
     reviewNativeLockSpend(session: NativeLockSession, client: TenraiClient, request: Parameters<NativeLockSession["prepareSpend"]>[1]): Promise<NativeLockSpendReview>;
-    /** Signs a reviewed native-lock spend; as with `exportSigned`, its input is held in the durable journal first. */
+    /** Sign a reviewed native spend and durably reserve its input before export. */
     signNativeLockSpend(session: NativeLockSession, review: NativeLockSpendReview, index?: number, branch?: Branch): Promise<SignedNativeLockSpend>;
-    /** Prepares a native spend for the wallet's ordinary submission, input reservation and retry handling. */
+    /** Prepare a reviewed native spend for managed submission. */
     prepareNativeLockSpend(session: NativeLockSession, review: NativeLockSpendReview, index?: number, branch?: Branch): Promise<PreparedTransfer>;
-    /** Whether this wallet derived the address. */
     owns(address: string): boolean;
-    /** Returns an already derived address path, if owned. */
+    /** Return the derivation path for an address already known to the wallet. */
     pathOf(address: string): Readonly<{
         branch: Branch;
         index: number;
     }> | undefined;
-    /** Scans owned addresses and returns their finalized balance. */
     balance(client: TenraiClient): Promise<WalletBalance>;
-    /** Returns up to256 largest available outputs. outputPage reads a bounded canonical page. */
+    /** Return up to the 256 largest outputs. Use `outputPage` for a canonical page. */
     outputs(client: TenraiClient, options?: {
         limit?: number;
         address?: string;
@@ -91,28 +84,25 @@ export declare class Wallet {
     outputPage(client: TenraiClient, query?: import("./public-coin-store.ts").PublicCoinQuery): Promise<import("./public-coin-store.ts").PublicCoinPage & {
         indexedHeight: number;
     }>;
-    /** Returns finalized address activity, newest first. */
+    /** Finalized activity, newest first. */
     activity(client: TenraiClient, options?: ActivityOptions): Promise<WalletActivity[]>;
-    /** Returns stake positions controlled by the used addresses. */
     positions(client: TenraiClient): Promise<StakePositionView[]>;
-    /** Signs a reviewed address-proof request for an owned path. */
     proveAddress(request: AddressProofRequest | string, options?: {
         now?: number;
     }): Promise<AddressProofDocument>;
-    /** Builds and signs a transfer for review; `submit` sends exactly this transfer, `exportSigned` hands out its bytes. */
+    /** Build a transfer review and retain its original signed bytes for `submit` or `exportSigned`. */
     prepare(client: TenraiClient, request: SendRequest): Promise<PreparedTransfer>;
-    /** Submits a transfer from `prepare` and holds its inputs back from other transfers, as `send` does. */
+    /** Reserve and send the exact transfer prepared by this wallet. */
     submit(client: TenraiClient, prepared: PreparedTransfer): Promise<SentTransfer>;
-    /** Signed bytes of a prepared transfer, returned once its inputs are held in the durable journal; nothing is sent. */
+    /** Export signed bytes after the input reservations commit durably. */
     exportSigned(prepared: PreparedTransfer): Promise<SignedTransfer>;
-    /** Builds, signs and submits a transfer; a lost answer whose status cannot be read throws `unconfirmed`. */
+    /** Submit a transfer. An ambiguous response raises `unconfirmed`. */
     send(client: TenraiClient, request: SendRequest): Promise<SentTransfer>;
-    /** Burns `amount`: pays it to the burn address of the wallet's network. It cannot be undone. */
+    /** Send to the network's unspendable burn address. */
     burn(client: TenraiClient, request: BurnRequest): Promise<SentTransfer>;
     /**
-     * Sends transfers on their way again, unchanged, while the node does not know them and they can still
-     * execute, each at most every 30 s: a node that restarts forgets what only its pool held. Every transfer
-     * runs it first; call it now and then while waiting. Returns the ids the node took.
+     * Retry unknown, executable transfers using their original bytes, at most every 30 seconds.
+     * Returns the IDs accepted by the node.
      */
     resend(client: TenraiClient): Promise<string[]>;
     reconcilePublic(client: TenraiClient): Promise<string[]>;
@@ -121,56 +111,52 @@ export declare class Wallet {
         after?: string;
         limit?: number;
     }): Promise<import("./outcome-store.ts").OutcomePage>;
-    /** The transfers on their way, to keep across a restart of the program and hand to `keepOpen`. */
+    /** Return copies of the retained public transfers. */
     openTransfers(): OpenTransfer[];
-    /** Takes back what `openTransfers` gave: their inputs stay held and `resend` looks after them. */
+    /** Import retained transfers when the wallet has no managed public journal. */
     keepOpen(transfers: readonly OpenTransfer[]): void;
     /**
-     * The most one transfer can pay to `to` (the first receiving address when left out): the largest spendable
-     * outputs up to the input limit, less the fee, which a `payload` raises. 0 when they cannot pay the fee.
+     * Return the most a single transfer can send after fees, within the input limit.
+     * Defaults to the first receiving address and returns zero if the fee cannot be covered.
      */
     maxSendable(client: TenraiClient, request?: FeeOptions & {
         to?: string;
         payload?: string | Uint8Array;
     }): Promise<bigint>;
     /**
-     * Compounds first when `request` needs more outputs than one transfer spends, and waits until that is final;
-     * `confirm` sees every round before it goes out. At most 64 compounds per call; returns none when the payment
-     * already fits and throws `insufficient` when compounding cannot make it fit.
+     * Confirm and finalize each needed compounding round before preparing the payment.
+     * Up to 64 compounds per call. Throws `insufficient` when compounding cannot make it fit.
      */
     mergeFor(client: TenraiClient, request: SendRequest, options?: MergeOptions): Promise<SentTransfer[]>;
-    /** Sends every spendable output to `to`, at most 64 transfers per call; run it again for the rest or after a failure. */
+    /** Sweep spendable outputs to one address, up to 64 transfers per call. */
     sweep(client: TenraiClient, request: SweepRequest): Promise<SentTransfer[]>;
     /**
-     * Merges the outputs of every address that holds more than `above` of them (several, by default),
-     * at most 64 transfers per call; the way out of `compound-needed`. `autoCompound` runs it on a timer.
+     * Merge outputs per address above the configured threshold, up to 64 transfers per call.
      */
     compound(client: TenraiClient, options?: CompoundOptions): Promise<SentTransfer[]>;
-    /** Bonds `amount` to a validator after checking its finalized delegation state. */
+    /** Bond to a validator after checking finalized delegation state. */
     bond(client: TenraiClient, request: BondRequest): Promise<SentTransfer>;
-    /** Starts unbonding a bonded position of this wallet. */
     unbond(client: TenraiClient, request: PositionRequest): Promise<SentTransfer>;
-    /** Returns the stake of a position that is `withdrawable` to the wallet. */
+    /** Withdraw a position once it is `withdrawable`. */
     withdraw(client: TenraiClient, request: PositionRequest): Promise<SentTransfer>;
-    /** Registers a validator using a self-bond, owner signature and proof of the new consensus key. */
+    /** Register a self-bond and prove possession of the new consensus key. */
     registerValidator(client: TenraiClient, request: RegisterValidatorRequest): Promise<SentTransfer>;
-    /** Schedules the validator's exit with the current finalized owner nonce. */
+    /** Schedule exit using the finalized owner nonce. */
     exitValidator(client: TenraiClient, request: ExitValidatorRequest): Promise<SentTransfer>;
-    /** Rotates a validator key and overlay endpoint after checking the finalized registry record. */
+    /** Rotate a validator key and endpoint using the finalized registry record. */
     rotateValidator(client: TenraiClient, request: RotateValidatorRequest): Promise<SentTransfer>;
-    /** Schedules an overlay endpoint change while retaining the active consensus key. */
+    /** Update the endpoint using the current consensus key. */
     updateValidatorEndpoint(client: TenraiClient, request: UpdateValidatorEndpointRequest): Promise<SentTransfer>;
-    /** Schedules a delayed validator commission change in the active rules' 10-bps grid. */
+    /** Schedule commission in the active rules' 10-basis-point increments. */
     scheduleValidatorCommission(client: TenraiClient, request: ScheduleValidatorCommissionRequest): Promise<SentTransfer>;
-    /** Changes the finalized reward lock for one stake position. */
     setStakeRewardAddress(client: TenraiClient, request: SetStakeRewardAddressRequest): Promise<SentTransfer>;
-    /** Publishes one signed heartbeat for the next finalized epoch of an eligible validator. */
+    /** Sign a heartbeat for the next finalized epoch. */
     heartbeatValidator(client: TenraiClient, request: ValidatorHeartbeatRequest): Promise<SentTransfer>;
-    /** Chats of this wallet, `protocol/messenger-v1.md`; the messenger key stays in the WASM. Keep one per wallet. */
+    /** Keep one messenger session per wallet. Its key stays in WASM. */
     messenger(client: TenraiClient): Messenger;
     /** Stops new spending immediately; resolves after outstanding work, key cleanup and store release. */
     close(): Promise<void>;
-    /** Relays an already signed reviewed public artifact through this wallet's durable submission path. */
+    /** Relay an already signed artifact through the wallet's durable submission path. */
     submitSignedPublic(client: TenraiClient, artifact: {
         transactionId: string;
         wireHex: string;
@@ -184,12 +170,12 @@ export declare class Wallet {
         transactionId: string;
         lifecycle: TransactionLifecycle;
     }>;
-    /** Retries the retained original bytes; it never constructs or signs a replacement transaction. */
+    /** Retry the retained original signed bytes. */
     retryPublic(client: TenraiClient, transactionId: string): Promise<{
         transactionId: string;
         lifecycle: TransactionLifecycle;
     }>;
-    /** Restores pending ENTER holds only; this reads the supplied store without contacting a node or creating a proof. */
+    /** Restore public and private submission journals locally before spending. */
     restorePrivatePending(options: PrivateNotesOptions): Promise<void>;
     /**
      * This account's private notes, read from `client` and checked against the wallet's trust root, and

@@ -10,7 +10,6 @@ import { type PublicTransferJournal } from "./public-transfer-journal.ts";
 import type { Bindings } from "./runtime.ts";
 import type { FeeOptions } from "./types.ts";
 import type { OpenTransfer } from "./wallet.ts";
-/** Explicit capabilities over the owning wallet's original maps and session. */
 export interface PublicWalletState {
     readonly wasm: Bindings;
     readonly network: Network;
@@ -31,8 +30,7 @@ export interface PublicWalletState {
     failRestore(): void;
 }
 export declare function resendPublic(state: PublicWalletState, client: TenraiClient): Promise<string[]>;
-/** Everything a plan needs, read from the node once per transfer. */
 export declare function publicContext(state: PublicWalletState, client: TenraiClient, fee: FeeOptions): Promise<Context>;
-/** Holds an original's inputs in the durable journal before its bytes leave the wallet; nothing is sent. */
+/** Commit the input reservations before exporting the signed bytes. */
 export declare function retainPublic(state: PublicWalletState, original: OpenTransfer): Promise<void>;
 export declare function submitPublic(state: PublicWalletState, client: TenraiClient, original: OpenTransfer): Promise<TransactionLifecycle>;

@@ -11,34 +11,33 @@ import type { Bindings } from "./runtime.ts";
 import { PrivateStoreSession } from "./private-store-session.ts";
 import type { PublicTransfersStore } from "./public-transfer-journal.ts";
 import { type PrivateRegistrationQuote, type PrivateRegistrationRequest } from "./private-registration.ts";
-/** Where a wallet keeps what it knows of its private notes between its runs. */
+/** Account storage used by private notes and retained transfers. */
 export interface PrivateNotesStore {
-    /** Stable identity of this durable account store, sharing its exclusive lease. */
+    /** Stable account identity for the shared exclusive lease. */
     readonly id: string;
     inventoryPages?: PrivateInventoryStore;
-    /** Durable paged ambiguous outcomes; required outside IndexedDB browsers. */
+    /** Durable outcome archive for adapters without an IndexedDB provider. */
     outcomes?: OutcomeStore;
-    /** Account-scoped durable encrypted scratch; required for full recovery outside IndexedDB browsers. */
+    /** Encrypted recovery scratch for adapters without an IndexedDB provider. */
     localPages?: PrivateLocalScanStore;
-    /** Exclusive ownership across all instances using this account journal; fail immediately when already owned. No time-based expiry. */
+    /** Fail if the account lease is already held. The lease has no time-based expiry. */
     acquireSendsLease?(): Promise<{
         release(): void | Promise<void>;
     }>;
-    /** What the last run left: the sealed state, kept apart from it if possible its mark, and the statements on their way. */
-    /** For sends, null means absent; existing data that cannot be read must throw. */
+    /** Load a sealed record. Return null for absent sends and throw for unreadable sends. */
     read(name: "state" | "mark" | "sends"): Promise<Uint8Array | null | undefined>;
-    /** Resolving a sends write must mean durable commit, before the original frame may be submitted. */
+    /** Resolve only when the sealed record has durably committed. */
     write(name: "state" | "mark" | "sends", bytes: Uint8Array): Promise<void>;
 }
 export interface PrivateNotesOptions {
     finalityStore?: FinalityGuardStore;
     store: PrivateNotesStore;
-    /** Explicit durable public artifact record, sharing this store's account-session lease. */
+    /** Public transaction journal sharing the account lease. */
     publicTransfers?: PublicTransfersStore;
-    /** A test network's genesis manifest, as its trust root. Mainnet has its own in the protocol WASM. */
+    /** Local genesis manifest for networks without a built-in trust root. */
     genesisManifest?: string;
 }
-/** A coin an ENTER may spend, with the path of its key. */
+/** Public input and derivation path for an ENTER. */
 export interface PrivateCoin {
     transactionId: string;
     outputIndex: number;
@@ -46,67 +45,55 @@ export interface PrivateCoin {
     branch: string;
     index: number;
 }
-/** What stands in the way of spending here, or `ready`. */
 export type PrivateUsability = "ready" | "inactive" | "other-rules" | "no-fit" | "review-open";
-/** How a private statement is made. */
 export interface PrivateProofOptions extends ProveOptions {
-    /** The prover on this device; see `localProver`. */
+    /** Device-local prover. See `localProver`. */
     prover: PrivateProver;
 }
 export interface PrivateNote {
-    /** The leaf of the note in the note log. */
+    /** Leaf index in the note log. */
     note: number;
     valueAtoms: bigint;
     noteCommitment: string;
 }
 export interface PrivateNotesResult {
-    /** The finalized cut this result is proven against. */
+    /** Verified finalized cut for this result. */
     height: number;
     balanceAtoms: bigint;
     reservedAtoms: bigint;
     reservedNoteCount: bigint;
-    /** At most 128 notes; use page() to continue the local inventory. */
+    /** First page of up to 128 notes. Use `page` to continue. */
     notes: PrivateNote[];
     noteCount: bigint;
     noteCursor: bigint;
     nextNote: number | null;
-    /** Payments among the notes that are new since the last refresh; none on the first read. */
+    /** New payments since the previous refresh. The initial scan returns none. */
     received: PrivateRecord[];
 }
 /**
- * A wallet's private notes, checked rather than believed. Every head comes with a proof of finality
- * from the wallet's trust root, the notes must rebuild the note tree of that head and the spends its
- * nullifier set, so a node can neither invent a head nor hide a note or a spend. All of it runs in
- * the protocol WASM, by the rules the command-line wallet runs by; this class only carries the bytes.
- * What it learned stays sealed in the store under the account's key, and the next refresh reads only
- * what is new.
+ * Verify the finalized head and rebuild the note and nullifier roots in WASM.
+ * Keep the verified scan state sealed under the account key for incremental refresh.
  */
 export declare class PrivateNotes {
     #private;
     private constructor();
     /** @internal */
     static open(wasm: Bindings, root: InstanceType<Bindings["WalletRoot"]>, network: Network, account: number, client: TenraiClient, options: PrivateNotesOptions, coins?: () => Promise<PrivateCoin[]>, resolved?: (digest: string) => void, existingJournal?: PrivateStoreSession): Promise<PrivateNotes>;
-    /** Whether this scan has released its keys. Pending ENTER holds remain available. */
+    /** True after the scan releases its keys. Pending ENTER holds remain available. */
     get isClosed(): boolean;
-    /** This account's private address. */
     get address(): string;
-    /** Whether saved bytes were found that did not open: they were dropped and everything is read again. */
+    /** True when unreadable scan state was discarded for recovery. */
     get savedStateDamaged(): boolean;
-    /**
-     * The cut this wallet had verified when it last wrote, if the saved state is older than that: an
-     * older copy was put back. The refresh proves its way forward from it all the same, and refuses a
-     * node behind that cut.
-     */
+    /** Rollback marker. Recovery verifies forward and requires a head at least this recent. */
     get rolledBackFrom(): number | undefined;
     /**
-     * Reads what is new from the node, proves it and saves it. `rescan` forgets the notes first and
-     * reads the whole history, from the compact recovery log retained by full and pruned nodes. Throws when the node does not lead
-     * to a finalized state; nothing it served then counts.
+     * Verify and save new chain data. `rescan` replays the compact recovery log.
+     * Publish the result only after verifying the finalized state.
      */
     refresh(options?: {
         rescan?: boolean;
     } & CallOptions): Promise<PrivateNotesResult>;
-    /** Reads at most 128 already verified notes from this device; it makes no owned-note network query. */
+    /** Read up to 128 verified notes from local storage. */
     page(options?: {
         after?: number;
         limit?: number;
@@ -114,51 +101,42 @@ export declare class PrivateNotes {
         notes: PrivateNote[];
         nextNote: number | null;
     }>;
-    /** Whether the account of `address`, or this wallet's without one, is registered at the cut the last refresh verified. */
+    /** Check recipient registration at the last verified cut. Defaults to this account. */
     registered(address?: string, options?: CallOptions): Promise<boolean>;
-    /** Exports owner authorization only. This does not spend coins or publish a registration. */
+    /** Export owner authorization without funding or publishing a registration. */
     registrationAuthorization(): Promise<Uint8Array>;
-    /** Checks this owner from a separate head-only context before any note recovery. */
+    /** Check registration using a separate finality context. */
     registrationStatus(options?: CallOptions): Promise<boolean>;
-    /** Quotes selected public inputs, exact fee, change and validity before any sponsor signature. */
+    /** Quote public inputs, fee, change and validity before sponsor signing. */
     planRegistration(request: PrivateRegistrationRequest, options?: CallOptions): Promise<PrivateRegistrationQuote>;
-    /** Discards an unsigned quote and frees its separate verification context. */
+    /** Discard the quote and release its verification context. */
     cancelRegistration(quote: PrivateRegistrationQuote): void;
-    /** Signs only a quote issued by this session, durably records it and posts the complete frame. */
+    /** Sign the issued quote, commit its original frame and submit it. */
     register(quote: PrivateRegistrationQuote): Promise<PrivateSend>;
-    /**
-     * What stands in the way of spending here: the node's rules must be this build's, and on mainnet the
-     * review done.
-     */
+    /** Check the node rules and security qualification for private spending. */
     usability(): Promise<PrivateUsability>;
-    /**
-     * Moves transparent coins into private notes: `amount` atoms to `to`, this wallet without one. What the
-     * coins hold beyond the amount and the fee becomes a note of this wallet.
-     */
+    /** Move public coins into notes, with any change returning to this account. */
     enter(request: {
         amount: bigint;
         to?: string;
     }, options: PrivateProofOptions): Promise<PrivateSend>;
-    /** Sends `amount` atoms from two notes of this wallet to a private address; the rest comes back as a note. */
+    /** Send from two owned notes and return private change to this account. */
     transfer(request: {
         to: string;
         amount: bigint;
     }, options: PrivateProofOptions): Promise<PrivateSend>;
-    /** Pays one or two whole notes out to a transparent address, less the fee. */
+    /** Exit one or two notes to a public address after fees. */
     exit(request: {
         to: string;
         notes: number[];
     }, options: PrivateProofOptions): Promise<PrivateSend>;
-    /** The statements on their way, which hold their notes and coins. */
+    /** Retained statements and their input holds. */
     onTheWay(): PrivateSend[];
-    /** The newest finished transactions and received payments this wallet saw, newest first. */
+    /** Settled transactions and received payments, newest first. */
     recent(): PrivateRecord[];
-    /**
-     * Asks about the statements on their way, given the newest final cut: sends again what no node knows
-     * while it is valid, and tells what became final, expired or was refused.
-     */
+    /** Reconcile retained statements at the latest verified cut and retry executable originals. */
     check(tip: number): Promise<PrivateSendOutcome[]>;
-    /** Reconciles public registration funding while the independent note recovery is incomplete. */
+    /** Reconcile registration funding independently of note recovery. */
     checkRegistrations(): Promise<PrivateSendOutcome[]>;
     /** Ambiguous outcomes remain queryable after their expired active holds are closed. */
     unknownOutcome(digest: string): Promise<import("./unknown-outcome.ts").UnknownOutcome<PrivateSend> | null>;

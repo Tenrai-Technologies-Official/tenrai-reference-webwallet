@@ -3,7 +3,7 @@ export const ATOMS_PER_TRAI = 100000000n;
 const MAX_ATOMS = (1n << 128n) - 1n;
 const ATOMS = /^(0|[1-9][0-9]{0,38})$/;
 const TRAI = /^(0|[1-9][0-9]*)(\.[0-9]{1,8})?$/;
-/** Reads an amount as the API sends it: atoms in a canonical decimal string. */
+/** Parse the API's canonical decimal atom string. */
 export function parseAtoms(value) {
     if (typeof value !== "string" || !ATOMS.test(value)) {
         throw new TypeError(`not an atom amount: ${JSON.stringify(value)}`);
@@ -14,7 +14,7 @@ export function parseAtoms(value) {
     }
     return atoms;
 }
-/** Atoms as the API expects them. */
+/** Encode atoms as a canonical decimal string. */
 export function toAtomAmount(atoms) {
     if (typeof atoms !== "bigint") {
         throw new TypeError("atoms must be a bigint");
@@ -24,7 +24,7 @@ export function toAtomAmount(atoms) {
     }
     return atoms.toString();
 }
-/** Exact TRAI text, such as "12.00005"; `fixed` keeps all eight decimals. */
+/** Format exact TRAI text. `fixed` keeps all eight decimals. */
 export function formatTrai(atoms, options = {}) {
     const value = typeof atoms === "bigint" ? atoms : parseAtoms(atoms);
     const sign = value < 0n ? "-" : "";
@@ -34,7 +34,7 @@ export function formatTrai(atoms, options = {}) {
     const shown = options.fixed ? fraction : fraction.replace(/0+$/, "");
     return shown ? `${sign}${whole}.${shown}` : `${sign}${whole}`;
 }
-/** Parses TRAI text with up to eight decimals, without floating point. */
+/** Parse up to eight decimal places into integer atoms. */
 export function parseTrai(text) {
     if (typeof text !== "string" || !TRAI.test(text)) {
         throw new TypeError(`not a TRAI amount: ${JSON.stringify(text)}`);
