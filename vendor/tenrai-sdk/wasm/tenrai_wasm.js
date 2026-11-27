@@ -2487,7 +2487,7 @@ export function assembleTransaction(body, witnesses, manifest) {
 }
 
 /**
- * The burn address of `network`: no key can spend what is paid to it, and the node removes it from supply.
+ * Returns the network's unspendable burn address. Payments to it leave circulation.
  * @param {string} network
  * @returns {string}
  */

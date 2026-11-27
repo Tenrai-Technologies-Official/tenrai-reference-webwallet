@@ -42,7 +42,9 @@
     "check": "tsc -p tsconfig.json",
     "test": "node --test \"test/**/*.test.ts\" && npm run test:synthetic",
     "test:synthetic": "node --import ./test/support/synthetic-chain.ts --test \"test/**/*.synthetic.ts\"",
-    "docs": "typedoc"
+    "docs": "typedoc",
+    "prepare": "npm run build",
+    "prepack": "npm run check"
   },
   "homepage": "https://tenrai-technologies.org/",
   "publishConfig": {

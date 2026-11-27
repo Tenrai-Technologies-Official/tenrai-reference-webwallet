@@ -2,17 +2,17 @@
     "format":  1,
     "package":  "tenrai-wasm",
     "version":  "0.1.0",
-    "revision":  "3951162471656e1768702611c72c1b84366e4def8017048198d27548cdbb6a0f",
+    "revision":  "66fbdb5dbf9500742305b393b5bc7ff6858f58c9f198f2d0343a8c5c96c136b5",
     "api_version":  1,
     "protocol_profile":  "tenrai-wire-v1",
     "assets":  {
                    "module":  {
                                   "file":  "tenrai_wasm.js",
-                                  "sha256":  "b2df1c44d91bdaf4da6e6ed04d97e6716e414b2682f73fe758901b057ea1c876"
+                                  "sha256":  "2cb1a24eeb1499b5b793622cdd380397014e12bae23c4620d70aefa649901d11"
                               },
                    "wasm":  {
                                 "file":  "tenrai_wasm_bg.wasm",
-                                "sha256":  "5d618d419cb69a33026accaefe9789c2767bb364ac80756b132f840622796295"
+                                "sha256":  "f432fdc69ff0771f108452772d2bd9e46b3d6be1a6f3ef6aab131b01d5cd448c"
                             }
                }
 }

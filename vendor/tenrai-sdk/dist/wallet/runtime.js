@@ -9,7 +9,7 @@ var __rewriteRelativeImportExtension = (this && this.__rewriteRelativeImportExte
 import * as bindings from "../../wasm/tenrai_wasm.js";
 import { TenraiError } from "../errors.js";
 // SHA-256 of the protocol binary in wasm/release.json.
-const WASM_SHA256 = "5d618d419cb69a33026accaefe9789c2767bb364ac80756b132f840622796295";
+const WASM_SHA256 = "f432fdc69ff0771f108452772d2bd9e46b3d6be1a6f3ef6aab131b01d5cd448c";
 const NODE_FS = "node:fs/promises";
 let loading;
 export function protocolBindings(source) {

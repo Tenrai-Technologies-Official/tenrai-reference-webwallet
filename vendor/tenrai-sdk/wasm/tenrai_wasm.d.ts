@@ -277,7 +277,7 @@ export function apiVersion(): number;
 export function assembleTransaction(body: Uint8Array, witnesses: Uint8Array, manifest: string): Uint8Array;
 
 /**
- * The burn address of `network`: no key can spend what is paid to it, and the node removes it from supply.
+ * Returns the network's unspendable burn address. Payments to it leave circulation.
  */
 export function burnAddress(network: string): string;
 
